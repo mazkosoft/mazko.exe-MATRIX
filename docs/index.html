@@ -35,19 +35,20 @@
             --metal-text-color: var(--matrix-dark-grey); /* 用于金属背景上的文字颜色 */
 
 
-            /* 黑色玻璃显示屏效果 - 增加玻璃质感 */
-            --glass-bg: rgba(0, 0, 0, 0.7); /* 更透亮一点的黑色半透明背景 */
+            /* 黑色玻璃显示屏效果 - 增加玻璃质感，降低模糊度以提高清晰度 */
+            --glass-bg: rgba(0, 0, 0, 0.6); /* 更不透明的黑色半透明背景 */
+            --glass-blur: 4px; /* 降低模糊度 */
             --glass-border: rgba(0, 255, 65, 0.5); /* 绿色半透明边框，更明显 */
-            --glass-glow: 0 0 20px rgba(0, 255, 65, 0.7); /* 绿色光晕，更强 */
-            --glass-inset-shadow: inset 0 0 12px rgba(0, 255, 65, 0.3); /* 绿色内阴影，更明显 */
+            --glass-glow: 0 0 15px rgba(0, 255, 65, 0.6); /* 绿色光晕，强度适中 */
+            --glass-inset-shadow: inset 0 0 8px rgba(0, 255, 65, 0.2); /* 绿色内阴影，强度适中 */
 
             /* 字体 - 使用等宽字体模拟代码终端 */
             --font-main: 'Roboto Mono', monospace;
 
             /* 阴影与光晕 - 绿色调 */
             --shadow-matrix: 0 4px 15px rgba(0, 255, 65, 0.2); /* 柔和的绿色阴影 */
-            --glow-matrix: 0 0 18px rgba(0, 255, 65, 0.8); /* 强烈的绿色光晕 */
-            --text-glow-matrix: 0 0 6px rgba(0, 255, 65, 0.8), 0 0 12px rgba(0, 255, 65, 0.6);
+            --glow-matrix: 0 0 16px rgba(0, 255, 65, 0.7); /* 强烈的绿色光晕 */
+            --text-glow-matrix: 0 0 5px rgba(0, 255, 65, 0.7), 0 0 10px rgba(0, 255, 65, 0.5); /* 调整文字光晕强度 */
 
             --taskbar-height: 48px;
 
@@ -92,7 +93,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 1000; /* 确保在其他内容之上 */
-            opacity: 0.15; /* 调整 CRT 纹理的透明度 */
+            opacity: 0.12; /* 调整 CRT 纹理的透明度，使其更不显眼 */
             background: repeating-linear-gradient(
                 #080808,
                 #080808 1px,
@@ -130,7 +131,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 2; /* 确保在内容之上 */
-            opacity: 0.15; /* 调整 CRT 纹理的透明度 */
+            opacity: 0.1; /* 调整 CRT 纹理的透明度，使其更不显眼 */
             background: repeating-linear-gradient(
                 #080808,
                 #080808 1px,
@@ -311,9 +312,10 @@
         }
 
         .start-button .icon-image {
-            width: 2em;
-            height: 2em;
+            width: 1.8em; /* Start button icon size slightly reduced */
+            height: auto; /* Ensure aspect ratio is maintained */
             filter: drop-shadow(var(--text-glow-matrix));
+            object-fit: contain; /* Prevent stretching */
         }
 
         /* 任务栏图标（打开/最小化窗口） */
@@ -411,7 +413,9 @@
 
         .desktop-icon .icon-image {
             width: 60px;
-            height: 60px;
+            height: auto; /* Allow height to adjust naturally */
+            max-width: 100%; /* Ensure it doesn't overflow its container */
+            object-fit: contain; /* Prevent stretching */
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
             transition: filter 0.15s ease;
         }
@@ -444,8 +448,8 @@
             height: auto;
             max-height: calc(100% - var(--taskbar-height) - 40px);
             background: rgba(0,0,0,0.8); /* Changed to black background */
-            backdrop-filter: blur(5px); /* 稍微模糊 */
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(var(--glass-blur)); /* 使用变量控制模糊度 */
+            -webkit-backdrop-filter: blur(var(--glass-blur));
             /* Removed metal border for start menu */
             /* border: 2px solid var(--metal-border-light); */
             /* border-bottom-color: var(--metal-border-dark); */
@@ -516,17 +520,16 @@
         }
         .start-menu-header:hover {
             transform: translateY(-4px);
-            box-shadow: 
-                0 8px 20px var(--glow-matrix), 
-                inset 0 1px 3px var(--metal-highlight),
-                inset 0 -3px 6px var(--metal-inner-shadow);
+            box-shadow: 0 8px 20px var(--glow-matrix), 
+                        inset 0 1px 3px var(--metal-highlight),
+                        inset 0 -3px 6px var(--metal-inner-shadow);
             filter: brightness(1.1);
         }
         .start-menu-header:active {
             background: linear-gradient(to bottom, var(--metal-color-end) 0%, var(--metal-color-mid) 50%, var(--metal-color-start) 100%);
             transform: translateY(0);
             box-shadow: 
-                inset 0 3px 10px var(--metal-shadow), 
+                inset 0 6px 15px var(--metal-shadow), 
                 inset 0 -1px 3px var(--metal-highlight),
                 0 2px 5px rgba(0,255,65,0.3);
             filter: brightness(0.9);
@@ -540,6 +543,12 @@
             color: var(--metal-text-color); /* Change to dark grey */
             filter: none; /* Remove green glow from icon */
             text-shadow: none; /* Remove text glow */
+        }
+        .start-menu-header .icon-image {
+            width: 2.5em; /* Reduced size for start menu header icon */
+            height: auto;
+            object-fit: contain; /* Prevent stretching */
+            margin-right: 12px; /* Add some spacing */
         }
         .start-menu-header:hover span, .start-menu-header:hover .icon-image {
             color: var(--metal-text-color); /* Keep dark on hover */
@@ -598,7 +607,8 @@
         .start-menu-item .icon-image {
             margin-right: 18px;
             width: 1.5em;
-            height: 1.5em;
+            height: auto; /* Ensure aspect ratio */
+            object-fit: contain; /* Prevent stretching */
             filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.8));
             transition: filter 0.2s ease;
         }
@@ -675,8 +685,8 @@
             transform: translateY(0);
             background: linear-gradient(to bottom, var(--metal-color-end) 0%, var(--metal-color-mid) 50%, var(--metal-color-start) 100%);
             box-shadow: 
-                inset 0 6px 15px var(--metal-shadow), /* Deeper inset shadow */
-                inset 0 -2px 5px var(--metal-highlight), /* More pronounced highlight */
+                inset 0 6px 15px var(--metal-shadow), 
+                inset 0 -2px 5px var(--metal-highlight),
                 0 0 10px rgba(0,255,65,0.7);
             filter: brightness(0.7); /* Slightly darker on press */
             border-top-color: var(--metal-border-dark);
@@ -687,7 +697,8 @@
 
         .start-menu-footer-button .icon-image {
             width: 32px;
-            height: 32px;
+            height: auto; /* Ensure aspect ratio */
+            object-fit: contain; /* Prevent stretching */
             /* 修正：确保图标有绿色光晕 */
             filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.7));
         }
@@ -708,8 +719,8 @@
         .os-window {
             position: absolute;
             background: var(--glass-bg);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(var(--glass-blur)); /* 使用变量控制模糊度 */
+            -webkit-backdrop-filter: blur(var(--glass-blur));
             border: 2px solid var(--glass-border);
             border-radius: 12px;
             box-shadow: var(--glass-glow), var(--glass-inset-shadow);
@@ -799,7 +810,8 @@
 
         .os-window-title-content .icon-image {
             width: 32px;
-            height: 32px;
+            height: auto; /* Allow height to adjust naturally */
+            object-fit: contain; /* Prevent stretching */
             filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.8)); /* 确保标题栏图标有绿色光晕 */
         }
         .os-window-title-bar:not(.inactive) .os-window-title-content .icon-image {
@@ -889,7 +901,7 @@
             box-shadow: 
                 inset 0 3px 10px var(--metal-shadow), 
                 inset 0 -1px 3px var(--metal-highlight),
-                0 2px 5px rgba(0,0,0,0.3); /* Subtle external shadow */
+                0 2px 5px rgba(0,0,0,0.3);
             filter: brightness(0.7); /* Darker on press */
             border-top-color: var(--metal-border-dark);
             border-bottom-color: var(--metal-border-light);
@@ -898,7 +910,8 @@
         }
         .os-window-controls .control-button .icon-image {
             width: 0.9em;
-            height: 0.9em;
+            height: auto; /* Ensure aspect ratio */
+            object-fit: contain; /* Prevent stretching */
             filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.8)); /* 修正：确保控制按钮图标有绿色光晕 */
         }
         .os-window-controls .control-button:not(.close):hover .icon-image { /* Restore green glow for non-close buttons on hover */
@@ -1246,7 +1259,8 @@
 
         .taskbar-minimized-icon .icon-image {
             width: 1.2em;
-            height: 1.2em;
+            height: auto; /* Ensure aspect ratio */
+            object-fit: contain; /* Prevent stretching */
             filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.8));
             transition: filter 0.2s ease;
         }
@@ -1277,8 +1291,8 @@
             top: 0;
             width: 250px;
             background: var(--glass-bg); /* Use glass background */
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(var(--glass-blur)); /* 使用变量控制模糊度 */
+            -webkit-backdrop-filter: blur(var(--glass-blur));
             border: 2px solid var(--glass-border);
             border-radius: 12px;
             box-shadow: var(--glass-glow), var(--glass-inset-shadow);
@@ -1470,7 +1484,8 @@
 
             .desktop-icon .icon-image {
                 width: 50px; /* 减小图标图片尺寸 */
-                height: 50px;
+                height: auto; /* Ensure aspect ratio */
+                object-fit: contain; /* Prevent stretching */
             }
 
             .desktop-icon-label {
@@ -1488,8 +1503,9 @@
             }
 
             .start-button .icon-image {
-                width: 1.8em;
-                height: 1.8em;
+                width: 1.6em; /* Slightly smaller for mobile */
+                height: auto; /* Ensure aspect ratio */
+                object-fit: contain; /* Prevent stretching */
             }
 
             .system-tray-icon {
@@ -1553,8 +1569,8 @@
             align-items: center;
             font-size: 0.85rem;
             background: linear-gradient(to bottom, var(--metal-color-start) 0%, var(--metal-color-mid) 50%, var(--metal-color-end) 100%);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(var(--glass-blur)); /* 使用变量控制模糊度 */
+            -webkit-backdrop-filter: blur(var(--glass-blur));
             border-top: 2px solid var(--metal-border-light); /* 顶部高光 */
             border-bottom: 1px solid var(--metal-border-dark); /* 底部阴影 */
             border-radius: 0 0 12px 12px;
@@ -3058,7 +3074,7 @@ Services include:
 
                     windowElement.querySelectorAll('.os-window-content img[data-full-image]').forEach(img => {
                         img.addEventListener('click', (e) => {
-                            modalImage.src = e.target.dataset.fullImage;
+                            modalImage.src = e.target.dataset.full-image;
                             imageModal.classList.remove('hidden');
                         });
                     });
