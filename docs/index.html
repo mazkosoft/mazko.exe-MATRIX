@@ -456,29 +456,26 @@
                 inset 0 1px 2px var(--metal-highlight), /* Inner highlight */
                 inset 0 -2px 5px var(--metal-inner-shadow); /* Inner shadow */
             padding: 20px;
-            /* 替换 display: none 为 visibility 和 opacity */
+            /* 初始隐藏状态 */
             visibility: hidden;
             opacity: 0;
+            transform: scale(0.6);
             flex-direction: column;
             z-index: 100;
             transform-origin: bottom left;
-            transition: opacity 0.3s ease-out, visibility 0.3s ease-out; /* Add transition for smoothness */
+            transition: opacity 0.3s ease-out, transform 0.3s ease-out, visibility 0.3s ease-out; /* Add transition for smoothness */
             overflow-y: auto;
             /* Added subtle metal texture to the overall menu background */
             background-image: repeating-linear-gradient(90deg, transparent, transparent 1px, var(--metal-bg) 1px, var(--metal-bg) 2px); /* Metal texture */
             background-blend-mode: overlay; /* Blend with black background */
         }
 
-        .start-menu.hidden {
-            visibility: hidden;
-            opacity: 0;
-            transform: scale(0.6); /* Start from smaller scale for animation */
-        }
-        .start-menu.visible {
+        /* 新增的打开状态类 */
+        .start-menu.is-open {
             visibility: visible;
             opacity: 1;
             transform: scale(1);
-            animation: fadeInScaleUpFromBottomLeft 0.3s ease-out forwards;
+            /* 动画现在由 transition 属性本身处理 */
         }
 
         /* 开始菜单头部（带个人信息） - 更高度拟物化的金属风格 */
@@ -513,7 +510,7 @@
             pointer-events: none;
             opacity: 0.8;
         }
-        /* 移除闪光效果 */
+        /* 移除闪光效果的伪元素 */
         .start-menu-header::after {
             display: none;
         }
@@ -695,7 +692,7 @@
             filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.7));
         }
 
-        /* 动画：菜单出现 - 从左下角放大淡入 */
+        /* 动画：菜单出现 - 从左下角放大淡入 (保留，但现在由 is-open 状态触发) */
         @keyframes fadeInScaleUpFromBottomLeft {
             from {
                 opacity: 0;
@@ -1638,7 +1635,7 @@
             </div>
 
             <!-- 开始菜单 -->
-            <div id="start-menu" class="start-menu hidden">
+            <div id="start-menu" class="start-menu">
                 <div class="start-menu-header" data-section="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO"> <!-- 点击头部打开关于我 -->
                     <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                     <span data-lang-key="profileName">MAZKO</span>
@@ -3061,7 +3058,7 @@ Services include:
 
                     windowElement.querySelectorAll('.os-window-content img[data-full-image]').forEach(img => {
                         img.addEventListener('click', (e) => {
-                            modalImage.src = e.target.dataset.fullImage;
+                            modalImage.src = e.target.dataset.full-image;
                             imageModal.classList.remove('hidden');
                         });
                     });
@@ -3335,16 +3332,17 @@ Services include:
                 startButton.addEventListener('click', (event) => {
                     event.stopPropagation(); // Prevent click from propagating to document
                     console.log('“开始”按钮被点击了！'); // Debug: Confirm button click
-                    startMenu.classList.toggle('hidden');
-                    // No need to explicitly add/remove 'visible' class as 'hidden' toggles opacity/visibility
+                    // 切换 is-open 类来控制菜单的显示和隐藏
+                    startMenu.classList.toggle('is-open'); 
                     console.log(`开始菜单可见性已切换。当前类：${startMenu.classList}`);
                 });
 
                 // Hide Start Menu when clicking outside of it
                 document.addEventListener('click', (event) => {
                     if (!startMenu.contains(event.target) && !startButton.contains(event.target)) {
-                        if (startMenu.classList.contains('visible')) { // Check for 'visible' class
-                            startMenu.classList.add('hidden');
+                        // 如果菜单当前是打开状态，则关闭它
+                        if (startMenu.classList.contains('is-open')) { 
+                            startMenu.classList.remove('is-open');
                             console.log('点击菜单外部，开始菜单已隐藏。');
                         }
                     }
@@ -3361,7 +3359,7 @@ Services include:
                     const section = item.dataset.section;
                     const { chineseTitle, englishTitle } = getWindowTitles(section);
                     
-                    startMenu.classList.add('hidden'); // Hide menu after clicking an item
+                    startMenu.classList.remove('is-open'); // Hide menu after clicking an item
                     console.log(`开始菜单项“${section}”被点击。菜单已隐藏。`);
 
                     let content = '';
@@ -3664,7 +3662,7 @@ Services include:
                 startMenuHeader.addEventListener('click', async (event) => {
                     event.preventDefault();
                     event.stopPropagation(); // Prevent start menu from closing immediately
-                    startMenu.classList.add('hidden');
+                    startMenu.classList.remove('is-open'); // Close start menu
 
                     const section = 'about';
                     // Directly get titles from LANG_CONTENT, as getWindowTitles is for generic sections
