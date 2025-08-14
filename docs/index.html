@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𝗠𝗔𝗫 _𝗢𝗦 _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝖤𝙳𝖨𝚃𝖨𝖤𝙳𝖨𝖮𝖭]</title>
+    <title>𝗠𝗔𝗫 _𝗢𝗦 _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝙴𝙳𝖨𝚃𝖨𝖤𝙳𝖨𝖮𝖭]</title>
     <!-- Favicon - 使用一个简单的SVG作为示例 -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌟</text></svg>" type="image/svg+xml">
     <!-- 引入 Tailwind CSS CDN，用于快速构建和响应式布局 -->
@@ -56,7 +56,7 @@
             --cursor-active: auto;
             --cursor-pointer: pointer;
 
-            --desktop-image-url:  url('./assets/backgrounds/bg.jpg'); /* 桌面背景图片的CSS变量 - 修正路径为 docs/assets/... */
+            --desktop-image-url:  url('../assets/background/bg.jpg'); /* 桌面背景图片的CSS变量 - 修正路径为 ../assets/... */
         }
 
         body {
@@ -303,7 +303,7 @@
                 inset 0 -2px 5px var(--metal-highlight), /* More pronounced highlight */
                 0 2px 5px rgba(0,255,65,0.3); /* Smaller external shadow */
             filter: brightness(0.7); /* Slightly darker on press */
-            border-top-color: var(--metal-border-dark); /* Invert borders */
+            border-top-color: var(--metal-border-dark);
             border-bottom-color: var(--metal-border-light);
             border-left-color: var(--metal-border-dark);
             border-right-color: var(--metal-border-light);
@@ -1717,12 +1717,12 @@
             'cursor_pointer': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 1L15 8L1 15V1L1 1Z\' fill=\'%2300FF41\' stroke=\'%2300FF41\' stroke-width=\'1\'/%3E%3C/svg%3E',
 
             // 桌面图标 / 开始菜单图标 (PNGs with relative paths) - 路径已修正为从 docs 目录开始
-            'icon_works': 'docs/assets/icon/file_icon.png', 
-            'icon_characters': 'docs/assets/icon/storage_icon.png', 
-            'icon_mazko_logo': 'docs/assets/icon/radiation m logo 1.png', 
+            'icon_works': '../assets/icon/file_icon.png', 
+            'icon_characters': '../assets/icon/storage_icon.png', 
+            'icon_mazko_logo': '../assets/icon/radiation m logo 1.png', 
             'icon_services': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 13.5V18C18 19.1046 17.1046 20 16 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4H10.5M18 13.5L22 9.5M22 9.5L18 5.5M22 9.5H16M13 10L10.5 12.5L13 15\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_socials': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M8.59 13.51L15.42 17.49\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M15.41 6.51L8.59 10.49\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
-            'icon_datacore': 'docs/assets/icon/datacore_logo.png', // 路径已修正为从 docs 目录开始
+            'icon_datacore': '../assets/icon/datacore_logo.png', // 路径已修正为从 ../assets/... 目录开始
             
             // 任务栏系统托盘图标 (SVG with green strokes/fills) - 更新填充为绿色
             'icon_wifi': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 18V22\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 12L12.01 12\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M2.99998 8.00002C5.99998 5.00002 9.00002 3.00002 12 3.00002C15 3.00002 18 5.00002 21 8.00002\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M5.99998 11C7.99998 9 10 7.99998 12 7.99998C14 7.99998 16 9 18 11\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
@@ -1750,40 +1750,40 @@
             'icon_behance_square': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'2\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M16 10C16 8.89543 15.1046 8 14 8H10C8.89543 8 8 8.89543 8 10V14C8 15.1046 8.89543 16 10 16H14C15.1046 16 16 15.1046 16 14V10Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M10 8L14 16\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_envelope': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M22 6L12 13L2 6\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // 桌面背景图像 (使用相对路径) - 路径已修正为从 docs 目录开始
-            'desktop_background_image': 'docs/assets/background/bg.jpg',
+            // 桌面背景图像 (使用相对路径) - 路径已修正为从 ../assets/... 目录开始
+            'desktop_background_image': '../assets/background/bg.jpg',
 
-            // 作品集图片 - 路径已修正为从 docs 目录开始
-            'work_001_thumbnail': 'docs/assets/works/work_001_thumbnail.png',
-            'work_001_full_1': 'docs/assets/works/work_001_full_1.png',
-            'work_001_full_2': 'docs/assets/works/work_001_full_2.png',
-            'work_001_full_3': 'docs/assets/works/work_001_full_3.png',
-            'work_002_thumbnail': 'docs/assets/works/work_002_thumbnail.png',
-            'work_002_full_1': 'docs/assets/works/work_002_full_1.png',
-            'work_002_full_2': 'docs/assets/works/work_002_full_2.png',
-            'work_002_full_3': 'docs/assets/works/work_002_full_3.png',
+            // 作品集图片 - 路径已修正为从 ../assets/... 目录开始
+            'work_001_thumbnail': '../assets/works/work_001_thumbnail.png',
+            'work_001_full_1': '../assets/works/work_001_full_1.png',
+            'work_001_full_2': '../assets/works/work_001_full_2.png',
+            'work_001_full_3': '../assets/works/work_001_full_3.png',
+            'work_002_thumbnail': '../assets/works/work_002_thumbnail.png',
+            'work_002_full_1': '../assets/works/work_002_full_1.png',
+            'work_002_full_2': '../assets/works/work_002_full_2.png',
+            'work_002_full_3': '../assets/works/work_002_full_3.png',
 
-            // 角色图片 - 路径已修正为从 docs 目录开始
-            'char_001_image': 'docs/assets/characters/char_001_image.png',
-            'char_002_image': 'docs/assets/characters/char_002_image.png',
+            // 角色图片 - 路径已修正为从 ../assets/... 目录开始
+            'char_001_image': '../assets/characters/char_001_image.png',
+            'char_002_image': '../assets/characters/char_002_image.png',
 
-            // 数据核心灵感图片 - 路径已修正为从 docs 目录开始
-            'inspiration_1_thumb': 'docs/assets/data-core/inspiration_1_thumb.jpg',
-            'inspiration_1_full': 'docs/assets/data-core/inspiration_1_full.jpg',
-            'inspiration_2_thumb': 'docs/assets/data-core/inspiration_2_thumb.jpg',
-            'inspiration_2_full': 'docs/assets/data-core/inspiration_2_full.jpg',
-            'inspiration_3_thumb': 'docs/assets/data-core/inspiration_3_thumb.jpg',
-            'inspiration_3_full': 'docs/assets/data-core/inspiration_3_full.jpg',
-            'inspiration_4_thumb': 'docs/assets/data-core/inspiration_4_thumb.jpg',
-            'inspiration_4_full': 'docs/assets/data-core/inspiration_4_full.jpg',
-            'inspiration_5_thumb': 'docs/assets/data-core/inspiration_5_thumb.jpg',
-            'inspiration_5_full': 'docs/assets/data-core/inspiration_5_full.jpg',
-            'inspiration_6_thumb': 'docs/assets/data-core/inspiration_6_thumb.jpg',
-            'inspiration_6_full': 'docs/assets/data-core/inspiration_6_full.jpg',
-            'inspiration_7_thumb': 'docs/assets/data-core/inspiration_7_thumb.jpg',
-            'inspiration_7_full': 'docs/assets/data-core/inspiration_7_full.jpg',
-            'inspiration_8_thumb': 'docs/assets/data-core/inspiration_8_thumb.jpg',
-            'inspiration_8_full': 'docs/assets/data-core/inspiration_8_full.jpg'
+            // 数据核心灵感图片 - 路径已修正为从 ../assets/... 目录开始
+            'inspiration_1_thumb': '../assets/data-core/inspiration_1_thumb.jpg',
+            'inspiration_1_full': '../assets/data-core/inspiration_1_full.jpg',
+            'inspiration_2_thumb': '../assets/data-core/inspiration_2_thumb.jpg',
+            'inspiration_2_full': '../assets/data-core/inspiration_2_full.jpg',
+            'inspiration_3_thumb': '../assets/data-core/inspiration_3_thumb.jpg',
+            'inspiration_3_full': '../assets/data-core/inspiration_3_full.jpg',
+            'inspiration_4_thumb': '../assets/data-core/inspiration_4_thumb.jpg',
+            'inspiration_4_full': '../assets/data-core/inspiration_4_full.jpg',
+            'inspiration_5_thumb': '../assets/data-core/inspiration_5_thumb.jpg',
+            'inspiration_5_full': '../assets/data-core/inspiration_5_full.jpg',
+            'inspiration_6_thumb': '../assets/data-core/inspiration_6_thumb.jpg',
+            'inspiration_6_full': '../assets/data-core/inspiration_6_full.jpg',
+            'inspiration_7_thumb': '../assets/data-core/inspiration_7_thumb.jpg',
+            'inspiration_7_full': '../assets/data-core/inspiration_7_full.jpg',
+            'inspiration_8_thumb': '../assets/data-core/inspiration_8_thumb.jpg',
+            'inspiration_8_full': '../assets/data-core/inspiration_8_full.jpg'
         };
 
         /**
@@ -3538,7 +3538,7 @@ Services include:
 
                                     openedWindow.querySelectorAll('.os-window-content img[data-full-image]').forEach(img => {
                                         img.addEventListener('click', (e) => {
-                                            modalImage.src = e.target.dataset.fullImage;
+                                            modalImage.src = e.target.dataset.full_image;
                                             imageModal.classList.remove('hidden');
                                         });
                                     });
