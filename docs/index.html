@@ -75,7 +75,79 @@
             cursor: var(--cursor-default);
             display: flex; /* 使用弹性盒子布局桌面容器 */
             flex-direction: column;
+            
+            /* CRT 纹理和发光效果 */
+            position: relative;
+            overflow: hidden; /* 确保伪元素不会溢出 */
+            /* filter: brightness(1.1) contrast(1.2); */ /* 调整整体对比度以适应CRT效果 */
         }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000; /* 确保在其他内容之上 */
+            opacity: 0.15; /* 调整 CRT 纹理的透明度 */
+            background: repeating-linear-gradient(
+                #080808,
+                #080808 1px,
+                #00FF41 1px,
+                #00FF41 2px
+            ); /* 细微的绿色扫描线 */
+            background-size: 100% 4px;
+            filter: blur(0.5px) hue-rotate(0deg) saturate(1.5); /* 稍微模糊和饱和度，模拟旧屏幕 */
+            animation: flicker 0.15s infinite alternate; /* 闪烁动画 */
+        }
+
+        /* 专门针对黑色背景、绿色文字的 CRT 效果 */
+        .os-window-content, 
+        .start-menu-item,
+        .work-card,
+        .service-category-card,
+        .taskbar-minimized-icon,
+        .work-detail-content { /* 应用到所有黑色背景的元素 */
+            position: relative; /* 确保伪元素相对于自身定位 */
+            overflow: hidden;
+            z-index: 1; /* 确保内容在 CRT 纹理之下 */
+        }
+
+        .os-window-content::after, 
+        .start-menu-item::after,
+        .work-card::after,
+        .service-category-card::after,
+        .taskbar-minimized-icon::after,
+        .work-detail-content::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 2; /* 确保在内容之上 */
+            opacity: 0.15; /* 调整 CRT 纹理的透明度 */
+            background: repeating-linear-gradient(
+                #080808,
+                #080808 1px,
+                #00FF41 1px,
+                #00FF41 2px
+            ); /* 细微的绿色扫描线 */
+            background-size: 100% 4px;
+            filter: blur(0.5px) hue-rotate(0deg) saturate(1.5); /* 稍微模糊和饱和度，模拟旧屏幕 */
+            animation: flicker 0.15s infinite alternate; /* 闪烁动画 */
+        }
+
+
+        @keyframes flicker {
+            0% { opacity: 0.15; }
+            50% { opacity: 0.2; }
+            100% { opacity: 0.15; }
+        }
+
 
         body:active {
             cursor: var(--cursor-active);
@@ -390,9 +462,15 @@
             background: var(--glass-bg);
             backdrop-filter: blur(5px); /* 稍微模糊 */
             -webkit-backdrop-filter: blur(5px);
-            border: 2px solid var(--glass-border);
+            /* Metal border for start menu */
+            border: 2px solid var(--metal-border-light); /* Top/Left highlight */
+            border-bottom-color: var(--metal-border-dark); /* Bottom/Right shadow */
+            border-right-color: var(--metal-border-dark);
             border-radius: 12px;
-            box-shadow: var(--glass-glow);
+            box-shadow: 
+                0 8px 25px var(--glow-matrix), /* Strong green outer glow */
+                inset 0 1px 2px var(--metal-highlight), /* Inner highlight */
+                inset 0 -2px 5px var(--metal-inner-shadow); /* Inner shadow */
             padding: 20px;
             display: none;
             flex-direction: column;
@@ -400,7 +478,7 @@
             transform-origin: bottom left;
             animation: fadeInScaleUpFromBottomLeft 0.3s ease-out forwards;
             overflow-y: auto;
-            /* Added subtle glass reflection */
+            /* Added subtle metal texture to the overall menu background */
             background-image: linear-gradient(to top right, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
                               radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.05) 0%, transparent 30%);
         }
@@ -494,8 +572,9 @@
             position: relative;
             overflow: hidden;
             box-shadow: var(--glass-inset-shadow);
-            border: 1px solid var(--glass-border);
-            background: rgba(0, 0, 0, 0.7);
+            /* Card background to black */
+            background-color: rgba(0, 0, 0, 0.7); 
+            border: 1px solid var(--glass-border); /* Retain green border */
             /* Added subtle glass reflection */
             background-image: linear-gradient(to top right, rgba(255, 255, 255, 0.03) 0%, transparent 50%);
         }
@@ -1652,11 +1731,11 @@
 
             // 桌面图标 / 开始菜单图标 (PNGs with relative paths)
             'icon_works': '../assets/icon/file_icon.png',
-            'icon_characters': './docs/assets/icon/storage_icon.png',
+            'icon_characters': '../assets/icon/storage_icon.png',
             'icon_mazko_logo': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M7.5 12C7.5 10.16 8.96 8.75 10.75 8.75C12.54 8.75 14 10.16 14 12C14 13.84 12.54 15.25 10.75 15.25C8.96 15.25 7.5 13.84 7.5 12ZM10.75 7.5C13.29 7.5 15.33 9.38 15.33 12C15.33 14.62 13.29 16.5 10.75 16.5C8.21 16.5 6.17 14.62 6.17 12C6.17 9.38 8.21 7.5 10.75 7.5ZM2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12ZM3.33 12C3.33 7.21 7.21 3.33 12 3.33C16.79 3.33 20.67 7.21 20.67 12C20.67 16.79 16.79 20.67 12 20.67C7.21 20.67 3.33 16.79 3.33 12Z\' fill=\'%2300FF41\'/%3E%3C/svg%3E', // 一个圆圈中的通用“M”形，像一个标志
             'icon_services': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 13.5V18C18 19.1046 17.1046 20 16 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4H10.5M18 13.5L22 9.5M22 9.5L18 5.5M22 9.5H16M13 10L10.5 12.5L13 15\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_socials': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M8.59 13.51L15.42 17.49\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M15.41 6.51L8.59 10.49\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
-            'icon_datacore': './docs/assets/icon/datacore_logo.png',
+            'icon_datacore': '../assets/icon/datacore_logo.png',
             
             // 任务栏系统托盘图标 (SVG with black strokes/fills)
             'icon_wifi': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 18V22\' stroke=\'%23080808\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 12L12.01 12\' stroke=\'%23080808\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M2.99998 8.00002C5.99998 5.00002 9.00002 3.00002 12 3.00002C15 3.00002 18 5.00002 21 8.00002\' stroke=\'%23080808\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M5.99998 11C7.99998 9 10 7.99998 12 7.99998C14 7.99998 16 9 18 11\' stroke=\'%23080808\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
@@ -1678,14 +1757,14 @@
             'icon_chevron_right': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M9 18L15 12L9 6\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
             // 社交媒体图标 (SVG with green strokes/fills)
-            'icon_weibo': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z\' fill=\'%2300FF41\'/%3E%3Cpath d=\'M15.5 8C15.5 7.44772 15.0523 7 14.5 7H9.5C8.94772 7 8.5 7.44772 8.5 8V16C8.5 16.5523 8.94772 17 9.5 17H14.5C15.0523 17 15.5 16.5523 15.5 16V8Z\' stroke=\'%23000000\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 10.5C12.8284 10.5 13.5 9.82843 13.5 9C13.5 8.17157 12.8284 7.5 12 7.5C11.1716 7.5 10.5 8.17157 10.5 9C10.5 9.82843 11.1716 10.5 12 10.5Z\' fill=\'%23000000\'/%3E%3Cpath d=\'M12 13C12.8284 13 13.5 12.3284 13.5 11.5C13.5 10.6716 12.8284 10 12 10C11.1716 10 10.5 10.6716 10.5 11.5C10.5 12.3284 11.1716 13 12 13Z\' fill=\'%23000000\'/%3E%3C/svg%3E',
+            'icon_weibo': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z\' fill=\'%2300FF41\'/%3E%3Cpath d=\'M15.5 8C15.5 7.44772 15.0523 7 14.5 7H9.5C8.94772 7 8.5 7.44772 8.5 8V16C8.5 16.5523 8.94772 17 9.5 17H14.5C15.0523 17 15.5 16.5523 15.5 16V8Z\' stroke=\'%23080808\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 10.5C12.8284 10.5 13.5 9.82843 13.5 9C13.5 8.17157 12.8284 7.5 12 7.5C11.1716 7.5 10.5 8.17157 10.5 9C10.5 9.82843 11.1716 10.5 12 10.5Z\' fill=\'%23080808\'/%3E%3Cpath d=\'M12 13C12.8284 13 13.5 12.3284 13.5 11.5C13.5 10.6716 12.8284 10 12 10C11.1716 10 10.5 10.6716 10.5 11.5C10.5 12.3284 11.1716 13 12 13Z\' fill=\'%23080808\'/%3E%3C/svg%3E',
             'icon_instagram': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'5\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M16 3H16.01\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_artstation': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z\' fill=\'%2300FF41\'/%3E%3Cpath d=\'M12 6L18 18H6L12 6Z\' fill=\'%23080808\'/%3E%3C/svg%3E',
             'icon_behance_square': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'2\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M16 10C16 8.89543 15.1046 8 14 8H10C8.89543 8 8 8.89543 8 10V14C8 15.1046 8.89543 16 10 16H14C15.1046 16 16 15.1046 16 14V10Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M10 8L14 16\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_envelope': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M22 6L12 13L2 6\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
             // 桌面背景图像 (使用相对路径)
-            'desktop_background_image': './docs/assets/background/bg.jpg'
+            'desktop_background_image': '../assets/background/bg.jpg'
         };
 
         /**
@@ -1937,7 +2016,7 @@ Services include:
 * **Concept Sketches**: Providing multi-angle character concepts based on your ideas.
 * **3D Modeling**: Creating high-poly and low-poly models using tools like Blender/ZBrush.
 * **Texture Painting**: Using Substance Painter to give characters retro pixelated or sci-fi textures.
-* **Rig骼绑定与动画（基础）**：提供基础的角色绑定和姿态设置。
+* **Rigging & Basic Animation**: Providing basic character rigging and pose setup.
 
 **Pricing Examples:**
 
@@ -2608,11 +2687,11 @@ Services include:
                                 title: '地下俱乐部场景',
                                 category: '场景设计 / PSX风格',
                                 // 使用相对路径
-                                thumbnail: './assets/works/work_001_thumbnail.png', 
+                                thumbnail: '../assets/works/work_001_thumbnail.png', 
                                 images: [
-                                    './assets/works/work_001_full_1.png', // 使用相对路径
-                                    './assets/works/work_001_full_2.png', // 使用相对路径
-                                    './assets/works/work_001_full_3.png'  // 使用相对路径
+                                    '../assets/works/work_001_full_1.png', // 使用相对路径
+                                    '../assets/works/work_001_full_2.png', // 使用相对路径
+                                    '../assets/works/work_001_full_3.png'  // 使用相对路径
                                 ],
                                 description: '一个充满霓虹灯和低多边形元素的地下俱乐部场景，融合了Y2K和故障美学。',
                                 tags: ['场景', 'PSX', 'Y2K', 'Blender']
@@ -2622,11 +2701,11 @@ Services include:
                                 title: '赛博朋克角色 - KAI',
                                 category: '角色设计 / Lowpoly',
                                 // 使用相对路径
-                                thumbnail: './assets/works/work_002_thumbnail.png', 
+                                thumbnail: '../assets/works/work_002_thumbnail.png', 
                                 images: [
-                                    './assets/works/work_002_full_1.png', // 使用相对路径
-                                    './assets/works/work_002_full_2.png', // 使用相对路径
-                                    './assets/works/work_002_full_3.png'  // 使用相对路径
+                                    '../assets/works/work_002_full_1.png', // 使用相对路径
+                                    '../assets/works/work_002_full_2.png', // 使用相对路径
+                                    '../assets/works/work_002_full_3.png'  // 使用相对路径
                                 ],
                                 description: '一个具有复古科幻感的赛博朋克角色，采用低多边形建模和像素质感纹理。',
                                 tags: ['角色', 'Lowpoly', '赛博朋K', 'Substance Painter']
@@ -2640,14 +2719,14 @@ Services include:
                                 name: '星际漫游者',
                                 description: '一个孤独的星际旅行者，探索宇宙深处的奥秘。PSX风格，低多边形设计。',
                                 // 
-                                image: './assets/characters/char_001_image.png' 
+                                image: '../assets/characters/char_001_image.png' 
                             },
                             {
                                 id: 'char-002',
                                 name: '都市忍者',
                                 description: '穿梭于霓虹都市阴影中的神秘忍者。',
                                 // 
-                                image: './assets/characters/char_002_image.png' 
+                                image: '../assets/characters/char_002_image.png' 
                             }
                         ];
                         break;
@@ -2674,14 +2753,14 @@ Services include:
                     case 'data-core': // Fetch content for the new Data Core app
                         data = [
                             // 示例灵感图片，请替换为您的实际图片 URL 或 Base64
-                            { url: './assets/data-core/inspiration_1_thumb.jpg', alt: '赛博朋克城市景观', fullSizeUrl: './assets/data-core/inspiration_1_full.jpg' },
-                            { url: './assets/data-core/inspiration_2_thumb.jpg', alt: '故障艺术肖像', fullSizeUrl: './assets/data-core/inspiration_2_full.jpg' },
-                            { url: './assets/data-core/inspiration_3_thumb.jpg', alt: 'Y2K美学设计', fullSizeUrl: './assets/data-core/inspiration_3_full.jpg' },
-                            { url: './assets/data-core/inspiration_4_thumb.jpg', alt: 'PSX风格场景', fullSizeUrl: './assets/data-core/inspiration_4_full.jpg' },
-                            { url: './assets/data-core/inspiration_5_thumb.jpg', alt: '霓虹灯管艺术', fullSizeUrl: './assets/data-core/inspiration_5_full.jpg' },
-                            { url: './assets/data-core/inspiration_6_thumb.jpg', alt: '科技感UI界面', fullSizeUrl: './assets/data-core/inspiration_6_full.jpg' },
-                            { url: './assets/data-core/inspiration_7_thumb.jpg', alt: '复古未来主义', fullSizeUrl: './assets/data-core/inspiration_7_full.jpg' },
-                            { url: './assets/data-core/inspiration_8_thumb.jpg', alt: '数字故障纹理', fullSizeUrl: './assets/data-core/inspiration_8_full.jpg' }
+                            { url: '../assets/data-core/inspiration_1_thumb.jpg', alt: '赛博朋克城市景观', fullSizeUrl: '../assets/data-core/inspiration_1_full.jpg' },
+                            { url: '../assets/data-core/inspiration_2_thumb.jpg', alt: '故障艺术肖像', fullSizeUrl: '../assets/data-core/inspiration_2_full.jpg' },
+                            { url: '../assets/data-core/inspiration_3_thumb.jpg', alt: 'Y2K美学设计', fullSizeUrl: '../assets/data-core/inspiration_3_full.jpg' },
+                            { url: '../assets/data-core/inspiration_4_thumb.jpg', alt: 'PSX风格场景', fullSizeUrl: '../assets/data-core/inspiration_4_full.jpg' },
+                            { url: '../assets/data-core/inspiration_5_thumb.jpg', alt: '霓虹灯管艺术', fullSizeUrl: '../assets/data-core/inspiration_5_full.jpg' },
+                            { url: '../assets/data-core/inspiration_6_thumb.jpg', alt: '科技感UI界面', fullSizeUrl: '../assets/data-core/inspiration_6_full.jpg' },
+                            { url: '../assets/data-core/inspiration_7_thumb.jpg', alt: '复古未来主义', fullSizeUrl: '../assets/data-core/inspiration_7_full.jpg' },
+                            { url: '../assets/data-core/inspiration_8_thumb.jpg', alt: '数字故障纹理', fullSizeUrl: '../assets/data-core/inspiration_8_full.jpg' }
                         ];
                         break;
                     case 'settings': // New case for settings
