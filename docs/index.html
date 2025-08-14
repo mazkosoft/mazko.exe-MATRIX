@@ -56,7 +56,7 @@
             --cursor-active: auto;
             --cursor-pointer: pointer;
 
-            --desktop-image-url:  url('../assets/background/bg.jpg'); /* 桌面背景图片的CSS变量 - 更新路径 */
+            --desktop-image-url:  url('docs/assets/background/bg.jpg'); /* 桌面背景图片的CSS变量 - 修正路径为 docs/assets/... */
         }
 
         body {
@@ -76,7 +76,7 @@
             display: flex; /* 使用弹性盒子布局桌面容器 */
             flex-direction: column;
             
-            /* CRT 纹理和发光效果 */
+            /* CRT 纹理和发光效果 - 移除频闪动画 */
             position: relative;
             overflow: hidden; /* 确保伪元素不会溢出 */
             /* filter: brightness(1.1) contrast(1.2); */ /* 调整整体对比度以适应CRT效果 */
@@ -100,10 +100,10 @@
             ); /* 细微的绿色扫描线 */
             background-size: 100% 4px;
             filter: blur(0.5px) hue-rotate(0deg) saturate(1.5); /* 稍微模糊和饱和度，模拟旧屏幕 */
-            animation: flicker 0.15s infinite alternate; /* 闪烁动画 */
+            /* animation: flicker 0.15s infinite alternate; */ /* 移除闪烁动画 */
         }
 
-        /* 专门针对黑色背景、绿色文字的 CRT 效果 */
+        /* 专门针对黑色背景、绿色文字的 CRT 效果 - 移除频闪动画 */
         .os-window-content, 
         .start-menu-item,
         .work-card,
@@ -138,15 +138,15 @@
             ); /* 细微的绿色扫描线 */
             background-size: 100% 4px;
             filter: blur(0.5px) hue-rotate(0deg) saturate(1.5); /* 稍微模糊和饱和度，模拟旧屏幕 */
-            animation: flicker 0.15s infinite alternate; /* 闪烁动画 */
+            /* animation: flicker 0.15s infinite alternate; */ /* 移除闪烁动画 */
         }
 
 
-        @keyframes flicker {
+        /* @keyframes flicker {
             0% { opacity: 0.15; }
             50% { opacity: 0.2; }
             100% { opacity: 0.15; }
-        }
+        } */ /* 移除 flicker 动画定义 */
 
 
         body:active {
@@ -445,10 +445,10 @@
             background: rgba(0,0,0,0.8); /* Changed to black background */
             backdrop-filter: blur(5px); /* 稍微模糊 */
             -webkit-backdrop-filter: blur(5px);
-            /* Metal border for start menu */
-            border: 2px solid var(--metal-border-light); /* Top/Left highlight */
-            border-bottom-color: var(--metal-border-dark); /* Bottom/Right shadow */
-            border-right-color: var(--metal-border-dark);
+            /* Removed metal border for start menu */
+            /* border: 2px solid var(--metal-border-light); */
+            /* border-bottom-color: var(--metal-border-dark); */
+            /* border-right-color: var(--metal-border-dark); */
             border-radius: 12px;
             box-shadow: 
                 0 8px 25px rgba(0, 255, 65, 0.5), /* Strong green outer glow */
@@ -672,7 +672,7 @@
             box-shadow: 
                 inset 0 6px 15px var(--metal-shadow), /* Deeper inset shadow */
                 inset 0 -2px 5px var(--metal-highlight), /* More pronounced highlight */
-                0 0 10px rgba(0,255,65,0.7); /* Slightly stronger external glow */
+                0 0 10px rgba(0,255,65,0.7);
             filter: brightness(0.7); /* Slightly darker on press */
             border-top-color: var(--metal-border-dark);
             border-bottom-color: var(--metal-border-light);
@@ -1716,13 +1716,13 @@
             'cursor_active': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M8 0V16M0 8H16\' stroke=\'%2300FF41\' stroke-width=\'2\'/%3E%3C/svg%3E',
             'cursor_pointer': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 1L15 8L1 15V1L1 1Z\' fill=\'%2300FF41\' stroke=\'%2300FF41\' stroke-width=\'1\'/%3E%3C/svg%3E',
 
-            // 桌面图标 / 开始菜单图标 (PNGs with relative paths)
-            'icon_works': '../assets/icon/file_icon.png', // 更新路径
-            'icon_characters': '../assets/icon/storage_icon.png', // 更新路径
-            'icon_mazko_logo': '../assets/icon/radiation m logo 1.png', // 更新路径
+            // 桌面图标 / 开始菜单图标 (PNGs with relative paths) - 路径已修正为从 docs 目录开始
+            'icon_works': 'docs/assets/icon/file_icon.png', 
+            'icon_characters': 'docs/assets/icon/storage_icon.png', 
+            'icon_mazko_logo': 'docs/assets/icon/radiation m logo 1.png', 
             'icon_services': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 13.5V18C18 19.1046 17.1046 20 16 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4H10.5M18 13.5L22 9.5M22 9.5L18 5.5M22 9.5H16M13 10L10.5 12.5L13 15\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_socials': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M8.59 13.51L15.42 17.49\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M15.41 6.51L8.59 10.49\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
-            'icon_datacore': '../assets/icon/datacore_logo.png', // 更新路径
+            'icon_datacore': 'docs/assets/icon/datacore_logo.png', // 路径已修正为从 docs 目录开始
             
             // 任务栏系统托盘图标 (SVG with green strokes/fills) - 更新填充为绿色
             'icon_wifi': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 18V22\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 12L12.01 12\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M2.99998 8.00002C5.99998 5.00002 9.00002 3.00002 12 3.00002C15 3.00002 18 5.00002 21 8.00002\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M5.99998 11C7.99998 9 10 7.99998 12 7.99998C14 7.99998 16 9 18 11\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
@@ -1750,8 +1750,40 @@
             'icon_behance_square': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'2\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M16 10C16 8.89543 15.1046 8 14 8H10C8.89543 8 8 8.89543 8 10V14C8 15.1046 8.89543 16 10 16H14C15.1046 16 16 15.1046 16 14V10Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M10 8L14 16\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_envelope': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M22 6L12 13L2 6\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // 桌面背景图像 (使用相对路径)
-            'desktop_background_image': '../assets/background/bg.jpg'
+            // 桌面背景图像 (使用相对路径) - 路径已修正为从 docs 目录开始
+            'desktop_background_image': 'docs/assets/background/bg.jpg',
+
+            // 作品集图片 - 路径已修正为从 docs 目录开始
+            'work_001_thumbnail': 'docs/assets/works/work_001_thumbnail.png',
+            'work_001_full_1': 'docs/assets/works/work_001_full_1.png',
+            'work_001_full_2': 'docs/assets/works/work_001_full_2.png',
+            'work_001_full_3': 'docs/assets/works/work_001_full_3.png',
+            'work_002_thumbnail': 'docs/assets/works/work_002_thumbnail.png',
+            'work_002_full_1': 'docs/assets/works/work_002_full_1.png',
+            'work_002_full_2': 'docs/assets/works/work_002_full_2.png',
+            'work_002_full_3': 'docs/assets/works/work_002_full_3.png',
+
+            // 角色图片 - 路径已修正为从 docs 目录开始
+            'char_001_image': 'docs/assets/characters/char_001_image.png',
+            'char_002_image': 'docs/assets/characters/char_002_image.png',
+
+            // 数据核心灵感图片 - 路径已修正为从 docs 目录开始
+            'inspiration_1_thumb': 'docs/assets/data-core/inspiration_1_thumb.jpg',
+            'inspiration_1_full': 'docs/assets/data-core/inspiration_1_full.jpg',
+            'inspiration_2_thumb': 'docs/assets/data-core/inspiration_2_thumb.jpg',
+            'inspiration_2_full': 'docs/assets/data-core/inspiration_2_full.jpg',
+            'inspiration_3_thumb': 'docs/assets/data-core/inspiration_3_thumb.jpg',
+            'inspiration_3_full': 'docs/assets/data-core/inspiration_3_full.jpg',
+            'inspiration_4_thumb': 'docs/assets/data-core/inspiration_4_thumb.jpg',
+            'inspiration_4_full': 'docs/assets/data-core/inspiration_4_full.jpg',
+            'inspiration_5_thumb': 'docs/assets/data-core/inspiration_5_thumb.jpg',
+            'inspiration_5_full': 'docs/assets/data-core/inspiration_5_full.jpg',
+            'inspiration_6_thumb': 'docs/assets/data-core/inspiration_6_thumb.jpg',
+            'inspiration_6_full': 'docs/assets/data-core/inspiration_6_full.jpg',
+            'inspiration_7_thumb': 'docs/assets/data-core/inspiration_7_thumb.jpg',
+            'inspiration_7_full': 'docs/assets/data-core/inspiration_7_full.jpg',
+            'inspiration_8_thumb': 'docs/assets/data-core/inspiration_8_thumb.jpg',
+            'inspiration_8_full': 'docs/assets/data-core/inspiration_8_full.jpg'
         };
 
         /**
@@ -2406,7 +2438,7 @@ Services include:
                                 <div class="works-grid">
                                     ${data?.map(work => `
                                         <div class="work-card" data-work-id="${work.id}">
-                                            <img src="${work.thumbnail}" alt="${work.title}">
+                                            <img src="${getAssetUrl(work.thumbnail_key)}" alt="${work.title}">
                                             <div class="work-card-title">${work.title}</div>
                                             <div class="work-card-category">${work.category}</div>
                                         </div>
@@ -2422,7 +2454,7 @@ Services include:
                                 <div class="grid grid-cols-2 gap-4 mt-4">
                                     ${data?.map(char => `
                                         <div class="flex flex-col items-center">
-                                            <img src="${char.image}" alt="${char.name}" class="rounded-lg shadow-md mb-2">
+                                            <img src="${getAssetUrl(char.image_key)}" alt="${char.name}" class="rounded-lg shadow-md mb-2">
                                             <p class="font-bold">${char.name}</p>
                                             <p class="text-sm opacity-80 text-center">${char.description}</p>
                                         </div>
@@ -2466,7 +2498,7 @@ Services include:
                                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                                         ${currentImageGallery.map(image => `
                                             <div class="flex flex-col items-center p-2 rounded-lg bg-white bg-opacity-5 hover:bg-opacity-10 transition-colors">
-                                                <img src="${image.url}" alt="${image.alt}" class="w-full h-32 object-cover rounded-md mb-2 cursor-pointer" data-full-image="${image.fullSizeUrl || image.url}">
+                                                <img src="${getAssetUrl(image.thumb_key)}" alt="${image.alt}" class="w-full h-32 object-cover rounded-md mb-2 cursor-pointer" data-full-image="${getAssetUrl(image.full_key || image.thumb_key)}">
                                                 <p class="text-sm text-center opacity-90">${image.alt}</p>
                                             </div>
                                         `).join('')}
@@ -2535,8 +2567,8 @@ Services include:
                                 contentHTML = `
                                     <div class="work-detail-content">
                                         <div class="gallery-main-image-container">
-                                            <img src="${currentWork.images[initialImageIndex]}" alt="${currentWork.title}" class="gallery-main-image">
-                                            ${currentWork.images.length > 1 ? `
+                                            <img src="${getAssetUrl(currentWork.images_keys[initialImageIndex])}" alt="${currentWork.title}" class="gallery-main-image">
+                                            ${currentWork.images_keys.length > 1 ? `
                                                 <button class="gallery-nav-button prev" data-direction="prev" title="上一张图片">
                                                     <span class="icon-placeholder" data-asset-key="icon_chevron_left"></span>
                                                 </button>
@@ -2546,8 +2578,8 @@ Services include:
                                             ` : ''}
                                         </div>
                                         <div class="gallery-thumbnails">
-                                            ${currentWork.images.map((imgSrc, index) => `
-                                                <img src="${imgSrc}" alt="${currentWork.title} 缩略图" class="gallery-thumbnail ${index === initialImageIndex ? 'active' : ''}" data-index="${index}">
+                                            ${currentWork.images_keys.map((imgKey, index) => `
+                                                <img src="${getAssetUrl(imgKey)}" alt="${currentWork.title} 缩略图" class="gallery-thumbnail ${index === initialImageIndex ? 'active' : ''}" data-index="${index}">
                                             `).join('')}
                                         </div>
                                         <h3>${currentWork.title}</h3>
@@ -2673,12 +2705,12 @@ Services include:
                                 id: 'work-001',
                                 title: '地下俱乐部场景',
                                 category: '场景设计 / PSX风格',
-                                // 使用相对路径
-                                thumbnail: '../assets/works/work_001_thumbnail.png', 
-                                images: [
-                                    '../assets/works/work_001_full_1.png', // 使用相对路径
-                                    '../assets/works/work_001_full_2.png', // 使用相对路径
-                                    '../assets/works/work_001_full_3.png'  // 使用相对路径
+                                // 使用 ASSETS 的 key
+                                thumbnail_key: 'work_001_thumbnail', 
+                                images_keys: [
+                                    'work_001_full_1', 
+                                    'work_001_full_2', 
+                                    'work_001_full_3'  
                                 ],
                                 description: '一个充满霓虹灯和低多边形元素的地下俱乐部场景，融合了Y2K和故障美学。',
                                 tags: ['场景', 'PSX', 'Y2K', 'Blender']
@@ -2687,12 +2719,12 @@ Services include:
                                 id: 'work-002',
                                 title: '赛博朋克角色 - KAI',
                                 category: '角色设计 / Lowpoly',
-                                // 使用相对路径
-                                thumbnail: '../assets/works/work_002_thumbnail.png', 
-                                images: [
-                                    '../assets/works/work_002_full_1.png', // 使用相对路径
-                                    '../assets/works/work_002_full_2.png', // 使用相对路径
-                                    '../assets/works/work_002_full_3.png'  // 使用相对路径
+                                // 使用 ASSETS 的 key
+                                thumbnail_key: 'work_002_thumbnail', 
+                                images_keys: [
+                                    'work_002_full_1', 
+                                    'work_002_full_2', 
+                                    'work_002_full_3'  
                                 ],
                                 description: '一个具有复古科幻感的赛博朋克角色，采用低多边形建模和像素质感纹理。',
                                 tags: ['角色', 'Lowpoly', '赛博朋K', 'Substance Painter']
@@ -2706,14 +2738,14 @@ Services include:
                                 name: '星际漫游者',
                                 description: '一个孤独的星际旅行者，探索宇宙深处的奥秘。PSX风格，低多边形设计。',
                                 // 
-                                image: '../assets/characters/char_001_image.png' 
+                                image_key: 'char_001_image' 
                             },
                             {
                                 id: 'char-002',
                                 name: '都市忍者',
                                 description: '穿梭于霓虹都市阴影中的神秘忍者。',
                                 // 
-                                image: '../assets/characters/char_002_image.png' 
+                                image_key: 'char_002_image' 
                             }
                         ];
                         break;
@@ -2740,14 +2772,14 @@ Services include:
                     case 'data-core': // Fetch content for the new Data Core app
                         data = [
                             // 示例灵感图片，请替换为您的实际图片 URL 或 Base64
-                            { url: '../assets/data-core/inspiration_1_thumb.jpg', alt: '赛博朋克城市景观', fullSizeUrl: '../assets/data-core/inspiration_1_full.jpg' },
-                            { url: '../assets/data-core/inspiration_2_thumb.jpg', alt: '故障艺术肖像', fullSizeUrl: '../assets/data-core/inspiration_2_full.jpg' },
-                            { url: '../assets/data-core/inspiration_3_thumb.jpg', alt: 'Y2K美学设计', fullSizeUrl: '../assets/data-core/inspiration_3_full.jpg' },
-                            { url: '../assets/data-core/inspiration_4_thumb.jpg', alt: 'PSX风格场景', fullSizeUrl: '../assets/data-core/inspiration_4_full.jpg' },
-                            { url: '../assets/data-core/inspiration_5_thumb.jpg', alt: '霓虹灯管艺术', fullSizeUrl: '../assets/data-core/inspiration_5_full.jpg' },
-                            { url: '../assets/data-core/inspiration_6_thumb.jpg', alt: '科技感UI界面', fullSizeUrl: '../assets/data-core/inspiration_6_full.jpg' },
-                            { url: '../assets/data-core/inspiration_7_thumb.jpg', alt: '复古未来主义', fullSizeUrl: '../assets/data-core/inspiration_7_full.jpg' },
-                            { url: '../assets/data-core/inspiration_8_thumb.jpg', alt: '数字故障纹理', fullSizeUrl: '../assets/data-core/inspiration_8_full.jpg' }
+                            { thumb_key: 'inspiration_1_thumb', full_key: 'inspiration_1_full', alt: '赛博朋克城市景观' },
+                            { thumb_key: 'inspiration_2_thumb', full_key: 'inspiration_2_full', alt: '故障艺术肖像' },
+                            { thumb_key: 'inspiration_3_thumb', full_key: 'inspiration_3_full', alt: 'Y2K美学设计' },
+                            { thumb_key: 'inspiration_4_thumb', full_key: 'inspiration_4_full', alt: 'PSX风格场景' },
+                            { thumb_key: 'inspiration_5_thumb', full_key: 'inspiration_5_full', alt: '霓虹灯管艺术' },
+                            { thumb_key: 'inspiration_6_thumb', full_key: 'inspiration_6_full', alt: '科技感UI界面' },
+                            { thumb_key: 'inspiration_7_thumb', full_key: 'inspiration_7_full', alt: '复古未来主义' },
+                            { thumb_key: 'inspiration_8_thumb', full_key: 'inspiration_8_full', alt: '数字故障纹理' }
                         ];
                         break;
                     case 'settings': // New case for settings
@@ -3201,8 +3233,8 @@ Services include:
                 const detailContent = `
                     <div class="work-detail-content">
                         <div class="gallery-main-image-container">
-                            <img src="${work.images[currentImageIndex]}" alt="${work.title}" class="gallery-main-image">
-                            ${work.images.length > 1 ? `
+                            <img src="${getAssetUrl(work.images_keys[currentImageIndex])}" alt="${work.title}" class="gallery-main-image">
+                            ${work.images_keys.length > 1 ? `
                                 <button class="gallery-nav-button prev" title="上一张图片">
                                     <span class="icon-placeholder" data-asset-key="icon_chevron_left"></span>
                                 </button>
@@ -3212,8 +3244,8 @@ Services include:
                             ` : ''}
                         </div>
                         <div class="gallery-thumbnails">
-                            ${work.images.map((image, index) => `
-                                <img src="${image}" alt="${work.title} 缩略图" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
+                            ${work.images_keys.map((imageKey, index) => `
+                                <img src="${getAssetUrl(imageKey)}" alt="${work.title} 缩略图" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
                             `).join('')}
                         </div>
                         <h3>${work.title}</h3>
@@ -3242,7 +3274,7 @@ Services include:
                              */
                             const updateGallery = () => {
                                 if (mainImage) {
-                                    mainImage.src = work.images[currentImageIndex];
+                                    mainImage.src = getAssetUrl(work.images_keys[currentImageIndex]);
                                     mainImage.alt = `${work.title} - 图片 ${currentImageIndex + 1}`;
                                 }
                                 thumbnails.forEach((thumb, index) => {
@@ -3256,14 +3288,14 @@ Services include:
 
                             if (prevButton) {
                                 prevButton.addEventListener('click', () => {
-                                    currentImageIndex = (currentImageIndex - 1 + work.images.length) % work.images.length;
+                                    currentImageIndex = (currentImageIndex - 1 + work.images_keys.length) % work.images_keys.length;
                                     updateGallery();
                                 });
                             }
 
                             if (nextButton) {
                                 nextButton.addEventListener('click', () => {
-                                    currentImageIndex = (currentImageIndex + 1) % work.images.length;
+                                    currentImageIndex = (currentImageIndex + 1) % work.images_keys.length;
                                     updateGallery();
                                 });
                             }
@@ -3366,7 +3398,7 @@ Services include:
                                 <div class="works-grid">
                                     ${data?.map(work => `
                                         <div class="work-card" data-work-id="${work.id}">
-                                            <img src="${work.thumbnail}" alt="${work.title}">
+                                            <img src="${getAssetUrl(work.thumbnail_key)}" alt="${work.title}">
                                             <div class="work-card-title">${work.title}</div>
                                             <div class="work-card-category">${work.category}</div>
                                         </div>
@@ -3402,7 +3434,7 @@ Services include:
                                 <div class="grid grid-cols-2 gap-4 mt-4">
                                     ${data?.map(char => `
                                         <div class="flex flex-col items-center">
-                                            <img src="${char.image}" alt="${char.name}" class="rounded-lg shadow-md mb-2">
+                                            <img src="${getAssetUrl(char.image_key)}" alt="${char.name}" class="rounded-lg shadow-md mb-2">
                                             <p class="font-bold">${char.name}</p>
                                             <p class="text-sm opacity-80 text-center">${char.description}</p>
                                         </div>
@@ -3477,7 +3509,7 @@ Services include:
                                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                                         ${data.map(image => `
                                             <div class="flex flex-col items-center p-2 rounded-lg bg-white bg-opacity-5 hover:bg-opacity-10 transition-colors">
-                                                <img src="${image.url}" alt="${image.alt}" class="w-full h-32 object-cover rounded-md mb-2 cursor-pointer" data-full-image="${image.fullSizeUrl || image.url}">
+                                                <img src="${getAssetUrl(image.thumb_key)}" alt="${image.alt}" class="w-full h-32 object-cover rounded-md mb-2 cursor-pointer" data-full-image="${getAssetUrl(image.full_key || image.thumb_key)}">
                                                 <p class="text-sm text-center opacity-90">${image.alt}</p>
                                             </div>
                                         `).join('')}
