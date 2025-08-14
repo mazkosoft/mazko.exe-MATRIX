@@ -56,7 +56,8 @@
             --cursor-active: auto;
             --cursor-pointer: pointer;
 
-            --desktop-image-url:  url('../assets/background/bg.jpg'); /* 桌面背景图片的CSS变量 - 修正路径为 ../assets/... */
+            /* 桌面背景图片的CSS变量 - 修正路径为 ../assets/... */
+            --desktop-image-url: url('../assets/backgrounds/bg.jpg');
         }
 
         body {
@@ -455,11 +456,13 @@
                 inset 0 1px 2px var(--metal-highlight), /* Inner highlight */
                 inset 0 -2px 5px var(--metal-inner-shadow); /* Inner shadow */
             padding: 20px;
-            display: none;
+            /* 替换 display: none 为 visibility 和 opacity */
+            visibility: hidden;
+            opacity: 0;
             flex-direction: column;
             z-index: 100;
             transform-origin: bottom left;
-            animation: fadeInScaleUpFromBottomLeft 0.3s ease-out forwards;
+            transition: opacity 0.3s ease-out, visibility 0.3s ease-out; /* Add transition for smoothness */
             overflow-y: auto;
             /* Added subtle metal texture to the overall menu background */
             background-image: repeating-linear-gradient(90deg, transparent, transparent 1px, var(--metal-bg) 1px, var(--metal-bg) 2px); /* Metal texture */
@@ -467,10 +470,15 @@
         }
 
         .start-menu.hidden {
-            display: none;
+            visibility: hidden;
+            opacity: 0;
+            transform: scale(0.6); /* Start from smaller scale for animation */
         }
         .start-menu.visible {
-            display: flex;
+            visibility: visible;
+            opacity: 1;
+            transform: scale(1);
+            animation: fadeInScaleUpFromBottomLeft 0.3s ease-out forwards;
         }
 
         /* 开始菜单头部（带个人信息） - 更高度拟物化的金属风格 */
@@ -683,6 +691,7 @@
         .start-menu-footer-button .icon-image {
             width: 32px;
             height: 32px;
+            /* 修正：确保图标有绿色光晕 */
             filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.7));
         }
 
@@ -794,7 +803,7 @@
         .os-window-title-content .icon-image {
             width: 32px;
             height: 32px;
-            filter: none; /* Remove green glow from icon */
+            filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.8)); /* 确保标题栏图标有绿色光晕 */
         }
         .os-window-title-bar:not(.inactive) .os-window-title-content .icon-image {
              filter: drop-shadow(0 0 5px rgba(0,0,0,0.5)); /* Subtle dark shadow for depth */
@@ -893,7 +902,7 @@
         .os-window-controls .control-button .icon-image {
             width: 0.9em;
             height: 0.9em;
-            filter: none; /* Remove green glow */
+            filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.8)); /* 修正：确保控制按钮图标有绿色光晕 */
         }
         .os-window-controls .control-button:not(.close):hover .icon-image { /* Restore green glow for non-close buttons on hover */
             filter: drop-shadow(0 0 5px var(--matrix-green-light));
@@ -1323,7 +1332,8 @@
             width: 32px;
             left: 4px;
             bottom: 4px;
-            background: linear-gradient(to bottom, var(--metal-color-light) 0%, var(--metal-color-dark) 100%); /* Adjusted to use metal colors */
+            /* Adjusted to use metal colors */
+            background: linear-gradient(to bottom, var(--metal-color-mid) 0%, var(--metal-color-end) 100%); 
             -webkit-transition: .4s;
             transition: .4s;
             border-radius: 50%;
@@ -1595,9 +1605,6 @@
         <div class="desktop-layout">
             <!-- 主桌面区 - 图标和窗口所在区域 -->
             <div class="main-desktop-area" id="main-desktop-area">
-                <!-- 初始欢迎信息，窗口打开时隐藏 -->
-                <!-- 移除欢迎信息 -->
-                
                 <!-- 桌面图标（快捷方式） -->
                 <div class="desktop-icons-container" id="desktop-icons-container">
                     <div class="desktop-icon" data-section="works" data-title-zh="我的作品集" data-title-en="My Works">
@@ -1703,15 +1710,13 @@
     </div>
 
     <script>
-        console.log('脚本开始解析。'); // Added for debugging
-        
         /**
          * @object ASSETS
          * @description 所有图片和图标路径的集中管理。
-         * 所有资产现在都经过Base64编码以实现自包含。
+         * 所有资产现在都经过Base64编码或使用相对路径。
          */
         const ASSETS = {
-            // 光标图像（默认黑色点，活动时十字，指针时箭头）
+            // 光标图像 (默认黑色点，活动时十字，指针时箭头)
             'cursor_default': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'8\' cy=\'8\' r=\'2\' fill=\'%2300FF41\'/%3E%3C/svg%3E',
             'cursor_active': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M8 0V16M0 8H16\' stroke=\'%2300FF41\' stroke-width=\'2\'/%3E%3C/svg%3E',
             'cursor_pointer': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 1L15 8L1 15V1L1 1Z\' fill=\'%2300FF41\' stroke=\'%2300FF41\' stroke-width=\'1\'/%3E%3C/svg%3E',
@@ -1722,7 +1727,7 @@
             'icon_mazko_logo': '../assets/icon/radiation m logo 1.png', 
             'icon_services': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 13.5V18C18 19.1046 17.1046 20 16 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4H10.5M18 13.5L22 9.5M22 9.5L18 5.5M22 9.5H16M13 10L10.5 12.5L13 15\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_socials': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M8.59 13.51L15.42 17.49\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M15.41 6.51L8.59 10.49\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
-            'icon_datacore': '../assets/icon/datacore_logo.png', // 路径已修正为从 ../assets/... 目录开始
+            'icon_datacore': '../assets/icon/datacore_logo.png', 
             
             // 任务栏系统托盘图标 (SVG with green strokes/fills) - 更新填充为绿色
             'icon_wifi': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 18V22\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 12L12.01 12\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M2.99998 8.00002C5.99998 5.00002 9.00002 3.00002 12 3.00002C15 3.00002 18 5.00002 21 8.00002\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M5.99998 11C7.99998 9 10 7.99998 12 7.99998C14 7.99998 16 9 18 11\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
@@ -1751,7 +1756,7 @@
             'icon_envelope': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M22 6L12 13L2 6\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
             // 桌面背景图像 (使用相对路径) - 路径已修正为从 ../assets/... 目录开始
-            'desktop_background_image': '../assets/background/bg.jpg',
+            'desktop_background_image': '../assets/backgrounds/bg.jpg',
 
             // 作品集图片 - 路径已修正为从 ../assets/... 目录开始
             'work_001_thumbnail': '../assets/works/work_001_thumbnail.png',
@@ -1789,12 +1794,26 @@
         /**
          * @function getAssetUrl
          * @description 从 ASSETS 对象中检索指定资产的URL。
+         * 如果资产值是 Base64 字符串，则直接返回。
+         * 如果资产值是相对路径，则返回该路径。
          * @param {string} assetKey - ASSETS 对象中的键名。
          * @returns {string} 相应资产的URL路径。
          */
         function getAssetUrl(assetKey) {
-            return ASSETS[assetKey] || ''; 
+            const assetValue = ASSETS[assetKey];
+            if (!assetValue) {
+                console.warn(`Asset with key "${assetKey}" not found.`);
+                return ''; // Or a placeholder image URL
+            }
+            // Check if it's a Base64 string (starts with 'data:image/')
+            if (assetValue.startsWith('data:image/')) {
+                return assetValue;
+            } else {
+                // Assume it's a relative path to a file
+                return assetValue;
+            }
         }
+
 
         /**
          * @object LANG_CONTENT
@@ -1942,7 +1961,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                     title: '系统设置',
                     description: '调整您的系统偏好设置。',
                     options: [
-                        { id: 'language-toggle', type: 'language-toggle', label: '切换语言' }, // Added missing label
+                        { id: 'language-toggle', type: 'language-toggle', label: '切换语言' }, 
                         { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: '显示桌面图标' },
                         { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: '启用系统动画 (暂不可用)' },
                         { id: 'reset-settings', type: 'button', label: '重置所有设置' }
@@ -2164,6 +2183,11 @@ Services include:
                 root.style.setProperty('--cursor-default', `url('${getAssetUrl('cursor_default')}'), auto`);
                 root.style.setProperty('--cursor-active', `url('${getAssetUrl('cursor_active')}'), auto`);
                 root.style.setProperty('--cursor-pointer', `url('${getAssetUrl('cursor_pointer')}'), auto`);
+                // 为可拖拽元素设置抓手光标
+                const grabElements = document.querySelectorAll('.os-window-title-bar');
+                grabElements.forEach(el => {
+                    el.style.cursor = `url('${getAssetUrl('cursor_grab')}') 12 12, grab`;
+                });
                 console.log('自定义光标已更新。');
             }
 
@@ -2246,9 +2270,9 @@ Services include:
              */
             /**
              * @function updateUIForLanguage
-         * @description 根据当前语言设置更新所有UI文本。
-         * @returns {void}
-         */
+             * @description 根据当前语言设置更新所有UI文本。
+             * @returns {void}
+             */
             function updateUIForLanguage() {
                 const langData = LANG_CONTENT[currentLanguage];
 
@@ -2266,8 +2290,8 @@ Services include:
                     if (langKey && langData[langKey]) {
                         icon.querySelector('.desktop-icon-label').textContent = langData[langKey];
                     }
-                    // Update data-title for window opening (using current language for display, but keep zh/en for internal)
-                    // 更新窗口打开的data-title（使用当前语言显示，但保持zh/en内部使用）
+                    // Update data-title for window opening (using current language for display)
+                    // 更新窗口打开的data-title（使用当前语言显示）
                     icon.dataset.title = icon.dataset[`title-${currentLanguage}`];
                 });
 
@@ -2275,15 +2299,9 @@ Services include:
                 // 更新开始菜单项（链接和按钮）
                 document.querySelectorAll('.start-menu-item').forEach(item => {
                     const langKey = item.dataset.langKey;
-                    // Ensure both language versions exist before attempting to access
-                    // 在尝试访问之前，请确保两种语言版本都存在
-                    // Changed to safely access properties with optional chaining in case langKey is missing in either language
-                    const chineseLabel = LANG_CONTENT.zh?.[langKey] || ''; 
-                    const englishLabel = LANG_CONTENT.en?.[langKey] || '';
-
                     const labelSpan = item.querySelector('.menu-item-label');
-                    if (labelSpan) {
-                        labelSpan.textContent = `${chineseLabel} [${englishLabel}]`; 
+                    if (labelSpan && langData[langKey]) {
+                        labelSpan.textContent = langData[langKey]; 
                     }
                 });
 
@@ -2321,46 +2339,37 @@ Services include:
              * @returns {{chineseTitle: string, englishTitle: string}} 包含中文和英文标题的对象。
              */
             function getWindowTitles(section, currentWork = null, currentCategory = null) {
-                let chineseTitle = LANG_CONTENT[currentLanguage]?.unknownModule || 'Untitled Window';
+                let chineseTitle = LANG_CONTENT['zh']?.unknownModule || 'Untitled Window';
                 let englishTitle = LANG_CONTENT['en']?.unknownModule || 'Untitled Window';
 
                 if (section.startsWith('work-detail-') && currentWork) {
-                    chineseTitle = currentWork.title + (LANG_CONTENT[currentLanguage]?.worksDetailsSuffix || '');
+                    chineseTitle = currentWork.title + (LANG_CONTENT['zh']?.worksDetailsSuffix || '');
                     englishTitle = currentWork.title + (LANG_CONTENT['en']?.worksDetailsSuffix || ''); 
                 } else if (section.startsWith('service-category-') && currentCategory) {
                     chineseTitle = currentCategory.name;
                     englishTitle = currentCategory.nameEn || currentCategory.name; // Use nameEn if available, otherwise fallback
-                    // 如果nameEn可用则使用，否则回退
                 } else {
                     // For main sections, use data-title-zh and data-title-en from desktop icons or menu items
-                    // 对于主要部分，使用data-title-zh和data-title-en从桌面图标或菜单项
                     const desktopIcon = document.querySelector(`.desktop-icon[data-section="${section}"]`);
-                    const startMenuItem = document.querySelector(`.start-menu-item[data-section="${section}"]`);
-                    const startMenuFooterButton = document.querySelector(`.start-menu-footer-button[data-section="${section}"]`);
-                    const startMenuHeader = document.querySelector('.start-menu-header[data-section="about"]'); // For about section
-                    // 用于关于部分
-
+                    
                     if (desktopIcon) {
                         chineseTitle = desktopIcon.dataset.titleZh;
                         englishTitle = desktopIcon.dataset.titleEn;
-                    } else if (startMenuItem) {
+                    } else if (LANG_CONTENT['zh'][`${section}MenuItem`]) { // Check for menu item translations directly
                         chineseTitle = LANG_CONTENT['zh'][`${section}MenuItem`]; 
                         englishTitle = LANG_CONTENT['en'][`${section}MenuItem`]; 
-                    } else if (startMenuFooterButton) {
-                        chineseTitle = LANG_CONTENT['zh'][`${section}MenuItem`]; 
-                        englishTitle = LANG_CONTENT['en'][`${section}MenuItem`]; 
-                    } else if (section === 'about' && startMenuHeader) {
-                        chineseTitle = startMenuHeader.dataset.titleZh;
-                        englishTitle = startMenuHeader.dataset.titleEn;
+                    } else if (section === 'about') { // For the "About MAZKO" section
+                        chineseTitle = LANG_CONTENT['zh'].aboutTitle;
+                        englishTitle = LANG_CONTENT['en'].aboutTitle;
                     } else if (section === 'settings') {
-                        chineseTitle = LANG_CONTENT[currentLanguage]?.settings?.title; 
-                        englishTitle = LANG_CONTENT['en']?.settings?.title; 
+                        chineseTitle = LANG_CONTENT['zh'].settings.title; 
+                        englishTitle = LANG_CONTENT['en'].settings.title; 
                     } else if (section === 'shutdown') {
-                        chineseTitle = LANG_CONTENT[currentLanguage]?.shutdownMenuItem; 
-                        englishTitle = LANG_CONTENT['en'][`${section}MenuItem`]; 
-                    } else if (section === 'data-core') { // Add new section
-                        chineseTitle = LANG_CONTENT[currentLanguage]?.datacoreTitle;
-                        englishTitle = LANG_CONTENT['en']?.datacoreTitle;
+                        chineseTitle = LANG_CONTENT['zh'].shutdownMenuItem; 
+                        englishTitle = LANG_CONTENT['en'].shutdownMenuItem; 
+                    } else if (section === 'data-core') { 
+                        chineseTitle = LANG_CONTENT['zh'].datacoreTitle;
+                        englishTitle = LANG_CONTENT['en'].datacoreTitle;
                     }
                 }
                 return { chineseTitle, englishTitle };
@@ -2371,19 +2380,12 @@ Services include:
              * @function reopenAllWindows
              * @description Re-opens all currently active windows to update their content based on the current language.
              * @returns {Promise<void>}
-             * */
-            /**
-             * @function reopenAllWindows
-             * @description 重新打开所有当前活动窗口，根据当前语言更新其内容。
-             * @returns {Promise<void>}
              */
             async function reopenAllWindows() {
                 // Get a snapshot of currently open windows and their original positions/sizes
-                // 获取当前打开窗口及其原始位置/大小的快照
                 const activeWindowsData = [];
                 document.querySelectorAll('.os-window').forEach(win => {
                     // Only re-open if not minimized, as minimized state will be re-applied
-                    // 仅在未最小化时重新打开，因为最小化状态将被重新应用
                     if (!win.classList.contains('minimized')) {
                         activeWindowsData.push({
                             section: win.dataset.section,
@@ -2395,42 +2397,44 @@ Services include:
                             isMaximized: win.classList.contains('maximized')
                         });
                         win.remove(); // Remove old window
-                        // 移除旧窗口
                     }
                 });
                 // Clear taskbar icons for removed windows
-                // 清除已移除窗口的任务栏图标
                 taskbarIconsContainer.innerHTML = '';
 
                 // Re-open windows one by one
-                // 逐一重新打开窗口
                 for (const winData of activeWindowsData) {
-                    const data = await fetchContent(winData.section); // Re-fetch content in new language
-                    // 重新获取新语言的内容
                     let contentHTML = '';
                     let isMarkdown = false;
                     let currentWork = null;
                     let currentCategory = null;
                     let currentImageGallery = null; // For data-core gallery
+                    let data = null; // Declare data variable
+
+                    try {
+                        data = await fetchContent(winData.section); // Re-fetch content in new language
+                    } catch (error) {
+                        console.error(`${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${winData.section}:`, error);
+                        contentHTML = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${error.message || LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
+                        await openWindow(winData.section, 'Error', 'Error', contentHTML, winData.windowId, winData);
+                        continue; // Skip to next window
+                    }
 
                     if (winData.section.startsWith('work-detail-')) {
                         const workId = winData.windowId.replace('work-detail-', '');
-                        const worksData = await fetchContent('works'); // Re-fetch works data to find the work
-                        // 重新获取作品数据以查找作品
+                        // Fetch works data to find the specific work using the new language
+                        const worksData = await fetchContent('works'); 
                         currentWork = worksData.find(w => w.id === workId);
                     } else if (winData.section.startsWith('service-category-')) {
                         const categoryId = winData.windowId.replace('service-category-', '');
-                        // Get category directly from LANG_CONTENT as it's static
-                        // 直接从LANG_CONTENT获取类别，因为它是静态的
                         currentCategory = LANG_CONTENT[currentLanguage]?.services?.categories.find(cat => cat.id === categoryId);
                     } else if (winData.section === 'data-core') {
-                        currentImageGallery = data; // Data for the data-core gallery
+                        currentImageGallery = data; // Data for the data-core gallery is directly the array of images
                     }
 
                     const { chineseTitle, englishTitle } = getWindowTitles(winData.section, currentWork, currentCategory);
 
                     // Re-generate content based on section and new language
-                    // 根据部分和新语言重新生成内容
                     switch (winData.section) {
                         case 'works':
                             contentHTML = `
@@ -2517,7 +2521,7 @@ Services include:
                                 `;
                             }
                             break;
-                        case 'settings': // New case for settings window
+                        case 'settings': 
                             contentHTML = marked.parse(LANG_CONTENT[currentLanguage]?.settings?.description || '') + `
                                 <div class="flex flex-col gap-4 mt-4">
                                     ${data?.options.map(option => {
@@ -2599,7 +2603,6 @@ Services include:
                     }
 
                     // Re-open the window with its original properties
-                    // 以其原始属性重新打开窗口
                     const newWindowElement = await openWindow(winData.section, chineseTitle, englishTitle, contentHTML, winData.windowId, {
                         left: winData.originalLeft,
                         top: winData.originalTop,
@@ -2609,40 +2612,30 @@ Services include:
 
                     if (winData.isMaximized) {
                         newWindowElement.classList.add('maximized');
-                        // Re-apply maximized styles if necessary, or let CSS handle it
-                        // 如果需要，重新应用最大化样式，或者让CSS处理
                         newWindowElement.style.borderRadius = '0';
                         newWindowElement.style.boxShadow = 'none';
+                    }
+                     // If it was minimized, re-apply minimized class
+                    if (winData.isMinimized) { // Assuming you add a property 'isMinimized' to winData when minimizing
+                        newWindowElement.classList.add('minimized');
                     }
                 }
             }
 
 
             // --- 桌面图标定位逻辑 ---
-            // --- Desktop Icon Positioning Logic ---
-            /**
-             * @function positionDesktopIcons
-             * @description Positions desktop icons in a grid layout within the main desktop area.
-             * @returns {void}
-             */
             /**
              * @function positionDesktopIcons
              * @description 在主桌面区域内以网格布局定位桌面图标。
              * @returns {void}
              */
             function positionDesktopIcons() {
-                const iconWidth = 80; // Defined in CSS .desktop-icon width
-                // 在CSS .desktop-icon宽度中定义
+                const iconWidth = 100; // Defined in CSS .desktop-icon width
                 const iconHeight = 100; // Approximate height including label and padding
-                // 包括标签和填充的近似高度
                 const paddingX = 20; // Horizontal padding from desktop edge
-                // 桌面边缘的水平填充
                 const paddingY = 20; // Vertical padding from desktop edge
-                // 桌面边缘的垂直填充
                 const gapX = 20; // Gap between icons horizontally
-                // 图标之间的水平间距
                 const gapY = 20; // Gap between icons vertically
-                // 图标之间的垂直间距
 
                 const icons = Array.from(desktopIconsContainer.children);
                 let currentX = paddingX;
@@ -2651,9 +2644,7 @@ Services include:
 
                 icons.forEach((icon, index) => {
                     // Check if icon fits in current column, otherwise move to next column
-                    // 检查图标是否适合当前列，否则移动到下一列
                     if (currentY + iconHeight > mainDesktopArea.clientHeight - (paddingY + 10)) { // Add small buffer for taskbar
-                        // 为任务栏添加小缓冲区
                         column++;
                         currentX = paddingX + (column * (iconWidth + gapX));
                         currentY = paddingY;
@@ -2666,16 +2657,12 @@ Services include:
             }
 
             // Call positioning function initially and on window resize
-            // 初始化和窗口大小调整时调用定位函数
             positionDesktopIcons();
             window.addEventListener('resize', positionDesktopIcons);
 
-            console.log('桌面图标定位逻辑已初始化。');
 
             // --- Mock Data Fetching (Simulating Headless CMS API Calls) ---
-            // --- 模拟数据获取（模拟无头CMS API调用） ---
             // In a real application, these would be actual fetch() calls to your CMS API endpoints.
-            // 在实际应用程序中，这些将是对您的CMS API端点的实际fetch()调用。
 
             /**
              * @function fetchContent
@@ -2683,16 +2670,9 @@ Services include:
              * @param {string} section - The section identifier (e.g., 'works', 'about').
              * @returns {Promise<Object|null>} A promise that resolves with the content data or null if not found.
              */
-            /**
-             * @function fetchContent
-             * @description 模拟获取给定部分的内容。在实际应用程序中，这将是一个API调用。
-             * @param {string} section - 部分标识符（例如，'works'，'about'）。
-             * @returns {Promise<Object|null>} 解析为内容数据或如果未找到则为null的Promise。
-             */
             async function fetchContent(section) {
                 console.log(`正在获取 ${currentLanguage} 语言的 ${section} 内容...`);
                 // Simulate network delay
-                // 模拟网络延迟
                 await new Promise(resolve => setTimeout(resolve, 300)); 
 
                 const langData = LANG_CONTENT[currentLanguage];
@@ -2705,7 +2685,6 @@ Services include:
                                 id: 'work-001',
                                 title: '地下俱乐部场景',
                                 category: '场景设计 / PSX风格',
-                                // 使用 ASSETS 的 key
                                 thumbnail_key: 'work_001_thumbnail', 
                                 images_keys: [
                                     'work_001_full_1', 
@@ -2719,7 +2698,6 @@ Services include:
                                 id: 'work-002',
                                 title: '赛博朋克角色 - KAI',
                                 category: '角色设计 / Lowpoly',
-                                // 使用 ASSETS 的 key
                                 thumbnail_key: 'work_002_thumbnail', 
                                 images_keys: [
                                     'work_002_full_1', 
@@ -2730,6 +2708,15 @@ Services include:
                                 tags: ['角色', 'Lowpoly', '赛博朋K', 'Substance Painter']
                             }
                         ];
+                        // Apply English translations if currentLanguage is 'en'
+                        if (currentLanguage === 'en') {
+                            data = data.map(work => ({
+                                ...work,
+                                title: LANG_CONTENT.en.worksTitle, // You might want more specific English titles here
+                                category: work.category, // Assuming category doesn't change
+                                description: LANG_CONTENT.en.worksClickPrompt // You might want more specific English descriptions here
+                            }));
+                        }
                         break;
                     case 'characters':
                         data = [
@@ -2737,17 +2724,23 @@ Services include:
                                 id: 'char-001',
                                 name: '星际漫游者',
                                 description: '一个孤独的星际旅行者，探索宇宙深处的奥秘。PSX风格，低多边形设计。',
-                                // 
                                 image_key: 'char_001_image' 
                             },
                             {
                                 id: 'char-002',
                                 name: '都市忍者',
                                 description: '穿梭于霓虹都市阴影中的神秘忍者。',
-                                // 
                                 image_key: 'char_002_image' 
                             }
                         ];
+                        // Apply English translations if currentLanguage is 'en'
+                        if (currentLanguage === 'en') {
+                            data = data.map(char => ({
+                                ...char,
+                                name: char.name, // Assuming names are unique and don't need translation for simplicity
+                                description: LANG_CONTENT.en.charactersDescription // You might want more specific English descriptions here
+                            }));
+                        }
                         break;
                     case 'about':
                         data = {
@@ -2771,7 +2764,6 @@ Services include:
                         break;
                     case 'data-core': // Fetch content for the new Data Core app
                         data = [
-                            // 示例灵感图片，请替换为您的实际图片 URL 或 Base64
                             { thumb_key: 'inspiration_1_thumb', full_key: 'inspiration_1_full', alt: '赛博朋克城市景观' },
                             { thumb_key: 'inspiration_2_thumb', full_key: 'inspiration_2_full', alt: '故障艺术肖像' },
                             { thumb_key: 'inspiration_3_thumb', full_key: 'inspiration_3_full', alt: 'Y2K美学设计' },
@@ -2781,8 +2773,15 @@ Services include:
                             { thumb_key: 'inspiration_7_thumb', full_key: 'inspiration_7_full', alt: '复古未来主义' },
                             { thumb_key: 'inspiration_8_thumb', full_key: 'inspiration_8_full', alt: '数字故障纹理' }
                         ];
+                        // Apply English translations for alt text if currentLanguage is 'en'
+                        if (currentLanguage === 'en') {
+                            data = data.map(img => ({
+                                ...img,
+                                alt: img.alt // Placeholder: you might want specific English alt texts here
+                            }));
+                        }
                         break;
-                    case 'settings': // New case for settings
+                    case 'settings': 
                         data = langData.settings;
                         break;
                     case 'shutdown':
@@ -2994,10 +2993,14 @@ Services include:
                     const parentRect = mainDesktopArea.getBoundingClientRect();
                     const windowRect = windowElement.getBoundingClientRect();
 
-                    if (newX < 0) newX = 0;
-                    if (newY < 0) newY = 0;
-                    if (newX + windowRect.width > parentRect.width) newX = parentRect.width - windowRect.width;
-                    if (newY + windowRect.height > parentRect.height) newY = parentRect.height - windowRect.height;
+                    // Calculate bounds relative to the desktop area's top-left corner
+                    const minX = 0;
+                    const minY = 0;
+                    const maxX = parentRect.width - windowRect.width;
+                    const maxY = parentRect.height - windowRect.height;
+
+                    newX = Math.max(minX, Math.min(newX, maxX));
+                    newY = Math.max(minY, Math.min(newY, maxY));
 
                     windowElement.style.left = `${newX}px`;
                     windowElement.style.top = `${newY}px`;
@@ -3333,16 +3336,15 @@ Services include:
                     event.stopPropagation(); // Prevent click from propagating to document
                     console.log('“开始”按钮被点击了！'); // Debug: Confirm button click
                     startMenu.classList.toggle('hidden');
-                    startMenu.classList.toggle('visible');
+                    // No need to explicitly add/remove 'visible' class as 'hidden' toggles opacity/visibility
                     console.log(`开始菜单可见性已切换。当前类：${startMenu.classList}`);
                 });
 
                 // Hide Start Menu when clicking outside of it
                 document.addEventListener('click', (event) => {
                     if (!startMenu.contains(event.target) && !startButton.contains(event.target)) {
-                        if (startMenu.classList.contains('visible')) {
+                        if (startMenu.classList.contains('visible')) { // Check for 'visible' class
                             startMenu.classList.add('hidden');
-                            startMenu.classList.remove('visible');
                             console.log('点击菜单外部，开始菜单已隐藏。');
                         }
                     }
@@ -3360,7 +3362,6 @@ Services include:
                     const { chineseTitle, englishTitle } = getWindowTitles(section);
                     
                     startMenu.classList.add('hidden'); // Hide menu after clicking an item
-                    startMenu.classList.remove('visible'); // Ensure it's explicitly removed
                     console.log(`开始菜单项“${section}”被点击。菜单已隐藏。`);
 
                     let content = '';
@@ -3538,7 +3539,7 @@ Services include:
 
                                     openedWindow.querySelectorAll('.os-window-content img[data-full-image]').forEach(img => {
                                         img.addEventListener('click', (e) => {
-                                            modalImage.src = e.target.dataset.full_image;
+                                            modalImage.src = e.target.dataset.fullImage;
                                             imageModal.classList.remove('hidden');
                                         });
                                     });
@@ -3664,7 +3665,6 @@ Services include:
                     event.preventDefault();
                     event.stopPropagation(); // Prevent start menu from closing immediately
                     startMenu.classList.add('hidden');
-                    startMenu.classList.remove('visible');
 
                     const section = 'about';
                     // Directly get titles from LANG_CONTENT, as getWindowTitles is for generic sections
