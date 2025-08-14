@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𝗠𝗔𝗫 _𝗢𝗦 _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝙴𝙳𝖨𝚃𝖨𝖤𝙳𝖨𝖮𝖭]</title>
     <!-- Favicon - 使用一个简单的SVG作为示例 -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌟</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌟</text></svg>\" type="image/svg+xml">
     <!-- 引入 Tailwind CSS CDN，用于快速构建和响应式布局 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 Google Fonts - Inter 字体作为通用字体，如果需要 'Chocolate Classical Sans'，请在此处引入其 CDN 或本地路径 -->
@@ -26,29 +26,29 @@
             --metal-color-start: #f8f8f8; /* 极浅的银色，接近纯白色，用于最强高光 */
             --metal-color-mid: #d0d0d0;   /* 亮银色 */
             --metal-color-end: #707070;   /* 显著更深的银灰色，用于深阴影 */
-            --metal-highlight: rgba(255, 255, 255, 0.95); /* 极强的反射高光 */
-            --metal-shadow: rgba(0, 0, 0, 0.8);         /* 极深阴影深度，更实 */
-            --metal-inner-shadow: rgba(0, 0, 0, 0.85);   /* 内部阴影，更深 */
-            --metal-border-light: rgba(255, 255, 255, 0.98); /* 极浅金属色，用于高光边框，极亮 */
-            --metal-border-dark: rgba(30, 30, 30, 0.95); /* 极深金属色，用于阴影边框，极深 */
-            --metal-bg: rgba(100, 100, 100, 0.25); /* 金属背景的微妙光泽，略微更可见 */
+            --metal-highlight: rgba(255, 255, 255, 0.98); /* 极强的反射高光，几乎白色 */
+            --metal-shadow: rgba(0, 0, 0, 0.9);         /* 极深阴影深度，更实 */
+            --metal-inner-shadow: rgba(0, 0, 0, 0.9);   /* 内部阴影，更深 */
+            --metal-border-light: rgba(255, 255, 255, 0.99); /* 极浅金属色，用于高光边框，极亮 */
+            --metal-border-dark: rgba(30, 30, 30, 0.98); /* 极深金属色，用于阴影边框，极深 */
+            --metal-bg: rgba(100, 100, 100, 0.35); /* 金属背景的微妙光泽，略微更可见 */
             --metal-text-color: var(--matrix-dark-grey); /* 用于金属背景上的文字颜色 */
 
 
             /* 黑色玻璃显示屏效果 - 增加玻璃质感，降低模糊度以提高清晰度 */
-            --glass-bg: rgba(0, 0, 0, 0.5); /* 更不透明的黑色半透明背景 */
-            --glass-blur: 3px; /* 降低模糊度，减少朦胧感 */
-            --glass-border: rgba(0, 255, 65, 0.5); /* 绿色半透明边框，更明显 */
-            --glass-glow: 0 0 12px rgba(0, 255, 65, 0.5); /* 绿色光晕，强度适中 */
-            --glass-inset-shadow: inset 0 0 6px rgba(0, 255, 65, 0.15); /* 绿色内阴影，强度适中 */
+            --glass-bg: rgba(0, 0, 0, 0.6); /* 更不透明的黑色半透明背景 */
+            --glass-blur: 5px; /* 略微增加模糊度，使玻璃感更强 */
+            --glass-border: rgba(0, 255, 65, 0.6); /* 绿色半透明边框，更明显 */
+            --glass-glow: 0 0 15px rgba(0, 255, 65, 0.6); /* 绿色光晕，强度适中 */
+            --glass-inset-shadow: inset 0 0 8px rgba(0, 255, 65, 0.2); /* 绿色内阴影，强度适中 */
 
             /* 字体 - 使用等宽字体模拟代码终端 */
             --font-main: 'Roboto Mono', monospace;
 
             /* 阴影与光晕 - 绿色调 */
             --shadow-matrix: 0 4px 15px rgba(0, 255, 65, 0.2); /* 柔和的绿色阴影 */
-            --glow-matrix: 0 0 14px rgba(0, 255, 65, 0.6); /* 强烈的绿色光晕 */
-            --text-glow-matrix: 0 0 4px rgba(0, 255, 65, 0.6), 0 0 8px rgba(0, 255, 65, 0.4); /* 调整文字光晕强度 */
+            --glow-matrix: 0 0 16px rgba(0, 255, 65, 0.7); /* 强烈的绿色光晕 */
+            --text-glow-matrix: 0 0 5px rgba(0, 255, 65, 0.7), 0 0 10px rgba(0, 255, 65, 0.5); /* 调整文字光晕强度 */
 
             --taskbar-height: 48px;
 
@@ -354,43 +354,6 @@
             color: var(--matrix-green-light); /* Green time */
             text-shadow: 0 0 4px var(--matrix-green-light); /* Green text glow */
         }
-
-        /* Removed individual system-tray-icon styles as they are now inside .system-tray-display */
-        /* .system-tray-icon {
-            font-size: 1.2rem;
-            color: var(--metal-text-color);
-            transition: all 0.2s ease;
-            cursor: default;
-            padding: 8px;
-            border-radius: 50%;
-            background-color: var(--matrix-black);
-            box-shadow: 0 1px 5px rgba(0,0,0,0.3);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .system-tray-icon:hover {
-            color: white;
-            background-color: rgba(0,255,65,0.25);
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0, 255, 65, 0.6);
-        }
-        .system-tray-icon .icon-image {
-            width: 1.2em;
-            height: 1.2em;
-            vertical-align: middle;
-            filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.7));
-            transition: filter 0.2s ease, transform 0.2s ease;
-        }
-        .system-tray-icon:hover .icon-image {
-            filter: drop-shadow(0 0 12px rgba(0, 255, 65, 0.9));
-        } */
-
-        /* 系统托盘时间文字 */
-        /* .system-tray-text {
-            color: var(--metal-text-color);
-            text-shadow: none;
-        } */
 
         /* 桌面图标（快捷方式） */
         .desktop-icons-container {
@@ -865,7 +828,7 @@
             cursor: pointer;
             transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
             
-            background: linear-gradient(to bottom, var(--metal-color-start) 0%, var(--metal-color-mid) 50%, var(--metal-color-end) 100%);
+            background: linear-gradient(to bottom, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end));
             border: 1px solid var(--metal-border-light); /* 顶部高光 */
             border-bottom-color: var(--metal-border-dark); /* 底部阴影 */
             border-right-color: var(--metal-border-dark);
@@ -894,7 +857,7 @@
         .os-window-controls .control-button:hover {
             transform: scale(1.1);
             filter: brightness(1.2);
-            background: linear-gradient(to top, var(--metal-color-start) 0%, var(--metal-color-mid) 50%, var(--metal-color-end) 100%);
+            background: linear-gradient(to top, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end));
             border-color: var(--metal-border-light); /* Brighter border on hover */
             box-shadow: 
                 inset 0 1px 3px var(--metal-highlight), 
@@ -986,44 +949,113 @@
             }
         }
 
-        /* 音乐播放器样式 */
-        .music-player-window {
-            min-width: 320px;
-            min-height: 400px;
-        }
-
-        .mp3-player-skin {
+        /* 音乐播放器皮肤 - 整体拟物化MP3样式 */
+        .music-player-standalone {
+            position: absolute;
             background-color: #1a1a1a; /* Dark background for MP3 player body */
             border: 2px solid #555;
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 20px; /* Slightly larger border-radius for softer look */
+            padding: 25px; /* Increased padding */
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 15px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 5px 15px rgba(0,255,65,0.2);
+            gap: 20px; /* Increased gap */
+            box-shadow: 
+                inset 0 0 15px rgba(0,0,0,0.6), /* Deeper inner shadow */
+                0 8px 25px rgba(0,255,65,0.3); /* Stronger outer glow */
+            min-width: 340px; /* Adjusted min-width */
+            min-height: 480px; /* Adjusted min-height */
+            z-index: 5; /* Ensure it layers correctly */
+            animation: windowPopIn 0.3s ease-out forwards; /* Reuse window pop-in animation */
+            
+            /* Enhanced metal texture on the player body itself */
+            background-image: 
+                linear-gradient(135deg, var(--metal-color-mid) 0%, var(--metal-color-end) 100%),
+                repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0%, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 4px); /* Subtle brushed metal lines */
+            background-blend-mode: overlay; /* Blend brushed lines with base gradient */
+            border: 3px solid var(--metal-border-light); /* Thicker, brighter border */
+            box-shadow: 
+                inset 0 1px 5px var(--metal-highlight), 
+                inset 0 -5px 10px var(--metal-inner-shadow),
+                0 10px 30px rgba(0, 255, 65, 0.4), /* Even stronger outer glow */
+                0 0 5px rgba(0, 255, 65, 0.2); /* Subtle green edge glow */
+            
+            .drag-handle {
+                width: 100%;
+                height: 35px; /* Slightly taller */
+                background: linear-gradient(to right, var(--metal-color-mid), var(--metal-color-start), var(--metal-color-mid)); /* Brighter handle */
+                border-radius: 10px 10px 0 0; /* Adjusted radius */
+                cursor: grab;
+                margin-top: -25px; /* Pull it slightly inside the padding */
+                margin-bottom: 15px; /* Increased margin */
+                box-shadow: 
+                    inset 0 1px 4px var(--metal-highlight), 
+                    inset 0 -2px 6px var(--metal-inner-shadow),
+                    0 2px 8px var(--metal-shadow);
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+                padding-right: 15px; /* Increased padding */
+                position: relative;
+                z-index: 10;
+                overflow: hidden; /* For inner texture */
+                background-image: repeating-linear-gradient(90deg, transparent, transparent 1px, var(--metal-bg) 1px, var(--metal-bg) 2px); /* Metal texture */
+                background-blend-mode: overlay;
+            }
+            .drag-handle .close-button-custom {
+                width: 25px; /* Slightly larger */
+                height: 25px; /* Slightly larger */
+                background-color: #DD0000; /* Brighter red */
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: white;
+                font-size: 1.2rem; /* Larger icon */
+                font-weight: bold;
+                cursor: pointer;
+                transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.1s ease;
+                box-shadow: 0 3px 8px rgba(0,0,0,0.5); /* Deeper shadow */
+                border: 1px solid rgba(255,255,255,0.3); /* Subtle white border */
+            }
+            .drag-handle .close-button-custom:hover {
+                background-color: #FF2222;
+                box-shadow: 0 0 12px rgba(255,0,0,0.8);
+                transform: scale(1.1);
+            }
+            .drag-handle .close-button-custom:active {
+                background-color: #AA0000;
+                box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+                transform: scale(0.95);
+            }
         }
 
         .mp3-display {
-            width: 100%;
-            height: 80px;
+            width: calc(100% - 20px); /* Adjust width to fit padding */
+            height: 90px; /* Slightly taller display */
             background-color: #000; /* Black display screen */
-            border-radius: 8px;
+            border-radius: 10px; /* Slightly larger radius */
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: 1.4rem; /* Larger font size */
             color: var(--matrix-green-light); /* Green text on display */
             overflow: hidden; /* For scrolling text */
             position: relative;
-            box-shadow: inset 0 0 15px rgba(0, 255, 65, 0.2); /* Inner green glow */
+            box-shadow: 
+                inset 0 0 20px rgba(0, 255, 65, 0.3), /* Stronger inner green glow */
+                0 0 10px rgba(0,0,0,0.5); /* Outer dark shadow for depth */
+            border: 2px solid rgba(0,255,65,0.4); /* Green border for display */
+            padding: 0 10px; /* Add padding for scrolling text */
         }
 
         .mp3-song-title {
             white-space: nowrap;
-            animation: scrollText 10s linear infinite; /* Scrolling animation */
+            /* animation: scrollText 10s linear infinite; */ /* Managed by JS now */
             padding: 0 100%; /* Ensure text scrolls completely off screen */
-            text-shadow: 0 0 5px var(--matrix-green-light);
+            text-shadow: 0 0 8px var(--matrix-green-light); /* Stronger text glow */
+            position: absolute;
+            left: 0;
         }
 
         @keyframes scrollText {
@@ -1033,64 +1065,89 @@
 
         .mp3-progress-container {
             width: 100%;
-            height: 8px;
+            height: 10px; /* Slightly thicker progress bar */
             background-color: #555;
-            border-radius: 4px;
+            border-radius: 5px; /* Matched radius */
             cursor: pointer;
             position: relative;
+            box-shadow: 
+                inset 0 1px 3px rgba(0,0,0,0.5), /* Inner shadow for depth */
+                0 1px 0 rgba(255,255,255,0.1); /* Subtle highlight */
         }
 
         .mp3-progress-bar {
             height: 100%;
             background-color: var(--matrix-green-light);
-            border-radius: 4px;
+            border-radius: 5px;
+            box-shadow: 0 0 8px var(--matrix-green-light); /* Green glow for the bar */
         }
 
         .mp3-controls {
             display: flex;
-            gap: 15px;
+            gap: 20px; /* Increased gap */
         }
 
         .mp3-control-button {
-            width: 48px;
-            height: 48px;
+            width: 55px; /* Larger buttons */
+            height: 55px; /* Larger buttons */
             border-radius: 50%;
-            background: linear-gradient(to bottom, var(--metal-color-start), var(--metal-color-end));
-            border: 2px solid var(--metal-border-light);
-            box-shadow: inset 0 1px 3px var(--metal-highlight), 0 3px 8px rgba(0,0,0,0.4);
+            background: linear-gradient(to bottom, var(--metal-color-start) 0%, var(--metal-color-mid) 50%, var(--metal-color-end) 100%);
+            border: 3px solid var(--metal-border-light); /* Thicker, brighter border */
+            box-shadow: 
+                inset 0 2px 5px var(--metal-highlight), /* Stronger inner highlight */
+                inset 0 -4px 8px var(--metal-inner-shadow), /* Stronger inner shadow */
+                0 5px 15px var(--metal-shadow); /* More pronounced external shadow */
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             transition: all 0.2s ease;
+            position: relative; /* For inner texture */
+            overflow: hidden;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.03) 2px, transparent 2px, transparent 4px); /* Subtle brushed lines */
+            background-blend-mode: overlay; /* Blend with base gradient */
         }
         .mp3-control-button:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-            box-shadow: inset 0 1px 3px var(--metal-highlight), 0 5px 12px rgba(0,255,65,0.4);
+            transform: translateY(-3px); /* More pronounced lift */
+            filter: brightness(1.2);
+            box-shadow: 
+                inset 0 2px 6px var(--metal-highlight), 
+                inset 0 -5px 10px var(--metal-inner-shadow),
+                0 8px 20px rgba(0,255,65,0.6); /* Stronger green glow on hover */
+            border-color: var(--matrix-green-light); /* Green border on hover */
         }
         .mp3-control-button:active {
             transform: translateY(0);
-            box-shadow: inset 0 3px 8px var(--metal-shadow), inset 0 -1px 3px var(--metal-highlight);
+            box-shadow: 
+                inset 0 5px 12px var(--metal-shadow), /* Even deeper inset shadow */
+                inset 0 -2px 5px var(--metal-highlight),
+                0 0 15px rgba(0,255,65,0.8); /* Intense green glow on active */
+            filter: brightness(0.7);
+            background: linear-gradient(to bottom, var(--metal-color-end) 0%, var(--metal-color-mid) 50%, var(--metal-color-start) 100%); /* Pressed state gradient */
+            border-top-color: var(--metal-border-dark); /* Invert borders for pressed look */
+            border-bottom-color: var(--metal-border-light);
+            border-left-color: var(--metal-border-dark);
+            border-right-color: var(--metal-border-light);
         }
         .mp3-control-button .icon-image {
-            width: 1.5em;
+            width: 1.8em; /* Larger icons */
             height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 8px var(--matrix-green-light));
+            filter: drop-shadow(0 0 10px var(--matrix-green-light)); /* Stronger icon glow */
         }
 
         .mp3-playlist {
             width: 100%;
-            max-height: 150px;
+            max-height: 180px; /* Increased max height */
             overflow-y: auto;
-            background-color: rgba(0,0,0,0.6);
-            border-radius: 8px;
-            padding: 10px;
+            background-color: rgba(0,0,0,0.7); /* Slightly more opaque */
+            border-radius: 10px; /* Larger radius */
+            padding: 15px; /* Increased padding */
             color: var(--matrix-green-light);
-            font-size: 0.9em;
-            text-shadow: 0 0 2px rgba(0,255,65,0.3);
-            box-shadow: inset 0 0 8px rgba(0,255,65,0.1);
+            font-size: 1em; /* Slightly larger font */
+            text-shadow: 0 0 4px rgba(0,255,65,0.4); /* Stronger text shadow */
+            box-shadow: inset 0 0 10px rgba(0,255,65,0.2); /* Stronger inner glow */
+            border: 1px solid rgba(0,255,65,0.5); /* Border for playlist */
         }
         .mp3-playlist ul {
             list-style: none;
@@ -1098,173 +1155,141 @@
             margin: 0;
         }
         .mp3-playlist li {
-            padding: 5px 0;
+            padding: 8px 0; /* More padding */
             cursor: pointer;
-            transition: color 0.1s ease, text-shadow 0.1s ease;
+            transition: color 0.1s ease, text-shadow 0.1s ease, background-color 0.1s ease;
+            border-bottom: 1px dashed rgba(0,255,65,0.2); /* Dashed separator */
+            last-child: border-bottom: none; /* No border for last item */
         }
         .mp3-playlist li:hover {
             color: white;
-            text-shadow: 0 0 6px white;
+            text-shadow: 0 0 8px white;
+            background-color: rgba(0,255,65,0.1); /* Subtle highlight on hover */
         }
         .mp3-playlist li.active-song {
             color: var(--matrix-green-light);
             font-weight: bold;
             text-shadow: var(--text-glow-matrix);
+            background-color: rgba(0,255,65,0.2); /* Stronger active background */
+            border-radius: 4px;
         }
 
         .mp3-mode-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 12px; /* Adjusted gap */
+            margin-top: 15px; /* Adjusted margin */
         }
         .mp3-mode-button {
-            padding: 8px 12px;
-            border-radius: 5px;
+            padding: 10px 16px; /* Larger padding */
+            border-radius: 8px; /* Larger radius */
             background-color: var(--matrix-dark-grey);
             color: var(--matrix-green-light);
-            border: 1px solid var(--matrix-green-dark);
+            border: 2px solid var(--matrix-green-dark); /* Thicker border */
             cursor: pointer;
             transition: all 0.2s ease;
-            font-size: 0.8em;
-            text-shadow: 0 0 3px rgba(0,255,65,0.3);
+            font-size: 0.9em; /* Slightly larger font */
+            text-shadow: 0 0 5px rgba(0,255,65,0.4); /* Stronger text shadow */
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.3); /* Inner shadow for depth */
+            position: relative;
+            overflow: hidden;
+            background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0%, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 2px); /* Subtle texture */
+            background-blend-mode: overlay;
         }
         .mp3-mode-button:hover {
-            background-color: rgba(0,255,65,0.2);
-            box-shadow: 0 0 8px rgba(0,255,65,0.5);
+            background-color: rgba(0,255,65,0.3);
+            box-shadow: 0 0 10px rgba(0,255,65,0.7), inset 0 0 8px rgba(0,255,65,0.3);
         }
         .mp3-mode-button.active-mode {
             background-color: var(--matrix-green-dark);
             color: white;
-            box-shadow: var(--glow-matrix);
+            box-shadow: var(--glow-matrix), inset 0 0 10px rgba(0,0,0,0.6);
         }
 
         /* 文件夹样式 */
         .folder-content-wrapper { /* Wrapper to contain items and allow flex layout for inner content */
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding: 15px;
+            gap: 12px; /* Increased gap */
+            padding: 18px; /* Increased padding */
             height: 100%; /* Ensure it fills parent height for scrollbar */
             overflow-y: auto; /* Enable scrolling */
         }
         .folder-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px;
-            border-radius: 8px;
+            gap: 12px; /* Increased gap */
+            padding: 10px; /* Increased padding */
+            border-radius: 10px; /* Larger border radius */
             cursor: pointer;
-            transition: background-color 0.15s ease;
+            transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
             user-select: none;
             position: relative; /* For right-click menu positioning */
+            border: 2px solid transparent; /* default transparent border */
+            background-color: rgba(0, 0, 0, 0.4); /* Subtle background for items */
+            box-shadow: inset 0 0 5px rgba(0, 255, 65, 0.1); /* Subtle inner glow */
         }
         .folder-item:hover {
-            background-color: rgba(0, 255, 65, 0.1);
+            background-color: rgba(0, 255, 65, 0.15); /* Stronger hover background */
+            border-color: rgba(0, 255, 65, 0.5); /* More prominent border on hover */
+            box-shadow: inset 0 0 8px rgba(0, 255, 65, 0.3), 0 0 10px rgba(0, 255, 65, 0.4); /* Stronger glow on hover */
         }
         .folder-item.selected {
-            background-color: rgba(0, 255, 65, 0.2);
-            border: 1px solid var(--matrix-green-light);
-            box-shadow: inset 0 0 5px rgba(0, 255, 65, 0.3);
+            background-color: rgba(0, 255, 65, 0.3); /* Stronger selected background */
+            border: 2px solid var(--matrix-green-light); /* Solid green border when selected */
+            box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.4), 0 0 15px rgba(0, 255, 65, 0.6); /* Intense glow when selected */
         }
         .folder-item .icon-image {
-            width: 24px;
+            width: 28px; /* Slightly larger icon */
             height: auto;
             object-fit: contain;
-            filter: drop-shadow(0 0 5px rgba(0, 255, 65, 0.5));
+            filter: drop-shadow(0 0 8px rgba(0, 255, 65, 0.7)); /* Stronger icon glow */
         }
         .folder-item-name {
             flex-grow: 1;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            font-size: 1.05rem; /* Slightly larger font */
+            text-shadow: 0 0 2px rgba(0,255,65,0.2); /* Subtle text glow */
         }
 
-        /* 右键菜单样式 */
+        /* 右键菜单样式 - 更加玻璃化和清晰 */
         .context-menu {
-            position: absolute;
-            background-color: rgba(0, 0, 0, 0.9);
-            border: 1px solid var(--matrix-green-dark);
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0, 255, 65, 0.4);
-            padding: 8px 0;
-            z-index: 1000;
+            position: fixed; /* Changed to fixed for correct positioning over everything */
+            background-color: rgba(0, 0, 0, 0.95); /* More opaque */
+            border: 2px solid var(--matrix-green-light); /* Brighter green border */
+            border-radius: 10px; /* Larger radius */
+            box-shadow: 0 6px 20px rgba(0, 255, 65, 0.6); /* Stronger glow */
+            padding: 10px 0; /* Increased padding */
+            z-index: 10000; /* Higher than any window */
             display: none; /* Hidden by default */
             flex-direction: column;
-            min-width: 150px;
+            min-width: 180px; /* Wider menu */
+            backdrop-filter: blur(var(--glass-blur)); /* Add blur to menu */
+            -webkit-backdrop-filter: blur(var(--glass-blur));
+            background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.05) 0%, transparent 60%); /* Subtle reflection */
         }
         .context-menu-item {
-            padding: 8px 15px;
+            padding: 10px 20px; /* Increased padding */
             color: var(--matrix-green-light);
             cursor: pointer;
-            transition: background-color 0.15s ease;
+            transition: background-color 0.15s ease, color 0.15s ease, text-shadow 0.15s ease;
+            display: flex; /* For icon alignment */
+            align-items: center;
+            gap: 10px; /* Increased gap */
+            font-size: 1.05rem; /* Slightly larger font */
+            text-shadow: 0 0 3px rgba(0,255,65,0.3); /* Subtle text glow */
         }
         .context-menu-item:hover {
-            background-color: rgba(0, 255, 65, 0.2);
+            background-color: rgba(0, 255, 65, 0.3); /* Stronger hover background */
+            color: white;
+            text-shadow: 0 0 8px white;
         }
         .context-menu-separator {
-            height: 1px;
+            height: 2px; /* Thicker separator */
             background-color: var(--matrix-dark-grey);
-            margin: 5px 0;
-        }
-
-        /* 浏览器样式 */
-        .browser-container {
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-        .browser-address-bar {
-            display: flex;
-            gap: 8px;
-            padding: 10px;
-            background-color: var(--matrix-dark-grey);
-            border-bottom: 1px solid var(--matrix-green-dark);
-            box-shadow: inset 0 -2px 5px rgba(0,0,0,0.3);
-        }
-        .browser-address-bar input {
-            flex-grow: 1;
-            background-color: #000;
-            border: 1px solid var(--matrix-green-dark);
-            border-radius: 5px;
-            padding: 8px 12px;
-            color: var(--matrix-green-light);
-            font-family: var(--font-main);
-            font-size: 0.9rem;
-            outline: none;
-            box-shadow: inset 0 0 5px rgba(0,255,65,0.1);
-        }
-        .browser-address-bar button {
-            background-color: var(--matrix-green-dark);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            font-size: 0.9rem;
-        }
-        .browser-address-bar button:hover {
-            background-color: var(--matrix-green-light);
-            box-shadow: 0 0 10px rgba(0,255,65,0.5);
-        }
-        .browser-iframe-container {
-            flex-grow: 1;
-            background-color: white; /* Iframe background */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: black;
-            font-family: sans-serif;
-            text-align: center;
-        }
-        .browser-iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .browser-loading-message {
-            color: var(--matrix-green-light);
-            font-size: 1.2rem;
-            text-shadow: var(--text-glow-matrix);
+            margin: 8px 0; /* Increased margin */
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.5); /* Shadow for separator */
         }
 
         /* ---------------------------------------------------- */
@@ -1674,28 +1699,37 @@
         /* 自定义滚动条样式（Webkit浏览器如Chrome/Safari） */
         /* 滚动条轨道 */
         ::-webkit-scrollbar {
-            width: 20px;
+            width: 20px; /* Wider scrollbar */
         }
 
         /* 滚动条滑块 */
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, var(--matrix-green-light), var(--matrix-green-dark));
+            background: linear-gradient(to bottom, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end)); /* Metal gradient */
             border-radius: 10px;
-            border: 4px solid var(--matrix-dark-grey);
-            transition: background 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: inset 0 0 10px rgba(0,255,65,0.3);
+            border: 4px solid var(--metal-border-dark); /* Darker border for depth */
+            transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            box-shadow: 
+                inset 0 1px 3px var(--metal-highlight), 
+                inset 0 -2px 5px var(--metal-inner-shadow),
+                0 2px 8px var(--metal-shadow); /* More prominent shadow */
         }
 
         /* 滑块悬停时 */
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, rgba(0, 255, 65, 1), rgba(0, 143, 17, 1));
-            box-shadow: inset 0 0 12px rgba(0,255,65,0.4), 0 0 20px rgba(0,255,65,0.9);
+            background: linear-gradient(to top, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end)); /* Reverse gradient on hover */
+            box-shadow: 
+                inset 0 1px 4px var(--metal-highlight), 
+                inset 0 -3px 6px var(--metal-inner-shadow),
+                0 4px 12px rgba(0,255,65,0.6); /* Green glow on hover */
+            border-color: var(--matrix-green-light); /* Green border on hover */
         }
 
         /* 轨道背景 */
         ::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
+            border: 1px solid var(--matrix-dark-grey); /* Subtle border for track */
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
         }
 
         /* 滚动条按钮（箭头） - 更突出更光泽 */
@@ -1839,7 +1873,7 @@
                 font-size: 0.8rem;
             }
             /* Music Player adjustments for mobile */
-            .music-player-window {
+            .music-player-standalone {
                 min-width: unset;
                 width: 95vw !important;
                 left: 2.5vw !important;
@@ -1870,7 +1904,7 @@
             justify-content: space-between;
             align-items: center;
             font-size: 0.85rem;
-            background: linear-gradient(to bottom, var(--metal-color-start) 0%, var(--metal-color-mid) 50%, var(--metal-color-end) 100%);
+            background: linear-gradient(to bottom, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end));
             backdrop-filter: blur(var(--glass-blur));
             -webkit-backdrop-filter: blur(var(--glass-blur));
             border-top: 2px solid var(--metal-border-light); /* 顶部高光 */
@@ -1939,10 +1973,6 @@
                         <span class="icon-placeholder" data-asset-key="icon_music_player"></span>
                         <span class="desktop-icon-label" data-lang-key="musicPlayerIcon">音乐播放器</span>
                     </div>
-                    <div class="desktop-icon" data-section="browser" data-title-zh="浏览器" data-title-en="Browser">
-                        <span class="icon-placeholder" data-asset-key="icon_browser"></span>
-                        <span class="desktop-icon-label" data-lang-key="browserIcon">浏览器</span>
-                    </div>
                     <!-- 新增的数据核心应用程序图标 -->
                     <div class="desktop-icon" data-section="data-core" data-title-zh="數據ᕼᣯ鈊 ⸸ Dᴬᵀᴬ.Cᴼᴿᴱ ☍" data-title-en="DATA.CORE">
                         <span class="icon-placeholder" data-asset-key="icon_datacore"></span>
@@ -1970,10 +2000,6 @@
                 </a>
                 <a href="#" class="start-menu-item" data-section="music-player" data-lang-key="musicPlayerMenuItem" data-title-zh="音乐播放器" data-title-en="Music Player">
                     <span class="icon-placeholder" data-asset-key="icon_music_player"></span>
-                    <span class="menu-item-label"></span>
-                </a>
-                <a href="#" class="start-menu-item" data-section="browser" data-lang-key="browserMenuItem" data-title-zh="浏览器" data-title-en="Browser">
-                    <span class="icon-placeholder" data-asset-key="icon_browser"></span>
                     <span class="menu-item-label"></span>
                 </a>
                 <!-- 新增的数据核心应用程序菜单项 -->
@@ -2029,11 +2055,11 @@
             'cursor_pointer': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 1L15 8L1 15V1L1 1Z\' fill=\'%2300FF41\' stroke=\'%2300FF41\' stroke-width=\'1\'/%3E%3C/svg%3E',
 
             // 桌面图标 / 开始菜单图标 (PNGs with relative paths)
-            'icon_folder': './assets/icon/folder_icon.png', // New folder icon
-            'icon_log': './assets/icon/log_icon.png', // New log icon
+            'icon_folder': './assets/icon/file_icon.png', // Updated to file_icon.png as per request
+            'icon_log': './assets/icon/storage_icon.png', // Updated to storage_icon.png as per request
             'icon_mazko_logo': './assets/icon/radiation m logo 1.png', 
             'icon_music_player': './assets/icon/music_player_icon.png', // New music player icon
-            'icon_browser': './assets/icon/browser_icon.png', // New browser icon
+            // 'icon_browser': './assets/icon/browser_icon.png', // Removed browser as per request
             'icon_datacore': './assets/icon/datacore_logo.png', 
 
             // Used for service/socials sections (these are now integrated into "About")
@@ -2097,9 +2123,9 @@
             'inspiration_8_full': './assets/data-core/inspiration_8_full.jpg',
 
             // Music files (placeholders - replace with actual paths in docs/assets/music)
-            'music_track_1': './assets/music/track1.mp3',
-            'music_track_2': './assets/music/track2.mp3',
-            'music_track_3': './assets/music/track3.mp3'
+            'music_track_1': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3',
+            'music_track_2': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3',
+            'music_track_3': 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3'
         };
 
         /**
@@ -2148,8 +2174,8 @@
                 mazkoExeIcon: 'MAZKO',
                 musicPlayerIcon: '音乐播放器',
                 musicPlayerMenuItem: '音乐播放器',
-                browserIcon: '浏览器',
-                browserMenuItem: '浏览器',
+                // browserIcon: '浏览器', // Removed browser as per request
+                // browserMenuItem: '浏览器', // Removed browser as per request
                 datacoreIcon: '數據核心',
                 datacoreMenuItem: '數據ᕼᣯ鈊 ⸸ Dᴬᵀᴬ.Cᴼᴿᴱ ☍',
                 settingsMenuItem: '系统设置',
@@ -2173,6 +2199,7 @@
                 contextMenuNewFile: '新建文件',
                 contextMenuRename: '重命名',
                 contextMenuDelete: '删除',
+                confirmDelete: '确定要删除 "{name}" 吗？',
 
                 // Music Player specific
                 nowPlaying: '正在播放：',
@@ -2183,7 +2210,7 @@
                 playlist: '播放列表',
                 songTitlePlaceholder: '无',
 
-                // Browser specific
+                // Browser specific (kept for completeness if needed in future, but not used in UI now)
                 browserGoButton: '前往',
                 browserPlaceholder: '输入网址，例如：https://www.example.com',
                 browserLoading: '正在加载...',
@@ -2295,8 +2322,8 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                 mazkoExeIcon: 'MAZKO',
                 musicPlayerIcon: 'Music Player',
                 musicPlayerMenuItem: 'Music Player',
-                browserIcon: 'Browser',
-                browserMenuItem: 'Browser',
+                // browserIcon: 'Browser', // Removed browser as per request
+                // browserMenuItem: 'Browser', // Removed browser as per request
                 datacoreIcon: 'DATA CORE',
                 datacoreMenuItem: 'DATA.CORE',
                 settingsMenuItem: 'System Settings',
@@ -2320,6 +2347,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                 contextMenuNewFile: 'New File',
                 contextMenuRename: 'Rename',
                 contextMenuDelete: 'Delete',
+                confirmDelete: 'Are you sure you want to delete "{name}"?',
 
                 // Music Player specific
                 nowPlaying: 'Now Playing:',
@@ -2330,7 +2358,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                 playlist: 'Playlist',
                 songTitlePlaceholder: 'None',
 
-                // Browser specific
+                // Browser specific (kept for completeness if needed in future, but not used in UI now)
                 browserGoButton: 'Go',
                 browserPlaceholder: 'Enter URL, e.g.: https://www.example.com',
                 browserLoading: 'Loading...',
@@ -2378,7 +2406,7 @@ I offer the following digital art services. Each service is designed to meet you
 * Concept Sketches: Providing multi-angle character concepts based on your ideas.
 * 3D Modeling: Creating high-poly and low-poly models using tools like Blender/ZBrush.
 * Texture Painting: Using Substance Painter to give characters retro pixelated or sci-fi textures.
-* Rigging & Basic Animation: Providing basic character rigging and pose setup.
+* Bone Rigging & Basic Animation: Providing basic character rigging and pose setup.
 **Pricing Examples**:
 * PSX Style Low-Poly Character: ¥1500 - ¥5000 (depending on detail complexity)
 * Detailed Concept Character Illustration: ¥800 - ¥3000 (depending on detail and background)
@@ -2390,7 +2418,7 @@ I offer the following digital art services. Each service is designed to meet you
 * Event Posters: Themed posters for music festivals, game releases, art exhibitions, etc.
 * Brand Visuals: Unique graphic elements and promotional images that align with your brand identity.
 * Digital Illustrations: Custom illustrations for websites, social media, or print.
-* Motion Graphics (Basic): Adding simple animation effects to posters.
+* Motion Graphics (Basic): 为海报添加简单的动画效果。
 **Pricing Examples**:
 * Single-Page Concept Poster: ¥1200 - ¥4000 (depending on complexity and revisions)
 * Series of Visual Promotional Images (3 images): ¥3000 - ¥8000
@@ -2527,7 +2555,9 @@ Feel free to follow me on the platforms below and interact.
             const contextMenu = document.getElementById('context-menu'); // Get context menu element
             let highestZIndex = 5;
 
-            const openWindowsMap = new Map();
+            const openWindowsMap = new Map(); // Stores references to open .os-window elements
+            const openStandaloneAppsMap = new Map(); // Stores references to open standalone app elements (like music player)
+
 
             console.log('核心DOM元素和变量已初始化。');
 
@@ -2634,16 +2664,13 @@ Feel free to follow me on the platforms below and interact.
              * @function getWindowTitles
              * @description Generates window titles in both Chinese and English based on the section and optional content.
              */
-            function getWindowTitles(section, currentWork = null, currentCategory = null) {
+            function getWindowTitles(section, currentItem = null) {
                 let chineseTitle = LANG_CONTENT['zh']?.unknownModule || 'Untitled Window';
                 let englishTitle = LANG_CONTENT['en']?.unknownModule || 'Untitled Window';
 
-                if (section.startsWith('work-detail-') && currentWork) {
-                    chineseTitle = currentWork.title + (LANG_CONTENT['zh']?.worksDetailsSuffix || '');
-                    englishTitle = currentWork.title + (LANG_CONTENT['en']?.worksDetailsSuffix || ''); 
-                } else if (section.startsWith('service-category-') && currentCategory) {
-                    chineseTitle = currentCategory.name;
-                    englishTitle = currentCategory.nameEn || currentCategory.name;
+                if (section.startsWith('file-content-') && currentItem) {
+                    chineseTitle = currentItem.title + (LANG_CONTENT['zh']?.worksDetailsSuffix || ''); // Reusing worksDetailsSuffix for simplicity
+                    englishTitle = currentItem.title + (LANG_CONTENT['en']?.worksDetailsSuffix || ''); 
                 } else {
                     const desktopIcon = document.querySelector(`.desktop-icon[data-section="${section}"]`);
                     
@@ -2668,9 +2695,6 @@ Feel free to follow me on the platforms below and interact.
                     } else if (section === 'music-player') {
                         chineseTitle = LANG_CONTENT['zh'].musicPlayerMenuItem;
                         englishTitle = LANG_CONTENT['en'].musicPlayerMenuItem;
-                    } else if (section === 'browser') {
-                        chineseTitle = LANG_CONTENT['zh'].browserMenuItem;
-                        englishTitle = LANG_CONTENT['en'].browserMenuItem;
                     } else if (section === 'folder') {
                         chineseTitle = LANG_CONTENT['zh'].folderMenuItem;
                         englishTitle = LANG_CONTENT['en'].folderMenuItem;
@@ -2684,13 +2708,15 @@ Feel free to follow me on the platforms below and interact.
 
             /**
              * @function reopenAllWindows
-             * @description Re-opens all currently active windows to update their content based on the current language.
+             * @description Re-opens all currently active windows and standalone apps to update their content based on the current language.
              */
             async function reopenAllWindows() {
                 const activeWindowsData = [];
+                // Collect data for regular windows
                 document.querySelectorAll('.os-window').forEach(win => {
                     if (!win.classList.contains('minimized')) {
                         activeWindowsData.push({
+                            type: 'window',
                             section: win.dataset.section,
                             windowId: win.dataset.windowId,
                             originalLeft: win.dataset.originalLeft,
@@ -2699,10 +2725,26 @@ Feel free to follow me on the platforms below and interact.
                             originalHeight: win.dataset.originalHeight,
                             isMaximized: win.classList.contains('maximized')
                         });
-                        win.remove();
                     }
+                    win.remove();
                 });
+                // Collect data for standalone apps (music player)
+                document.querySelectorAll('.music-player-standalone').forEach(app => {
+                    activeWindowsData.push({
+                        type: 'standalone',
+                        section: app.dataset.section,
+                        windowId: app.dataset.windowId,
+                        originalLeft: app.style.left,
+                        originalTop: app.style.top,
+                        originalWidth: app.style.width,
+                        originalHeight: app.style.height,
+                    });
+                    app.remove();
+                });
+
                 taskbarIconsContainer.innerHTML = '';
+                openWindowsMap.clear();
+                openStandaloneAppsMap.clear();
 
                 for (const winData of activeWindowsData) {
                     let contentHTML = '';
@@ -2718,97 +2760,55 @@ Feel free to follow me on the platforms below and interact.
                         continue;
                     }
 
-                    const { chineseTitle, englishTitle } = getWindowTitles(winData.section, null, null);
+                    const { chineseTitle, englishTitle } = getWindowTitles(winData.section, null);
 
-                    switch (winData.section) {
-                        case 'folder':
-                            contentHTML = renderFolderContent(APP_DATA.folder, winData.windowId); // Pass windowId here
-                            break;
-                        case 'log':
-                            contentHTML = renderLogContent(data);
-                            break;
-                        case 'about':
-                            contentHTML = LANG_CONTENT[currentLanguage]?.aboutContent;
-                            isMarkdown = true;
-                            break;
-                        case 'music-player':
-                             contentHTML = `
-                                <div class="mp3-player-skin">
-                                    <div class="mp3-display">
-                                        <span class="mp3-song-title">${LANG_CONTENT[currentLanguage].noSongSelected}</span>
-                                    </div>
-                                    <div class="mp3-progress-container">
-                                        <div class="mp3-progress-bar" style="width: 0%;"></div>
-                                    </div>
-                                    <div class="mp3-controls">
-                                        <button class="mp3-control-button" id="prev-song-button">
-                                            <span class="icon-placeholder" data-asset-key="icon_prev_track"></span>
-                                        </button>
-                                        <button class="mp3-control-button" id="play-pause-button">
-                                            <span class="icon-placeholder" data-asset-key="icon_play"></span>
-                                        </button>
-                                        <button class="mp3-control-button" id="next-song-button">
-                                            <span class="icon-placeholder" data-asset-key="icon_next_track"></span>
-                                        </button>
-                                    </div>
-                                    <div class="mp3-mode-buttons">
-                                        <button class="mp3-mode-button active-mode" data-mode="loop">${LANG_CONTENT[currentLanguage].playbackModeLoop}</button>
-                                        <button class="mp3-mode-button" data-mode="shuffle">${LANG_CONTENT[currentLanguage].playbackModeShuffle}</button>
-                                        <button class="mp3-mode-button" data-mode="repeat-one">${LANG_CONTENT[currentLanguage].playbackModeRepeatOne}</button>
-                                    </div>
-                                    <div class="mp3-playlist">
-                                        <h4 class="font-bold mb-2">${LANG_CONTENT[currentLanguage].playlist}:</h4>
-                                        <ul>
-                                            ${APP_DATA.music.map((song, index) => `
-                                                <li data-index="${index}" class="${index === currentSongIndex ? 'active-song' : ''}">${song.title} - ${song.artist}</li>
-                                            `).join('')}
-                                        </ul>
-                                    </div>
-                                </div>
-                            `;
-                            break;
-                        case 'browser':
-                            contentHTML = `
-                                <div class="browser-container">
-                                    <div class="browser-address-bar">
-                                        <input type="text" id="browser-url-input" placeholder="${LANG_CONTENT[currentLanguage].browserPlaceholder}" value="about:blank">
-                                        <button id="browser-go-button">${LANG_CONTENT[currentLanguage].browserGoButton}</button>
-                                    </div>
-                                    <div class="browser-iframe-container" id="browser-iframe-container">
-                                        <iframe id="browser-iframe" class="browser-iframe" src="about:blank"></iframe>
-                                        <p class="browser-loading-message hidden">${LANG_CONTENT[currentLanguage].browserLoading}</p>
-                                        <p class="browser-security-warning hidden text-red-400 text-center p-4">${LANG_CONTENT[currentLanguage].browserSecurityWarning}</p>
-                                    </div>
-                                </div>
-                            `;
-                            break;
-                        case 'data-core':
-                            contentHTML = renderDataCoreContent(data, chineseTitle); // Re-render Data Core content
-                            break;
-                        case 'settings':
-                            contentHTML = renderSettingsContent(data);
-                            break;
-                        case 'shutdown':
-                            contentHTML = renderShutdownContent();
-                            break;
-                        default:
-                            contentHTML = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.unknownModule || 'Unknown Module'}</p>`;
-                    }
+                    if (winData.type === 'standalone') {
+                         await openStandaloneApp(winData.section, chineseTitle, englishTitle, winData.windowId, winData);
+                    } else {
+                        switch (winData.section) {
+                            case 'folder':
+                                contentHTML = renderFolderContent(APP_DATA.folder, winData.windowId); // Pass windowId here
+                                break;
+                            case 'log':
+                                contentHTML = renderLogContent(data);
+                                break;
+                            case 'about':
+                                contentHTML = LANG_CONTENT[currentLanguage]?.aboutContent;
+                                isMarkdown = true;
+                                break;
+                            case 'data-core':
+                                contentHTML = renderDataCoreContent(data, chineseTitle); // Re-render Data Core content
+                                break;
+                            case 'settings':
+                                contentHTML = renderSettingsContent(data);
+                                break;
+                            case 'shutdown':
+                                contentHTML = renderShutdownContent();
+                                break;
+                            default: // For dynamically opened file content windows
+                                if (winData.section.startsWith('file-content-')) {
+                                    const fileName = winData.section.replace('file-content-', '');
+                                    const file = findFileInFolder(APP_DATA.folder, fileName);
+                                    if (file) {
+                                        contentHTML = marked.parse(file.content);
+                                        isMarkdown = true;
+                                    } else {
+                                        contentHTML = `<p class="text-xl text-red-400">文件未找到：${fileName}</p>`;
+                                    }
+                                } else {
+                                    contentHTML = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.unknownModule || 'Unknown Module'}</p>`;
+                                }
+                        }
+                        const newWindowElement = await openWindow(winData.section, chineseTitle, englishTitle, contentHTML, winData.windowId, winData, isMarkdown);
 
-                    const newWindowElement = await openWindow(winData.section, chineseTitle, englishTitle, contentHTML, winData.windowId, {
-                        left: winData.originalLeft,
-                        top: winData.originalTop,
-                        width: winData.originalWidth,
-                        height: winData.originalHeight
-                    }, isMarkdown);
-
-                    if (winData.isMaximized) {
-                        newWindowElement.classList.add('maximized');
-                        newWindowElement.style.borderRadius = '0';
-                        newWindowElement.style.boxShadow = 'none';
-                    }
-                    if (winData.isMinimized) {
-                        newWindowElement.classList.add('minimized');
+                        if (winData.isMaximized) {
+                            newWindowElement.classList.add('maximized');
+                            newWindowElement.style.borderRadius = '0';
+                            newWindowElement.style.boxShadow = 'none';
+                        }
+                        if (winData.isMinimized) {
+                            newWindowElement.classList.add('minimized');
+                        }
                     }
                 }
             }
@@ -2865,8 +2865,8 @@ Feel free to follow me on the platforms below and interact.
                         };
                     case 'music-player':
                         return APP_DATA.music;
-                    case 'browser':
-                        return {}; // No data to fetch for browser itself
+                    // case 'browser': // Removed browser as per request
+                    //     return {}; 
                     case 'data-core':
                         return APP_DATA.datacore;
                     case 'settings': 
@@ -2894,26 +2894,29 @@ Feel free to follow me on the platforms below and interact.
 
             /**
              * @function bringToFront
-             * @description Brings a specified window element to the front of the stacking order.
+             * @description Brings a specified window element (regular or standalone) to the front of the stacking order.
              */
-            function bringToFront(windowElement) {
+            function bringToFront(element) {
                 highestZIndex++;
-                windowElement.style.zIndex = highestZIndex;
-                console.log(`窗口 "${windowElement.dataset.windowId}" 已置于最前。新z-index: ${highestZIndex}`);
-                setActiveTaskbarIcon(windowElement.dataset.windowId);
+                element.style.zIndex = highestZIndex;
+                console.log(`元素 "${element.dataset.windowId}" 已置于最前。新z-index: ${highestZIndex}`);
+                setActiveTaskbarIcon(element.dataset.windowId);
+
+                // Deactivate all other window title bars, activate current
                 document.querySelectorAll('.os-window-title-bar').forEach(bar => bar.classList.add('inactive'));
-                const titleBar = windowElement.querySelector('.os-window-title-bar');
+                const titleBar = element.querySelector('.os-window-title-bar');
                 if (titleBar) {
                     titleBar.classList.remove('inactive');
                 }
-                const statusBarTextElement = windowElement.querySelector('.os-window-status-bar .status-text');
+                const statusBarTextElement = element.querySelector('.os-window-status-bar .status-text');
                 if (statusBarTextElement) {
                     statusBarTextElement.textContent = LANG_CONTENT[currentLanguage].statusBarStatusReady;
                 }
             }
+
             /**
              * @function openWindow
-             * @description Creates and opens a new window or brings an existing one to the front.
+             * @description Creates and opens a new *regular* window or brings an existing one to the front.
              * @param {string} section - The section identifier this window belongs to.
              * @param {string} chineseTitle - The Chinese title for the window.
              * @param {string} englishTitle - The English title for the window.
@@ -2925,7 +2928,7 @@ Feel free to follow me on the platforms below and interact.
             async function openWindow(section, chineseTitle, englishTitle, contentHTML, windowId = section, initialProps = {}, isMarkdown = false) {
                 console.log(`尝试打开窗口：${chineseTitle} [${englishTitle}] (部分：${section}，ID：${windowId}，Markdown：${isMarkdown}`);
 
-                let existingWindow = document.querySelector(`.os-window[data-window-id="${windowId}"]`);
+                let existingWindow = openWindowsMap.get(windowId);
                 if (existingWindow) {
                     bringToFront(existingWindow);
                     if (existingWindow.classList.contains('minimized')) {
@@ -2936,10 +2939,6 @@ Feel free to follow me on the platforms below and interact.
 
                 const windowElement = document.createElement('div');
                 windowElement.classList.add('os-window');
-                // Add specific class for music player window for custom sizing
-                if (section === 'music-player') {
-                    windowElement.classList.add('music-player-window');
-                }
                 windowElement.dataset.section = section;
                 windowElement.dataset.windowId = windowId;
                 
@@ -2992,7 +2991,7 @@ Feel free to follow me on the platforms below and interact.
                 windowElement.innerHTML = `
                     <div class="os-window-title-bar">
                         <div class="os-window-title-content">
-                            <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
+                            <span class="icon-placeholder" data-asset-key="${section === 'folder' ? 'icon_folder' : section === 'log' ? 'icon_log' : 'icon_mazko_logo'}"></span>
                             <span class="os-window-title">${fullTitle}</span>
                         </div>
                         <div class="os-window-controls">
@@ -3020,13 +3019,7 @@ Feel free to follow me on the platforms below and interact.
                 console.log(`窗口 "${windowId}" 已附加到主桌面区域。`);
                 renderDynamicAssets();
 
-                openWindowsMap.set(windowId, {
-                    section: section,
-                    chineseTitle: chineseTitle,
-                    englishTitle: englishTitle,
-                    windowElement: windowElement
-                });
-
+                openWindowsMap.set(windowId, windowElement);
                 createTaskbarIcon(windowElement, chineseTitle, windowId);
 
                 const titleBar = windowElement.querySelector('.os-window-title-bar');
@@ -3036,6 +3029,7 @@ Feel free to follow me on the platforms below and interact.
 
                 if (titleBar) {
                     titleBar.addEventListener('mousedown', (e) => {
+                        if (windowElement.classList.contains('maximized')) return; // Prevent dragging when maximized
                         isDraggingWindow = true;
                         offsetXWindow = e.clientX - windowElement.getBoundingClientRect().left;
                         offsetYWindow = e.clientY - windowElement.getBoundingClientRect().top;
@@ -3093,12 +3087,6 @@ Feel free to follow me on the platforms below and interact.
                         if (taskbarIcon) {
                             taskbarIcon.remove();
                         }
-                        // Stop any active music playback if this is the music player
-                        if (section === 'music-player') {
-                            currentAudio.pause();
-                            currentAudio.currentTime = 0;
-                            clearInterval(scrollingTextInterval); // Stop text scrolling
-                        }
                         console.log(`窗口 "${windowId}" 已关闭。`);
                     });
                 } else {
@@ -3116,19 +3104,18 @@ Feel free to follow me on the platforms below and interact.
                     });
                 }
 
-                windowElement.addEventListener('mousedown', () => {
-                    bringToFront(windowElement);
+                windowElement.addEventListener('mousedown', (e) => {
+                    // Only bring to front if clicking on the window itself, not children like input fields
+                    if (e.target.closest('.os-window') === windowElement || e.target.closest('.os-window-title-bar') === titleBar) {
+                        bringToFront(windowElement);
+                    }
                 });
 
                 // Attach specific event listeners based on section
                 // Using a setTimeout of 0ms to allow the DOM to fully render the innerHTML
                 // before querying for elements inside it.
                 setTimeout(() => {
-                    if (section === 'music-player') {
-                        attachMusicPlayerListeners(windowElement, APP_DATA.music);
-                    } else if (section === 'browser') {
-                        attachBrowserListeners(windowElement);
-                    } else if (section === 'folder') {
+                    if (section === 'folder') {
                         attachFolderListeners(windowElement, APP_DATA.folder, windowId); // Pass windowId here
                     }
                     else if (section === 'data-core') {
@@ -3140,46 +3127,222 @@ Feel free to follow me on the platforms below and interact.
             }
 
             /**
-             * @function createTaskbarIcon
-             * @description Creates and appends a taskbar icon for a given window.
+             * @function openStandaloneApp
+             * @description Creates and opens a new *standalone* app (like the music player) or brings an existing one to the front.
+             * This function is designed for apps that do NOT use the standard os-window frame.
+             * @param {string} section - The section identifier this app belongs to (e.g., 'music-player').
+             * @param {string} chineseTitle - The Chinese title for the app (for taskbar).
+             * @param {string} englishTitle - The English title for the app (for taskbar).
+             * @param {string} [appId=section] - A unique ID for this specific app instance.
+             * @param {Object} [initialProps={}] - Initial position and size properties (left, top, width, height).
              */
-            function createTaskbarIcon(windowElement, title, windowId) {
+            async function openStandaloneApp(section, chineseTitle, englishTitle, appId = section, initialProps = {}) {
+                console.log(`尝试打开独立应用：${chineseTitle} [${englishTitle}] (部分：${section}，ID：${appId})`);
+
+                let existingApp = openStandaloneAppsMap.get(appId);
+                if (existingApp) {
+                    bringToFront(existingApp);
+                    if (existingApp.classList.contains('minimized')) { // Standalone apps can also be minimized
+                        restoreWindow(existingApp);
+                    }
+                    return existingApp;
+                }
+
+                let appElement;
+                let contentHTML = '';
+
+                const desktopWidth = mainDesktopArea.offsetWidth;
+                const desktopHeight = mainDesktopArea.offsetHeight;
+
+                let defaultWidth, defaultHeight, offsetX, offsetY;
+
+                if (window.innerWidth <= 768) {
+                    defaultWidth = window.innerWidth * 0.95;
+                    defaultHeight = window.innerHeight * 0.8; // Allow more flexible height
+                    offsetX = (window.innerWidth - defaultWidth) / 2;
+                    offsetY = (window.innerHeight - defaultHeight) / 2 - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--taskbar-height')) || 48) / 2;
+                } else {
+                    defaultWidth = 360; // Fixed width for MP3 player
+                    defaultHeight = 500; // Fixed height for MP3 player
+                    const openApps = document.querySelectorAll('.music-player-standalone:not(.minimized)');
+                    offsetX = 50 * (openApps.length % 5);
+                    offsetY = 50 * (openApps.length % 5);
+                    offsetX += (desktopWidth / 2 - defaultWidth / 2);
+                    offsetY += (desktopHeight / 2 - defaultHeight / 2);
+                }
+
+                // Music Player specific content
+                if (section === 'music-player') {
+                    appElement = document.createElement('div');
+                    appElement.classList.add('music-player-standalone');
+                    appElement.dataset.section = section;
+                    appElement.dataset.windowId = appId; // Using windowId for consistency with taskbar
+                    
+                    contentHTML = `
+                        <div class="drag-handle">
+                             <div class="control-button close-button-custom" title="关闭">
+                                &times;
+                            </div>
+                        </div>
+                        <div class="mp3-player-skin">
+                            <div class="mp3-display">
+                                <span class="mp3-song-title">${LANG_CONTENT[currentLanguage].noSongSelected}</span>
+                            </div>
+                            <div class="mp3-progress-container">
+                                <div class="mp3-progress-bar" style="width: 0%;"></div>
+                            </div>
+                            <div class="mp3-controls">
+                                <button class="mp3-control-button" id="prev-song-button">
+                                    <span class="icon-placeholder" data-asset-key="icon_prev_track"></span>
+                                </button>
+                                <button class="mp3-control-button" id="play-pause-button">
+                                    <span class="icon-placeholder" data-asset-key="icon_play"></span>
+                                </button>
+                                <button class="mp3-control-button" id="next-song-button">
+                                    <span class="icon-placeholder" data-asset-key="icon_next_track"></span>
+                                </button>
+                            </div>
+                            <div class="mp3-mode-buttons">
+                                <button class="mp3-mode-button active-mode" data-mode="loop">${LANG_CONTENT[currentLanguage].playbackModeLoop}</button>
+                                <button class="mp3-mode-button" data-mode="shuffle">${LANG_CONTENT[currentLanguage].playbackModeShuffle}</button>
+                                <button class="mp3-mode-button" data-mode="repeat-one">${LANG_CONTENT[currentLanguage].playbackModeRepeatOne}</button>
+                            </div>
+                            <div class="mp3-playlist">
+                                <h4 class="font-bold mb-2">${LANG_CONTENT[currentLanguage].playlist}:</h4>
+                                <ul>
+                                    ${APP_DATA.music.map((song, index) => `
+                                        <li data-index="${index}" class="${index === currentSongIndex ? 'active-song' : ''}">${song.title} - ${song.artist}</li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    // Fallback for unexpected standalone app type
+                    appElement = document.createElement('div');
+                    appElement.classList.add('os-window'); // Revert to regular window for safety
+                    appElement.dataset.section = section;
+                    appElement.dataset.windowId = appId;
+                    contentHTML = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.unknownModule || 'Unknown Module'}</p>`;
+                }
+
+                appElement.style.width = initialProps.width || `${defaultWidth}px`;
+                appElement.style.height = initialProps.height || `${defaultHeight}px`;
+                appElement.style.left = initialProps.left || `${offsetX}px`;
+                appElement.style.top = initialProps.top || `${offsetY}px`;
+
+                // Adjust position if it goes off screen
+                if (parseFloat(appElement.style.left) + parseFloat(appElement.style.width) > desktopWidth) {
+                    appElement.style.left = `${desktopWidth - parseFloat(appElement.style.width) - 20}px`;
+                }
+                if (parseFloat(appElement.style.top) + parseFloat(appElement.style.height) > desktopHeight) {
+                    appElement.style.top = `${desktopHeight - parseFloat(appElement.style.height) - 20}px`;
+                }
+
+                appElement.innerHTML = contentHTML;
+                mainDesktopArea.appendChild(appElement);
+                renderDynamicAssets(); // Render icons inside the new app
+
+                bringToFront(appElement);
+                openStandaloneAppsMap.set(appId, appElement);
+                createTaskbarIcon(appElement, chineseTitle, appId); // Create taskbar icon for standalone app
+
+                // Attach drag and close listeners for standalone app
+                if (section === 'music-player') {
+                    const dragHandle = appElement.querySelector('.drag-handle');
+                    const closeButton = appElement.querySelector('.close-button-custom');
+                    let isDraggingApp = false;
+                    let offsetXApp, offsetYApp;
+
+                    if (dragHandle) {
+                        dragHandle.addEventListener('mousedown', (e) => {
+                            isDraggingApp = true;
+                            offsetXApp = e.clientX - appElement.getBoundingClientRect().left;
+                            offsetYApp = e.clientY - appElement.getBoundingClientRect().top;
+                            dragHandle.style.cursor = 'grabbing';
+                            bringToFront(appElement);
+                        });
+                    }
+
+                    document.addEventListener('mousemove', (e) => {
+                        if (!isDraggingApp) return;
+                        let newX = e.clientX - offsetXApp;
+                        let newY = e.clientY - offsetYApp;
+
+                        const parentRect = mainDesktopArea.getBoundingClientRect();
+                        const appRect = appElement.getBoundingClientRect();
+
+                        const minX = 0;
+                        const minY = 0;
+                        const maxX = parentRect.width - appRect.width;
+                        const maxY = parentRect.height - appRect.height;
+
+                        newX = Math.max(minX, Math.min(newX, maxX));
+                        newY = Math.max(minY, Math.min(newY, maxY));
+
+                        appElement.style.left = `${newX}px`;
+                        appElement.style.top = `${newY}px`;
+                    });
+
+                    document.addEventListener('mouseup', () => {
+                        if (isDraggingApp) {
+                            isDraggingApp = false;
+                            if (dragHandle) dragHandle.style.cursor = 'grab';
+                        }
+                    });
+
+                    if (closeButton) {
+                        closeButton.addEventListener('click', () => {
+                            appElement.remove();
+                            openStandaloneAppsMap.delete(appId);
+                            const taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${appId}"]`);
+                            if (taskbarIcon) {
+                                taskbarIcon.remove();
+                            }
+                            // Stop any active music playback if this is the music player
+                            currentAudio.pause();
+                            currentAudio.currentTime = 0;
+                            clearInterval(scrollingTextInterval); // Stop text scrolling
+                            console.log(`独立应用 "${appId}" 已关闭。`);
+                        });
+                    }
+
+                    // Attach music player specific listeners
+                    attachMusicPlayerListeners(appElement, APP_DATA.music);
+                }
+
+                appElement.addEventListener('mousedown', () => {
+                     bringToFront(appElement);
+                });
+
+                return appElement;
+            }
+
+
+            /**
+             * @function createTaskbarIcon
+             * @description Creates and appends a taskbar icon for a given window or standalone app.
+             */
+            function createTaskbarIcon(element, title, windowId) {
                 let taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${windowId}"]`);
                 if (!taskbarIcon) {
                     taskbarIcon = document.createElement('div');
                     taskbarIcon.classList.add('taskbar-minimized-icon');
                     taskbarIcon.dataset.windowId = windowId;
 
-                    let displayTitle = String(title || 'Untitled Window');
+                    let displayTitle = String(title || 'Untitled');
+                    const section = element.dataset.section;
 
                     const langData = LANG_CONTENT[currentLanguage];
-                    const section = windowElement.dataset.section;
-
                     if (langData && section) {
                         if (langData[`${section}MenuItem`]) {
                             displayTitle = langData[`${section}MenuItem`];
                         } else if (section === 'about' && langData.mazkoExeIcon) {
                             displayTitle = langData.mazkoExeIcon;
-                        } else if (section.startsWith('service-category-')) {
-                            const categoryId = section.replace('service-category-', '');
-                            const category = langData.services?.categories?.find(cat => cat.id === categoryId);
-                            if (category?.name) {
-                                displayTitle = category.name;
-                            }
-                        } else if (section.startsWith('work-detail-')) {
-                            const regex = /^(.*?)\s*\[.*?\]$/;
-                            const match = String(title).match(regex);
-                            if (match && match[1]) {
-                                displayTitle = match[1].trim();
-                            } else {
-                                displayTitle = String(title).trim();
-                            }
                         } else if (section === 'data-core') {
                             displayTitle = langData.datacoreIcon;
                         } else if (section === 'music-player') {
                             displayTitle = langData.musicPlayerIcon;
-                        } else if (section === 'browser') {
-                            displayTitle = langData.browserIcon;
                         } else if (section === 'folder') {
                             displayTitle = langData.folderIcon;
                         } else if (section === 'log') {
@@ -3188,12 +3351,21 @@ Feel free to follow me on the platforms below and interact.
                     }
                     displayTitle = displayTitle.trim() || 'Untitled';
 
-                    taskbarIcon.innerHTML = `<span class="icon-placeholder" data-asset-key="icon_window_restore"></span> <span>${displayTitle}</span>`;
+                    let iconKey = 'icon_window_restore'; // Default icon
+                    if (section === 'folder') iconKey = 'icon_folder';
+                    else if (section === 'log') iconKey = 'icon_log';
+                    else if (section === 'music-player') iconKey = 'icon_music_player';
+                    else if (section === 'about') iconKey = 'icon_mazko_logo';
+                    else if (section === 'data-core') iconKey = 'icon_datacore';
+                    // For file content windows, use a generic file icon
+                    else if (section.startsWith('file-content-')) iconKey = 'icon_file';
+
+                    taskbarIcon.innerHTML = `<span class="icon-placeholder" data-asset-key="${iconKey}"></span> <span>${displayTitle}</span>`;
                     taskbarIconsContainer.appendChild(taskbarIcon);
                     renderDynamicAssets();
 
                     taskbarIcon.addEventListener('click', () => {
-                        restoreWindow(windowElement);
+                        restoreWindow(element);
                     });
                 }
                 setActiveTaskbarIcon(windowId);
@@ -3201,37 +3373,55 @@ Feel free to follow me on the platforms below and interact.
 
             /**
              * @function minimizeWindow
-             * @description Minimizes a given window.
+             * @description Minimizes a given window or standalone app.
              */
-            function minimizeWindow(windowElement, title, windowId) {
-                windowElement.classList.add('minimized');
-                console.log(`窗口 "${windowId}" 已最小化。`);
-                setActiveTaskbarIcon(windowId); 
+            function minimizeWindow(element) {
+                element.classList.add('minimized');
+                console.log(`元素 "${element.dataset.windowId}" 已最小化。`);
+                setActiveTaskbarIcon(element.dataset.windowId); 
             }
 
             /**
              * @function restoreWindow
-             * @description Restores a minimized or maximized window to its original size and position.
+             * @description Restores a minimized or maximized window/standalone app to its original size and position.
              */
-            function restoreWindow(windowElement) {
-                windowElement.classList.remove('minimized');
-                windowElement.classList.remove('maximized');
-                windowElement.style.width = windowElement.dataset.originalWidth;
-                windowElement.style.height = windowElement.dataset.originalHeight;
-                windowElement.style.left = windowElement.dataset.originalLeft;
-                windowElement.style.top = windowElement.dataset.originalTop;
-                windowElement.style.borderRadius = '12px';
-                windowElement.style.boxShadow = 'var(--glass-glow), var(--glass-inset-shadow)'; 
-                bringToFront(windowElement);
-                console.log(`窗口 "${windowElement.dataset.windowId}" 已恢复。`);
-                setActiveTaskbarIcon(windowElement.dataset.windowId);
+            function restoreWindow(element) {
+                element.classList.remove('minimized');
+                element.classList.remove('maximized'); // Only applies to regular windows
+                // Regular window restoration
+                if (element.classList.contains('os-window')) {
+                    element.style.width = element.dataset.originalWidth;
+                    element.style.height = element.dataset.originalHeight;
+                    element.style.left = element.dataset.originalLeft;
+                    element.style.top = element.dataset.originalTop;
+                    element.style.borderRadius = '12px';
+                    element.style.boxShadow = 'var(--glass-glow), var(--glass-inset-shadow)'; 
+                } else if (element.classList.contains('music-player-standalone')) {
+                    // Standalone app restoration (they don't have original dimensions stored as dataset props yet)
+                    // For music player, it's fixed size, so just ensure it's visible.
+                    const desktopWidth = mainDesktopArea.offsetWidth;
+                    const desktopHeight = mainDesktopArea.offsetHeight;
+                    element.style.width = '360px';
+                    element.style.height = '500px';
+                    // Re-center if it moved
+                    element.style.left = `${(desktopWidth / 2) - 180}px`;
+                    element.style.top = `${(desktopHeight / 2) - 250}px`;
+                }
+
+                bringToFront(element);
+                console.log(`元素 "${element.dataset.windowId}" 已恢复。`);
+                setActiveTaskbarIcon(element.dataset.windowId);
             }
 
             /**
              * @function toggleMaximizeWindow
-             * @description Toggles the maximized state of a window.
+             * @description Toggles the maximized state of a regular window.
              */
             function toggleMaximizeWindow(windowElement) {
+                if (windowElement.classList.contains('music-player-standalone')) {
+                    return; // Standalone apps cannot be maximized in this way
+                }
+
                 if (windowElement.classList.contains('maximized')) {
                     windowElement.classList.remove('maximized');
                     windowElement.style.width = windowElement.dataset.originalWidth;
@@ -3256,15 +3446,15 @@ Feel free to follow me on the platforms below and interact.
             }
 
             // --- Music Player Functions ---
-            function attachMusicPlayerListeners(windowElement, playlist) {
-                const playPauseButton = windowElement.querySelector('#play-pause-button');
-                const prevSongButton = windowElement.querySelector('#prev-song-button');
-                const nextSongButton = windowElement.querySelector('#next-song-button');
-                const progressBarContainer = windowElement.querySelector('.mp3-progress-container');
-                const progressBar = windowElement.querySelector('.mp3-progress-bar');
-                const songTitleDisplay = windowElement.querySelector('.mp3-song-title');
-                const playlistUl = windowElement.querySelector('.mp3-playlist ul');
-                const modeButtons = windowElement.querySelectorAll('.mp3-mode-button');
+            function attachMusicPlayerListeners(appElement, playlist) {
+                const playPauseButton = appElement.querySelector('#play-pause-button');
+                const prevSongButton = appElement.querySelector('#prev-song-button');
+                const nextSongButton = appElement.querySelector('#next-song-button');
+                const progressBarContainer = appElement.querySelector('.mp3-progress-container');
+                const progressBar = appElement.querySelector('.mp3-progress-bar');
+                const songTitleDisplay = appElement.querySelector('.mp3-song-title');
+                const playlistUl = appElement.querySelector('.mp3-playlist ul');
+                const modeButtons = appElement.querySelectorAll('.mp3-mode-button');
 
                 currentPlaylist = playlist; // Set the global playlist
                 
@@ -3327,15 +3517,21 @@ Feel free to follow me on the platforms below and interact.
                 }
 
                 function updateProgressBar() {
-                    const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
-                    progressBar.style.width = `${progress}%`;
+                    if (currentAudio.duration) {
+                        const progress = (currentAudio.currentTime / currentAudio.duration) * 100;
+                        progressBar.style.width = `${progress}%`;
+                    } else {
+                        progressBar.style.width = '0%';
+                    }
                 }
 
                 function setProgress(e) {
                     const width = progressBarContainer.clientWidth;
                     const clickX = e.offsetX;
-                    const duration = currentAudio.duration;
-                    currentAudio.currentTime = (clickX / width) * duration;
+                    if (currentAudio.duration) {
+                        const duration = currentAudio.duration;
+                        currentAudio.currentTime = (clickX / width) * duration;
+                    }
                 }
 
                 function updatePlaylistHighlight() {
@@ -3349,20 +3545,27 @@ Feel free to follow me on the platforms below and interact.
                 }
 
                 function startSongTitleScrolling() {
-                    clearInterval(scrollingTextInterval); // Clear any existing interval
-                    const songTitleElement = windowElement.querySelector('.mp3-song-title');
-                    // Check if scrolling is needed
-                    if (songTitleElement.scrollWidth > songTitleElement.clientWidth) {
+                    const songTitleElement = appElement.querySelector('.mp3-song-title');
+                    // Reset animation properties
+                    songTitleElement.style.animation = 'none';
+                    songTitleElement.offsetHeight; /* trigger reflow */
+                    
+                    const textWidth = songTitleElement.scrollWidth;
+                    const containerWidth = songTitleElement.clientWidth;
+
+                    if (textWidth > containerWidth) {
+                        // Calculate duration based on text length to make speed consistent
+                        const animationDuration = textWidth / 50; // Adjust 50 for desired speed
+                        songTitleElement.style.animation = `scrollText ${animationDuration}s linear infinite`;
                         songTitleElement.style.animationPlayState = 'running';
                     } else {
-                        songTitleElement.style.animationPlayState = 'paused';
-                        songTitleElement.style.transform = 'translateX(0)'; // Reset position if not scrolling
+                        songTitleElement.style.animation = 'none'; // No animation needed
+                        songTitleElement.style.transform = 'translateX(0)';
                     }
                 }
 
                 function stopSongTitleScrolling() {
-                    clearInterval(scrollingTextInterval);
-                    const songTitleElement = windowElement.querySelector('.mp3-song-title');
+                    const songTitleElement = appElement.querySelector('.mp3-song-title');
                     songTitleElement.style.animationPlayState = 'paused';
                     songTitleElement.style.transform = 'translateX(0)'; // Reset position
                 }
@@ -3403,74 +3606,28 @@ Feel free to follow me on the platforms below and interact.
                     songTitleDisplay.textContent = LANG_CONTENT[currentLanguage].noSongSelected;
                 }
             }
-
-            // --- Browser Functions ---
-            function attachBrowserListeners(windowElement) {
-                const urlInput = windowElement.querySelector('#browser-url-input');
-                const goButton = windowElement.querySelector('#browser-go-button');
-                const iframe = windowElement.querySelector('#browser-iframe');
-                const loadingMessage = windowElement.querySelector('.browser-loading-message');
-                const securityWarning = windowElement.querySelector('.browser-security-warning');
-
-                function loadUrl() {
-                    let url = urlInput.value.trim();
-                    if (!url) {
-                        iframe.src = 'about:blank';
-                        loadingMessage.classList.add('hidden');
-                        securityWarning.classList.add('hidden');
-                        return;
+            
+            // Helper to find a file in the recursive folder structure
+            function findFileInFolder(currentFolder, fileName) {
+                for (const item of currentFolder.children) {
+                    if (item.type === 'file' && item.name === fileName) {
+                        return item;
                     }
-                    // Basic URL validation/prefixing
-                    if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                        url = 'https://' + url; // Default to HTTPS
+                    if (item.type === 'folder') {
+                        const found = findFileInFolder(item, fileName);
+                        if (found) return found;
                     }
-
-                    iframe.src = url;
-                    loadingMessage.classList.remove('hidden');
-                    securityWarning.classList.add('hidden'); // Hide warning while loading new URL
-                    iframe.classList.add('opacity-0'); // Hide iframe content while loading
                 }
-
-                goButton.addEventListener('click', loadUrl);
-                urlInput.addEventListener('keypress', (e) => {
-                    if (e.key === 'Enter') {
-                        loadUrl();
-                    }
-                });
-
-                iframe.addEventListener('load', () => {
-                    loadingMessage.classList.add('hidden');
-                    iframe.classList.remove('opacity-0'); // Show iframe content
-
-                    try {
-                        // Attempt to access contentDocument to detect cross-origin issues
-                        const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                        if (iframeDoc.body.innerHTML === '') {
-                             securityWarning.classList.remove('hidden');
-                        } else {
-                            securityWarning.classList.add('hidden');
-                        }
-                    } catch (e) {
-                        // Cross-origin access denied
-                        securityWarning.classList.remove('hidden');
-                    }
-                });
-
-                iframe.addEventListener('error', () => {
-                    loadingMessage.classList.add('hidden');
-                    securityWarning.classList.remove('hidden');
-                    iframe.classList.remove('opacity-0');
-                });
+                return null;
             }
 
-            // --- Folder System Functions ---
-            // let currentFolderData = APP_DATA.folder; // This should be managed per-window via its own state
-            let selectedFolderItem = null; // Currently selected file/folder for right-click operations
 
-            function renderFolderContent(folder, windowInstanceId) { // Added windowInstanceId
-                if (!folder || folder.type !== 'folder') {
-                    return `<p class="text-red-400">${LANG_CONTENT[currentLanguage].unknownModule || 'Invalid Folder'}</p>`;
-                }
+            // --- Folder System Functions ---
+            const folderWindowStates = new Map(); // Map to store currentPath and currentActiveFolder per window
+
+            function renderFolderContent(folder, windowId) { // Added windowId
+                const currentPath = folderWindowStates.has(windowId) ? folderWindowStates.get(windowId).currentPath : [];
+                const displayedPath = currentPath.length > 0 ? currentPath.join(' / ') : '/';
 
                 const itemsHTML = folder.children.map(item => `
                     <div class="folder-item" data-item-name="${item.name}" data-item-type="${item.type}">
@@ -3480,29 +3637,38 @@ Feel free to follow me on the platforms below and interact.
                 `).join('');
 
                 return `
-                    <h3 class="text-xl font-bold mb-4">${folder.name}</h3>
-                    <div class="folder-content-wrapper" id="current-folder-content-${windowInstanceId}">
+                    <h3 class="text-xl font-bold mb-4">${LANG_CONTENT[currentLanguage].folderIcon}: ${displayedPath}</h3>
+                    <div class="folder-content-wrapper" id="current-folder-content-${windowId}">
                         ${itemsHTML}
                     </div>
                 `;
             }
 
-            function attachFolderListeners(windowElement, initialFolder, windowInstanceId) { // Added windowInstanceId
-                const folderContentContainer = windowElement.querySelector(`#current-folder-content-${windowInstanceId}`);
-                let currentPath = []; // To track navigation in mock folder system
-                let currentActiveFolder = initialFolder; // The actual data object for the current folder
-
-                console.log("Attaching folder listeners for window:", windowInstanceId);
-                console.log("Folder content container:", folderContentContainer);
-
+            function attachFolderListeners(windowElement, initialFolder, windowId) { // Added windowId
+                const folderContentContainer = windowElement.querySelector(`#current-folder-content-${windowId}`);
+                
+                // Initialize or retrieve state for this specific folder window
+                if (!folderWindowStates.has(windowId)) {
+                    folderWindowStates.set(windowId, {
+                        currentPath: [],
+                        currentActiveFolder: JSON.parse(JSON.stringify(initialFolder)) // Deep copy to allow independent modification
+                    });
+                }
+                let { currentPath, currentActiveFolder } = folderWindowStates.get(windowId);
 
                 function updateFolderView() {
+                    if (!folderContentContainer) {
+                        console.error("Folder content container is null, cannot update view.");
+                        return;
+                    }
+
                     folderContentContainer.innerHTML = currentActiveFolder.children.map(item => `
                         <div class="folder-item" data-item-name="${item.name}" data-item-type="${item.type}">
                             <span class="icon-placeholder" data-asset-key="${item.type === 'folder' ? 'icon_folder_closed' : 'icon_file'}"></span>
                             <span class="folder-item-name">${item.name}</span>
                         </div>
                     `).join('');
+                    
                     // Update window title based on current folder
                     const titleElement = windowElement.querySelector('.os-window-title');
                     if (titleElement) {
@@ -3519,6 +3685,8 @@ Feel free to follow me on the platforms below and interact.
                     if (targetFolder) {
                         currentPath.push(folderName);
                         currentActiveFolder = targetFolder;
+                        folderWindowStates.get(windowId).currentPath = currentPath; // Update state map
+                        folderWindowStates.get(windowId).currentActiveFolder = currentActiveFolder; // Update state map
                         updateFolderView();
                     }
                 }
@@ -3526,12 +3694,14 @@ Feel free to follow me on the platforms below and interact.
                 function navigateUpFolder() {
                     if (currentPath.length > 0) {
                         currentPath.pop();
-                        // Reconstruct currentActiveFolder by traversing from root
-                        let tempFolder = APP_DATA.folder;
+                        // Reconstruct currentActiveFolder by traversing from root of the current window's folder structure
+                        let tempFolder = folderWindowStates.get(windowId).currentActiveFolder = JSON.parse(JSON.stringify(APP_DATA.folder)); // Reset to root copy
                         currentPath.forEach(name => {
                             tempFolder = tempFolder.children.find(item => item.name === name && item.type === 'folder');
                         });
                         currentActiveFolder = tempFolder;
+                        folderWindowStates.get(windowId).currentPath = currentPath; // Update state map
+                        folderWindowStates.get(windowId).currentActiveFolder = currentActiveFolder; // Update state map
                         updateFolderView();
                     }
                 }
@@ -3561,9 +3731,8 @@ Feel free to follow me on the platforms below and interact.
                         }
                     });
                 } else {
-                    console.error("Folder content container is null for window:", windowInstanceId);
+                    console.error("Folder content container is null for window:", windowId);
                 }
-
 
                 // Right-click context menu logic
                 windowElement.addEventListener('contextmenu', (e) => {
@@ -3572,14 +3741,22 @@ Feel free to follow me on the platforms below and interact.
                     const clickedItem = e.target.closest('.folder-item');
                     selectedFolderItem = clickedItem; // Store the clicked item
 
+                    // Remove existing selection
+                    document.querySelectorAll('.folder-item.selected').forEach(item => item.classList.remove('selected'));
+                    if (clickedItem) {
+                        clickedItem.classList.add('selected'); // Highlight selected item
+                    }
+                    
                     renderContextMenu(e.clientX, e.clientY, clickedItem);
                 });
 
                 // Hide context menu on any click outside
-                document.addEventListener('click', () => {
-                    contextMenu.classList.add('hidden');
-                    selectedFolderItem = null; // Clear selection
-                    document.querySelectorAll('.folder-item.selected').forEach(item => item.classList.remove('selected'));
+                document.addEventListener('click', (e) => {
+                    if (!contextMenu.contains(e.target)) {
+                        contextMenu.classList.add('hidden');
+                        selectedFolderItem = null; // Clear selection
+                        document.querySelectorAll('.folder-item.selected').forEach(item => item.classList.remove('selected'));
+                    }
                 });
 
                 // Render context menu
@@ -3587,7 +3764,6 @@ Feel free to follow me on the platforms below and interact.
                     contextMenu.innerHTML = ''; // Clear previous menu items
 
                     if (targetItem) {
-                        targetItem.classList.add('selected'); // Highlight selected item
                         contextMenu.innerHTML = `
                             <div class="context-menu-item" data-action="rename">
                                 <span class="icon-placeholder" data-asset-key="icon_edit"></span> ${LANG_CONTENT[currentLanguage].contextMenuRename}
@@ -3625,7 +3801,7 @@ Feel free to follow me on the platforms below and interact.
                 // Handle context menu actions
                 function handleContextMenuItemClick(action, targetItem) {
                     const currentItemName = targetItem ? targetItem.dataset.itemName : null;
-                    const currentItemType = targetItem ? targetItem.dataset.itemType : null;
+                    // const currentItemType = targetItem ? targetItem.dataset.itemType : null; // Not strictly needed for logic
 
                     switch (action) {
                         case 'new-folder':
@@ -3645,7 +3821,7 @@ Feel free to follow me on the platforms below and interact.
                             }
                             break;
                         case 'new-file':
-                            let newFileName = prompt(LANG_CONTENT[currentLanguage].renamePrompt); // Reusing prompt for simplicity
+                            let newFileName = prompt(LANG_CONTENT[currentLanguage].renamePrompt); 
                             if (newFileName) {
                                 newFileName = newFileName.trim();
                                 if (!newFileName) {
@@ -3669,7 +3845,7 @@ Feel free to follow me on the platforms below and interact.
                                         alert(LANG_CONTENT[currentLanguage].emptyNameError);
                                         return;
                                     }
-                                    if (currentActiveFolder.children.some(item => item.name === newName)) {
+                                    if (currentActiveFolder.children.some(item => item.name === newName && item.name !== currentItemName)) {
                                         alert(LANG_CONTENT[currentLanguage].duplicateNameError);
                                         return;
                                     }
@@ -3682,13 +3858,23 @@ Feel free to follow me on the platforms below and interact.
                             }
                             break;
                         case 'delete':
-                            if (targetItem && confirm(`确定要删除 "${currentItemName}" 吗？`)) {
+                            if (targetItem && confirm(LANG_CONTENT[currentLanguage].confirmDelete.replace('{name}', currentItemName))) {
                                 currentActiveFolder.children = currentActiveFolder.children.filter(item => item.name !== currentItemName);
                                 updateFolderView();
                             }
                             break;
                     }
                 }
+
+                // Add an event listener to the window itself to handle keyboard navigation (e.g., Backspace for "up")
+                windowElement.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' || e.key === 'ArrowLeft') { // Backspace or Left arrow to go up
+                        if (!e.target.matches('input, textarea')) { // Only if not typing in an input field
+                            navigateUpFolder();
+                            e.preventDefault(); // Prevent browser back navigation
+                        }
+                    }
+                });
 
                 updateFolderView(); // Initial render
             }
@@ -3857,6 +4043,13 @@ Feel free to follow me on the platforms below and interact.
                     let data = null;
                     let isMarkdown = false;
 
+                    // Special handling for standalone apps (like Music Player)
+                    if (section === 'music-player') {
+                        await openStandaloneApp(section, chineseTitle, englishTitle, section);
+                        return; // Exit as it's not a regular window
+                    }
+
+                    // For regular windows, show loading spinner first
                     content = `
                         <div class="flex flex-col items-center justify-center h-full">
                             <div class="loading-spinner"></div>
@@ -3903,73 +4096,6 @@ Feel free to follow me on the platforms below and interact.
                             isMarkdown = true;
                             if (openedWindow) {
                                 openedWindow.querySelector('.os-window-content').innerHTML = marked.parse(content || '');
-                                renderDynamicAssets();
-                            }
-                            break;
-                        case 'music-player':
-                            content = `
-                                <div class="mp3-player-skin">
-                                    <div class="mp3-display">
-                                        <span class="mp3-song-title">${LANG_CONTENT[currentLanguage].noSongSelected}</span>
-                                    </div>
-                                    <div class="mp3-progress-container">
-                                        <div class="mp3-progress-bar" style="width: 0%;"></div>
-                                    </div>
-                                    <div class="mp3-controls">
-                                        <button class="mp3-control-button" id="prev-song-button">
-                                            <span class="icon-placeholder" data-asset-key="icon_prev_track"></span>
-                                        </button>
-                                        <button class="mp3-control-button" id="play-pause-button">
-                                            <span class="icon-placeholder" data-asset-key="icon_play"></span>
-                                        </button>
-                                        <button class="mp3-control-button" id="next-song-button">
-                                            <span class="icon-placeholder" data-asset-key="icon_next_track"></span>
-                                        </button>
-                                    </div>
-                                    <div class="mp3-mode-buttons">
-                                        <button class="mp3-mode-button active-mode" data-mode="loop">${LANG_CONTENT[currentLanguage].playbackModeLoop}</button>
-                                        <button class="mp3-mode-button" data-mode="shuffle">${LANG_CONTENT[currentLanguage].playbackModeShuffle}</button>
-                                        <button class="mp3-mode-button" data-mode="repeat-one">${LANG_CONTENT[currentLanguage].playbackModeRepeatOne}</button>
-                                    </div>
-                                    <div class="mp3-playlist">
-                                        <h4 class="font-bold mb-2">${LANG_CONTENT[currentLanguage].playlist}:</h4>
-                                        <ul>
-                                            ${APP_DATA.music.map((song, index) => `
-                                                <li data-index="${index}" class="${index === currentSongIndex ? 'active-song' : ''}">${song.title} - ${song.artist}</li>
-                                            `).join('')}
-                                        </ul>
-                                    </div>
-                                </div>
-                            `;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                                // Re-attach listeners after content update
-                                setTimeout(() => {
-                                    attachMusicPlayerListeners(openedWindow, APP_DATA.music);
-                                }, 0);
-                                renderDynamicAssets();
-                            }
-                            break;
-                        case 'browser':
-                            content = `
-                                <div class="browser-container">
-                                    <div class="browser-address-bar">
-                                        <input type="text" id="browser-url-input" placeholder="${LANG_CONTENT[currentLanguage].browserPlaceholder}" value="about:blank">
-                                        <button id="browser-go-button">${LANG_CONTENT[currentLanguage].browserGoButton}</button>
-                                    </div>
-                                    <div class="browser-iframe-container" id="browser-iframe-container">
-                                        <iframe id="browser-iframe" class="browser-iframe" src="about:blank"></iframe>
-                                        <p class="browser-loading-message hidden">${LANG_CONTENT[currentLanguage].browserLoading}</p>
-                                        <p class="browser-security-warning hidden text-red-400 text-center p-4">${LANG_CONTENT[currentLanguage].browserSecurityWarning}</p>
-                                    </div>
-                                </div>
-                            `;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                                // Re-attach listeners after content update
-                                setTimeout(() => {
-                                    attachBrowserListeners(openedWindow);
-                                }, 0);
                                 renderDynamicAssets();
                             }
                             break;
@@ -4027,6 +4153,7 @@ Feel free to follow me on the platforms below and interact.
                                     <p class="text-3xl text-white opacity-70" id="welcome-message-text">${LANG_CONTENT[currentLanguage]?.shutdownMessage}</p>
                                 </div>`;
                                 openWindowsMap.clear();
+                                openStandaloneAppsMap.clear(); // Clear standalone apps too
                                 taskbarIconsContainer.innerHTML = '';
                                 renderDynamicAssets();
                             }, 2000);
@@ -4090,18 +4217,19 @@ Feel free to follow me on the platforms below and interact.
 
                         const section = icon.dataset.section;
                         
-                        let existingWindow = document.querySelector(`.os-window[data-window-id="${section}"]`);
-                        if (existingWindow) {
-                            if (existingWindow.classList.contains('minimized')) {
-                                restoreWindow(existingWindow);
+                        // Check if it's a regular window or standalone app
+                        let existingElement = openWindowsMap.get(section) || openStandaloneAppsMap.get(section);
+
+                        if (existingElement) {
+                            if (existingElement.classList.contains('minimized')) {
+                                restoreWindow(existingElement);
                             } else {
-                                bringToFront(existingWindow);
+                                bringToFront(existingElement);
                             }
                             return;
                         }
                         
                         // Simulate click on the corresponding start menu item or button to trigger window opening logic
-                        // Find the corresponding start menu item or button and click it
                         const startMenuItem = document.querySelector(`.start-menu-item[data-section="${section}"]`);
                         const startMenuFooterButton = document.querySelector(`.start-menu-footer-button[data-section="${section}"]`);
 
@@ -4151,19 +4279,25 @@ Feel free to follow me on the platforms below and interact.
                 }
             });
 
-            // Handle window focus/blur to update title bar active state
+            // Handle window/app focus/blur to update title bar active state and z-index
             document.addEventListener('mousedown', (e) => {
-                const clickedWindow = e.target.closest('.os-window');
+                const clickedElement = e.target.closest('.os-window') || e.target.closest('.music-player-standalone');
+                
                 document.querySelectorAll('.os-window').forEach(win => {
                     const titleBar = win.querySelector('.os-window-title-bar');
                     if (titleBar) {
-                        if (win === clickedWindow) {
+                        if (win === clickedElement) {
                             titleBar.classList.remove('inactive');
                         } else {
                             titleBar.classList.add('inactive');
                         }
                     }
                 });
+
+                // Bring clicked element to front if it's a window or standalone app
+                if (clickedElement) {
+                    bringToFront(clickedElement);
+                }
             });
 
             // Initial UI update based on default language
