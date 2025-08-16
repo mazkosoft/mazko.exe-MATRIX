@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𝗠𝗔𝗫 _𝗢𝗦 _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝖮𝖭]</title>
+    <title>𝗠𝗔𝗫 _𝗢� _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝖮𝖭]</title>
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14' font-size='16'%3E📟%3C/text%3E%3C/svg%3E" type="image/svg+xml">
     <!-- Tailwind CSS for rapid and responsive layout -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Roboto Mono for a terminal-like feel -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Noto Sans SC (思源黑体) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts-d-gstatic-d-com-s-gmn.tga.wuaicha.cc" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap" rel="stylesheet">
     <!-- Marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
@@ -64,8 +66,8 @@
             --glass-glow: 0 0 15px rgba(0, 255, 65, 0.6); /* 绿色光晕，强度适中 */
             --glass-inset-shadow: inset 0 0 8px rgba(0, 255, 65, 0.2); /* 绿色内阴影，强度适中 */
 
-            /* 字体 - 使用等宽字体模拟代码终端 */
-            --font-main: 'Roboto Mono', monospace;
+            /* 字体 - 使用思源黑体 */
+            --font-main: 'Noto Sans SC', sans-serif;
 
             /* 阴影与光晕 - 绿色调 */
             --shadow-matrix: 0 4px 15px rgba(0, 255, 65, 0.2); /* 柔和的绿色阴影 */
@@ -701,49 +703,105 @@
             opacity: 0.8;
         }
 
-        /* Content Beautification - Enhanced */
+        /* --- START: Content Beautification --- */
         .markdown-content h1, .markdown-content h2, .markdown-content h3 {
+            color: white;
             border-bottom: 2px solid var(--matrix-green-dark);
-            padding-bottom: 0.6em;
-            margin-bottom: 1.2em;
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
             margin-top: 1.5em;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
         }
-        .markdown-content h1 { font-size: 2.5em; text-shadow: var(--text-glow-matrix); }
-        .markdown-content h2 { font-size: 2.1em; }
-        .markdown-content h3 { font-size: 1.7em; }
-        .markdown-content p { margin-bottom: 1.5em; text-shadow: 0 0 2px rgba(0,255,65,0.1); }
-        .markdown-content a { color: var(--matrix-green-light); text-decoration: none; border-bottom: 1px dashed var(--matrix-green-light); text-shadow: var(--text-glow-matrix); transition: all 0.2s ease; }
-        .markdown-content a:hover { color: white; background-color: var(--matrix-green-dark); border-bottom-style: solid; text-shadow: 0 0 8px white; }
-        .markdown-content hr { border: 0; height: 2px; background: var(--matrix-green-dark); margin: 2.5em 0; }
-        .markdown-content ul, .markdown-content ol { padding-left: 2em; margin-bottom: 1.5em; }
-        .markdown-content li { margin-bottom: 0.8em; padding-left: 1em; }
-        .markdown-content ul > li::marker { content: '» '; color: var(--matrix-green-light); }
+        .markdown-content h1 { font-size: 2.2em; }
+        .markdown-content h2 { font-size: 1.8em; }
+        .markdown-content h3 { font-size: 1.4em; }
+
+        .markdown-content p { 
+            margin-bottom: 1.2em; 
+            text-shadow: 0 0 3px rgba(0,255,65,0.2); 
+            line-height: 1.9;
+        }
+
+        .markdown-content a { 
+            color: var(--matrix-green-light); 
+            text-decoration: none; 
+            border-bottom: 1px solid var(--matrix-green-light);
+            font-weight: bold;
+            transition: all 0.2s ease-in-out; 
+        }
+        .markdown-content a:hover { 
+            color: var(--matrix-black); 
+            background-color: var(--matrix-green-light); 
+            text-shadow: none;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+
+        .markdown-content hr { 
+            border: 0; 
+            height: 1px; 
+            background-image: linear-gradient(to right, transparent, var(--matrix-green-dark), transparent);
+            margin: 2.5em 0; 
+        }
+
+        .markdown-content ul, .markdown-content ol { 
+            padding-left: 1.5em; 
+            margin-bottom: 1.5em; 
+        }
+        .markdown-content li { 
+            margin-bottom: 0.8em; 
+            padding-left: 0.8em; 
+        }
+        .markdown-content ul > li::before {
+            content: '»';
+            color: var(--matrix-green-light);
+            font-weight: bold;
+            margin-right: 0.8em;
+            transition: text-shadow 0.2s;
+        }
+         .markdown-content ul > li:hover::before {
+            text-shadow: 0 0 8px var(--matrix-green-light);
+        }
+
         .markdown-content blockquote {
-            border-left: 5px solid var(--matrix-green-light);
+            border-left: 4px solid var(--matrix-green-light);
             background-color: rgba(0, 255, 65, 0.05);
             padding: 1em 1.5em;
             margin: 1.5em 0;
-            border-radius: 4px;
+            border-radius: 0 8px 8px 0;
+            color: #eee;
         }
+        .markdown-content blockquote p {
+            margin-bottom: 0;
+        }
+
         .markdown-content code {
-            background-color: var(--matrix-dark-grey);
+            background-color: rgba(0, 255, 65, 0.1);
             padding: 0.2em 0.5em;
             border-radius: 4px;
             font-size: 0.9em;
-            border: 1px solid var(--matrix-light-grey);
+            border: 1px solid var(--matrix-green-dark);
+            color: white;
+            text-shadow: 0 0 5px var(--matrix-green-light);
         }
+
         .markdown-content pre {
             background-color: var(--matrix-black);
             padding: 1.5em;
             border-radius: 8px;
             border: 1px solid var(--matrix-dark-grey);
             overflow-x: auto;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
         }
         .markdown-content pre code {
             background: none;
             border: none;
             padding: 0;
+            color: var(--matrix-green-light);
+            text-shadow: none;
         }
+        /* --- END: Content Beautification --- */
         
         .log-table { width: 100%; border-collapse: collapse; }
         .log-table th, .log-table td { padding: 12px 15px; border: 1px solid var(--matrix-dark-grey); text-align: left; }
@@ -1317,7 +1375,7 @@
                     posterCardTitle: '海报设计服务',
                     posterCardDesc: '平面、AI动态及3D海报设计服务报价。',
                     introContent: `# 关于 MAZKO\n\nMAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的数字艺术家。\n\n我的创作领域涵盖：\n\n* **三维模型与渲染**\n* **概念艺术与插画**\n* **视觉特效与动画**\n* **用户界面设计**\n\n---\n\n## 联系方式\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **小红书**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **哔哩哔哩**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)`,
-                    characterContent: `# **角色建模服务报价表**\n\n**👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】**\n\n**[低边形人物建模丨500¥+ / 人]**\n\n我将为你的角色进行低多边形建模与设计！\n\n▷ **基础服务内容：**\n\n- 角色建模（低多边形）\n- 简单动作绑定\n- 渲染视频导出\n\n■ **交付格式：** FBX / Blender / mp4\n\n----------\n\n**🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】**\n\n**[低边形人物复古动画 丨1000¥+ / 个]**\n\n我将为您提供完整的低多边形角色动画服务。\n包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。\n\n▷ **基础服务内容：**\n\n- 角色建模 + 骨骼动画设定\n- 场景搭建（根据需求定制）\n- 演示渲染（默认动画长度为 20 秒内）\n\n■ **交付格式：** FBX / Blender / mp4\n\n----------\n\n**⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明**\n\n- **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。\n- **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。\n- **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。\n\n----------\n\n**📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭�𝐦𝐞𝐧𝐭】** **版权申明**\n\n- 所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。\n- 客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。\n- 需版权转让的，另行签署协议并支付原报价 3-5 倍费用。\n- 超范围使用引发的纠纷，由客户承担全部责任。\n\n----------\n\n🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
+                    characterContent: `# **角色建模服务报价表**\n\n**👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】**\n\n**[低边形人物建模丨500¥+ / 人]**\n\n我将为你的角色进行低多边形建模与设计！\n\n▷ **基础服务内容：**\n\n- 角色建模（低多边形）\n- 简单动作绑定\n- 渲染视频导出\n\n■ **交付格式：** FBX / Blender / mp4\n\n----------\n\n**🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】**\n\n**[低边形人物复古动画 丨1000¥+ / 个]**\n\n我将为您提供完整的低多边形角色动画服务。\n包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。\n\n▷ **基础服务内容：**\n\n- 角色建模 + 骨骼动画设定\n- 场景搭建（根据需求定制）\n- 演示渲染（默认动画长度为 20 秒内）\n\n■ **交付格式：** FBX / Blender / mp4\n\n----------\n\n**⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明**\n\n- **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。\n- **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。\n- **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。\n\n----------\n\n**📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】** **版权申明**\n\n- 所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。\n- 客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。\n- 需版权转让的，另行签署协议并支付原报价 3-5 倍费用。\n- 超范围使用引发的纠纷，由客户承担全部责任。\n\n----------\n\n🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
                     posterContent: `# **海报设计服务报价表**\n\n**[平面海报 500¥ / 张]**\n\n提供**源文件**和指定格式和尺寸的**图片**\n\n----------\n\n**[AI动态海报 500¥ / 张]**\n\n提供指定格式和尺寸的**视频和图片**\n\n----------\n\n**[3D海报 700¥+/ 张]**\n\n提供指定格式和尺寸的**图片**\n\n----------\n\n**[3D动态海报 1000¥+/ 张]**\n\n可提供指定格式和尺寸的**视频**\n\n----------\n\n**📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明**\n\n- **项目启动**：预付50%的订金后开始设计，工期约 **1–2 天/ 张**\n- **尾款支付**：设计定稿并经甲方确认后，支付50%的尾款\n- **成果交付**：收到尾款后交付**最终成品文件**\n\n----------\n\n**🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】修改规则与超额费用**\n\n- 提供 **3 次免费基础调整调** + **1 次免费重大调整**\n- 超出免费基础调整次数后，每次**加收设计费的 25%**\n- 超出免费重大调整次数后，每次**加收设计费的 50%**\n\n----------\n\n**📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明**\n\n- **基础调整**：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更\n- **重大调整**：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计\n- **责任界定**：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担\n- **效率建议**：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率\n\n----------\n\n**📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐍𝐓】版权申明**\n\n- 所有成果知识产权归服务方（🅜）所有。\n- 甲方获**仅限该 club 自身宣传的商用使用权**（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。\n- 版权转让需另签协议并付费。\n- 超范围使用引发的纠纷，由甲方承担责任。\n\n----------\n\n🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`
                 },
                 settings: {
