@@ -4,15 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𝗠𝗔𝗫 _𝗢𝗦 _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝖮𝖭]</title>
-    <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14' font-size='16'%3E📟%3C/text%3E%3C/svg%3E" type="image/svg+xml">
-    <!-- Tailwind CSS for rapid and responsive layout -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts - Roboto Mono for a terminal-like feel -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Marked.js for Markdown parsing -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
+        /* --- START: Custom Cursor CSS --- */
+        /* Hide default cursor for all elements */
+        * {
+            cursor: none !important;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 48px; /* 根据您的光标图片大小调整 */
+            height: 48px; /* 根据您的光标图片大小调整 */
+            pointer-events: none; /* Make cursor element non-interactive */
+            z-index: 99999; /* Ensure cursor is on top of everything */
+            transform: translate(-25%, -25%); /* Optional: Adjust hotspot of the cursor */
+        }
+        
+        .custom-cursor img {
+            width: 100%;
+            height: auto;
+        }
+        /* --- END: Custom Cursor CSS --- */
+
         /* 全局样式和变量，针对 Matrix 视觉风格优化 */
         :root {
             /* 核心黑客帝国绿色调色板 */
@@ -51,11 +70,6 @@
 
             --taskbar-height: 48px;
 
-            /* 鼠标指针 - 由 JavaScript 动态设置 */
-            --cursor-default: auto;
-            --cursor-active: auto;
-            --cursor-pointer: pointer;
-
             /* 桌面背景图片的CSS变量 - 修正路径为 ./assets/... */
             --desktop-image-url: url('./assets/backgrounds/bg.jpg');
         }
@@ -70,7 +84,6 @@
             position: relative;
             width: 100vw;
             height: 100vh;
-            cursor: var(--cursor-default);
             display: flex;
             flex-direction: column;
         }
@@ -226,7 +239,6 @@
                 inset 0 1px 2px var(--metal-highlight),
                 inset 0 -2px 5px var(--metal-inner-shadow),
                 inset 0 0 1px rgba(255,255,255,0.5);
-            cursor: pointer;
             transition: all 0.2s ease-in-out;
             position: relative;
             overflow: hidden;
@@ -321,7 +333,6 @@
             align-items: center;
             text-align: center;
             width: 100px;
-            cursor: pointer;
             transition: transform 0.15s ease, filter 0.15s ease, background-color 0.15s ease;
             padding: 10px;
             border-radius: 15px;
@@ -399,7 +410,6 @@
                 inset 0 1px 2px var(--metal-highlight), 
                 inset 0 -2px 5px var(--metal-inner-shadow),
                 0 4px 10px var(--metal-shadow);
-            cursor: pointer;
             transition: all 0.2s ease;
             position: relative;
             overflow: hidden;
@@ -447,7 +457,6 @@
             color: var(--matrix-green-light);
             text-decoration: none;
             transition: background-color 0.2s ease, transform 0.15s ease, filter 0.2s ease, box-shadow 0.2s ease;
-            cursor: pointer;
             font-size: 1.05rem;
             border-radius: 8px;
             margin: 6px 0;
@@ -498,7 +507,6 @@
             border-bottom-color: var(--metal-border-dark);
             border-right-color: var(--metal-border-dark);
             border-radius: 8px;
-            cursor: pointer;
             transition: all 0.2s ease;
             color: var(--metal-text-color);
             box-shadow: 
@@ -567,7 +575,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            cursor: grab;
             border-radius: 12px 12px 0 0;
             position: relative;
             font-size: 1.1rem;
@@ -629,7 +636,6 @@
             justify-content: center;
             font-size: 0.7em;
             color: var(--metal-text-color);
-            cursor: pointer;
             transition: all 0.15s ease;
             background: linear-gradient(to bottom, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end));
             border: 1px solid var(--metal-border-light);
@@ -777,9 +783,7 @@
             position: absolute;
             top: 0;
             left:0;
-            cursor: grab;
         }
-        .player-drag-handle:active { cursor: grabbing; }
 
         .player-screen {
             width: 100%;
@@ -835,7 +839,6 @@
             height: 8px;
             background-color: #111;
             border-radius: 4px;
-            cursor: pointer;
             position: relative;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);
         }
@@ -860,7 +863,6 @@
             border-radius: 50%;
             background: radial-gradient(circle at 30% 30%, #3a3a3a, #1e1e1e);
             border: none;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -886,7 +888,6 @@
             gap: 12px;
             padding: 10px;
             border-radius: 10px;
-            cursor: pointer;
             transition: all 0.15s ease;
             user-select: none;
             position: relative;
@@ -920,7 +921,6 @@
         .context-menu-item {
             padding: 10px 20px;
             color: var(--matrix-green-light);
-            cursor: pointer;
             transition: all 0.15s ease;
             display: flex;
             align-items: center;
@@ -954,7 +954,6 @@
             border: 1px solid var(--glass-border);
             border-radius: 6px;
             padding: 6px 10px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -1013,7 +1012,6 @@
         }
         .app-tab {
             padding: 10px 15px;
-            cursor: pointer;
             border-bottom: 3px solid transparent;
             margin-bottom: -1px;
         }
@@ -1060,7 +1058,6 @@
             color: var(--matrix-black);
             border: none;
             padding: 8px 12px;
-            cursor: pointer;
         }
 
         .auth-form-container { padding: 10px; }
@@ -1078,13 +1075,11 @@
             background: var(--matrix-green-dark);
             color: var(--matrix-black);
             border: none;
-            cursor: pointer;
             font-weight: bold;
             margin-bottom: 10px;
         }
         .auth-form-container .form-toggle-link {
             text-align: center;
-            cursor: pointer;
             text-decoration: underline;
             font-size: 0.9rem;
             opacity: 0.8;
@@ -1101,7 +1096,6 @@
             border: 1px solid var(--matrix-green-dark);
             padding: 20px;
             border-radius: 8px;
-            cursor: pointer;
             transition: all 0.2s ease;
         }
         .service-card:hover {
@@ -1120,70 +1114,72 @@
     </style>
 </head>
 <body>
+    <div id="custom-cursor" class="custom-cursor">
+        <img id="cursor-image" src="" alt="cursor">
+    </div>
     <div class="desktop-background" id="desktop-background"></div>
 
     <div class="desktop-container" id="desktop-container">
         <div class="desktop-layout">
             <div class="main-desktop-area" id="main-desktop-area">
                 <div class="desktop-icons-container" id="desktop-icons-container">
-                    <div class="desktop-icon" data-app-id="folder" data-title-zh="我的文件夹" data-title-en="My Folder">
+                    <div class="desktop-icon" data-app-id="folder" data-title-zh="我的文件夹" data-title-en="My Folder" data-cursor-type="pointer">
                         <span class="icon-placeholder" data-asset-key="icon_folder"></span>
                         <span class="desktop-icon-label" data-lang-key="folderIcon">文件夹</span>
                     </div>
-                    <div class="desktop-icon" data-app-id="log" data-title-zh="系统日志" data-title-en="System Log">
+                    <div class="desktop-icon" data-app-id="log" data-title-zh="系统日志" data-title-en="System Log" data-cursor-type="pointer">
                         <span class="icon-placeholder" data-asset-key="icon_log"></span>
                         <span class="desktop-icon-label" data-lang-key="logIcon">系统日志</span>
                     </div>
-                    <div class="desktop-icon" data-app-id="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO">
+                    <div class="desktop-icon" data-app-id="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO" data-cursor-type="pointer">
                         <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                         <span class="desktop-icon-label" data-lang-key="mazkoExeIcon">MAZKO</span>
                     </div>
-                    <div class="desktop-icon" data-app-id="music-player" data-title-zh="音乐播放器" data-title-en="Music Player">
+                    <div class="desktop-icon" data-app-id="music-player" data-title-zh="音乐播放器" data-title-en="Music Player" data-cursor-type="pointer">
                         <span class="icon-placeholder" data-asset-key="icon_music_player"></span>
                         <span class="desktop-icon-label" data-lang-key="musicPlayerIcon">音乐播放器</span>
                     </div>
-                    <div class="desktop-icon" data-app-id="data-core" data-title-zh="數據核心" data-title-en="DATA.CORE">
+                    <div class="desktop-icon" data-app-id="data-core" data-title-zh="數據核心" data-title-en="DATA.CORE" data-cursor-type="pointer">
                         <span class="icon-placeholder" data-asset-key="icon_datacore"></span>
                         <span class="desktop-icon-label" data-lang-key="datacoreIcon">數據核心</span>
                     </div>
                 </div>
-                <!-- Windows will be appended here by JavaScript -->
                 <div id="context-menu" class="context-menu"></div>
             </div>
 
             <div id="start-menu" class="start-menu">
-                <div class="start-menu-header" id="start-menu-user-area">
+                <div class="start-menu-header" id="start-menu-user-area" data-cursor-type="pointer">
                     <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                     <span data-lang-key="profileName">MAZKO</span>
                 </div>
-                <a href="#" class="start-menu-item" data-app-id="folder" data-lang-key="folderMenuItem">
+                <a href="#" class="start-menu-item" data-app-id="folder" data-lang-key="folderMenuItem" data-cursor-type="pointer">
                     <span class="icon-placeholder" data-asset-key="icon_folder"></span>
                     <span class="menu-item-label">我的文件夹</span>
                 </a>
-                <a href="#" class="start-menu-item" data-app-id="log" data-lang-key="logMenuItem">
+                <a href="#" class="start-menu-item" data-app-id="log" data-lang-key="logMenuItem" data-cursor-type="pointer">
                     <span class="icon-placeholder" data-asset-key="icon_log"></span>
                     <span class="menu-item-label">系统日志</span>
                 </a>
-                <a href="#" class="start-menu-item" data-app-id="music-player" data-lang-key="musicPlayerMenuItem">
+                <a href="#" class="start-menu-item" data-app-id="music-player" data-lang-key="musicPlayerMenuItem" data-cursor-type="pointer">
                     <span class="icon-placeholder" data-asset-key="icon_music_player"></span>
                     <span class="menu-item-label">音乐播放器</span>
                 </a>
-                <a href="#" class="start-menu-item" data-app-id="data-core" data-lang-key="datacoreMenuItem">
+                <a href="#" class="start-menu-item" data-app-id="data-core" data-lang-key="datacoreMenuItem" data-cursor-type="pointer">
                     <span class="icon-placeholder" data-asset-key="icon_datacore"></span>
                     <span class="menu-item-label">數據核心</span>
                 </a>
                 <div class="start-menu-buttons-container">
-                    <button class="start-menu-footer-button" data-app-id="settings" title="设置">
+                    <button class="start-menu-footer-button" data-app-id="settings" title="设置" data-cursor-type="pointer">
                         <span class="icon-placeholder" data-asset-key="icon_settings"></span>
                     </button>
-                    <button class="start-menu-footer-button" data-app-id="shutdown" title="关闭系统">
+                    <button class="start-menu-footer-button" data-app-id="shutdown" title="关闭系统" data-cursor-type="pointer">
                         <span class="icon-placeholder" data-asset-key="icon_shutdown"></span>
                     </button>
                 </div>
             </div>
 
             <div class="taskbar" id="taskbar">
-                <button class="start-button" id="start-button-taskbar">
+                <button class="start-button" id="start-button-taskbar" data-cursor-type="pointer">
                     <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                 </button>
                 <div id="taskbar-icons" class="taskbar-icons-container"></div>
@@ -1199,7 +1195,6 @@
         </div>
     </div>
     
-    <!-- Firebase SDK -->
     <script type="module">
         // These global variables are provided by the environment.
         const firebaseConfig = typeof __firebase_config !== 'undefined' 
@@ -1243,8 +1238,7 @@
 
     <script>
         const ASSETS = {
-            'cursor_default': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'8\' cy=\'8\' r=\'2\' fill=\'%2300FF41\'/%3E%3C/svg%3E',
-            'cursor_pointer': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 1L15 8L1 15V1Z\' fill=\'%2300FF41\' stroke=\'%2300FF41\'/%3E%3C/svg%3E',
+            // Removed old cursor assets
             'icon_folder': './assets/icon/file_icon.png',
             'icon_log': './assets/icon/storage_icon.png',
             'icon_mazko_logo': './assets/icon/radiation m logo 1.png',
@@ -1416,6 +1410,70 @@
         };
 
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- START: Custom Cursor Logic ---
+
+            const CURSOR_DATA = {
+                // !!重要!! 请根据您每个文件夹的实际图片数量修改 frameCount
+                'default': { path: "./assets/cursors/8-Tumi's 3D Metallic Normal/", frameCount: 30, speed: 50 },
+                'pointer': { path: "./assets/cursors/6-Tumi's 3D Metallic Link/", frameCount: 30, speed: 50 },
+                'move': { path: "./assets/cursors/7-Tumi's 3D Metallic Move/", frameCount: 30, speed: 50 },
+                'text': { path: "./assets/cursors/10-Tumi's 3D Metallic Text/", frameCount: 20, speed: 50 },
+                // 您可以根据需要, 按照下面的格式添加更多光标类型
+                // 'help': { path: "./assets/cursors/4-Tumi's 3D Metallic Help/", frameCount: 30, speed: 50 },
+            };
+
+            const cursorElement = document.getElementById('custom-cursor');
+            const cursorImage = document.getElementById('cursor-image');
+            let currentCursorType = 'default';
+            let currentFrame = 1;
+            let animationInterval = null;
+
+            // 1. 让光标跟随鼠标移动
+            document.addEventListener('mousemove', e => {
+                cursorElement.style.left = e.clientX + 'px';
+                cursorElement.style.top = e.clientY + 'px';
+            });
+
+            // 2. 播放光标动画的函数
+            function startCursorAnimation(type) {
+                if (animationInterval) clearInterval(animationInterval);
+                
+                const data = CURSOR_DATA[type];
+                if (!data) return; // 如果没有找到光标数据，则不执行
+
+                animationInterval = setInterval(() => {
+                    currentFrame = (currentFrame % data.frameCount) + 1;
+                    cursorImage.src = `${data.path}${currentFrame}.png`;
+                }, data.speed);
+            }
+
+            // 3. 设置和切换光标类型的函数
+            function setCursorType(type) {
+                if (type === currentCursorType || !CURSOR_DATA[type]) return;
+                currentCursorType = type;
+                currentFrame = 1; // 重置帧
+                // 立即设置第一帧以获得快速响应
+                cursorImage.src = `${CURSOR_DATA[type].path}1.png`;
+                startCursorAnimation(type);
+            }
+
+            // 4. 使用事件委托来监听鼠标悬浮
+            document.addEventListener('mouseover', e => {
+                const target = e.target.closest('[data-cursor-type]');
+                if (target) {
+                    setCursorType(target.dataset.cursorType);
+                } else {
+                    setCursorType('default'); // 当鼠标离开标记的元素时，恢复默认光标
+                }
+            });
+
+            // 初始启动
+            setCursorType('default');
+
+            // --- END: Custom Cursor Logic ---
+
+
             const mainDesktopArea = document.getElementById('main-desktop-area');
             const desktopIconsContainer = document.getElementById('desktop-icons-container');
             const startButton = document.getElementById('start-button-taskbar');
@@ -1552,15 +1610,15 @@
                 const finalContent = isMarkdown ? marked.parse(contentHTML) : contentHTML;
 
                 windowEl.innerHTML = `
-                    <div class="os-window-title-bar">
+                    <div class="os-window-title-bar" data-cursor-type="move">
                         <div class="os-window-title-content">
                             <span class="icon-placeholder" data-asset-key="icon_${appId}"></span>
                             <span class="os-window-title">${title}</span>
                         </div>
                         <div class="os-window-controls">
-                            <div class="control-button minimize" title="最小化"><span class="icon-placeholder" data-asset-key="icon_minus"></span></div>
-                            <div class="control-button maximize" title="最大化"><span class="icon-placeholder" data-asset-key="icon_square"></span></div>
-                            <div class="control-button close" title="关闭"><span class="icon-placeholder" data-asset-key="icon_times"></span></div>
+                            <div class="control-button minimize" title="最小化" data-cursor-type="pointer"><span class="icon-placeholder" data-asset-key="icon_minus"></span></div>
+                            <div class="control-button maximize" title="最大化" data-cursor-type="pointer"><span class="icon-placeholder" data-asset-key="icon_square"></span></div>
+                            <div class="control-button close" title="关闭" data-cursor-type="pointer"><span class="icon-placeholder" data-asset-key="icon_times"></span></div>
                         </div>
                     </div>
                     <div class="os-window-content ${isMarkdown ? 'markdown-content' : ''}">${finalContent}</div>
@@ -1621,8 +1679,6 @@
                     win.classList.remove('is-dragging');
                     document.removeEventListener('mousemove', onMouseMove);
                     document.removeEventListener('mouseup', onMouseUp);
-                    titleBar.style.cursor = 'grab';
-                    document.body.style.cursor = 'default';
                     if(statusBarText) statusBarText.textContent = LANG_CONTENT[currentLanguage].statusBarStatusReady;
                 };
 
@@ -1638,8 +1694,6 @@
                     document.addEventListener('mousemove', onMouseMove);
                     document.addEventListener('mouseup', onMouseUp);
                     
-                    titleBar.style.cursor = 'grabbing';
-                    document.body.style.cursor = 'grabbing';
                     if(statusBarText) statusBarText.textContent = LANG_CONTENT[currentLanguage].statusBarStatusDragging;
                 });
 
@@ -1692,6 +1746,7 @@
                 const iconEl = document.createElement('div');
                 iconEl.className = 'taskbar-minimized-icon';
                 iconEl.dataset.windowId = appId;
+                iconEl.dataset.cursorType = 'pointer';
                 iconEl.innerHTML = `
                     <span class="icon-placeholder" data-asset-key="icon_${appId}"></span>
                     <span class="taskbar-minimized-icon-label">${title}</span>
@@ -1731,7 +1786,7 @@
                 playerElement.dataset.appId = appId;
 
                 playerElement.innerHTML = `
-                    <div class="player-drag-handle"></div>
+                    <div class="player-drag-handle" data-cursor-type="move"></div>
                     <div class="player-screen">
                         <div class="screen-header">
                             <span>Matrix Groove</span>
@@ -1743,23 +1798,23 @@
                             </div>
                         </div>
                     </div>
-                    <div class="player-progress-container">
+                    <div class="player-progress-container" data-cursor-type="pointer">
                         <div class="player-progress-bar"></div>
                     </div>
                     <div class="player-controls">
-                        <button class="player-control-button" data-action="power">
+                        <button class="player-control-button" data-action="power" data-cursor-type="pointer">
                             <span class="icon-placeholder" data-asset-key="icon_power"></span>
                         </button>
-                        <button class="player-control-button" data-action="prev">
+                        <button class="player-control-button" data-action="prev" data-cursor-type="pointer">
                             <span class="icon-placeholder" data-asset-key="icon_prev_track"></span>
                         </button>
-                        <button class="player-control-button" data-action="play-pause">
+                        <button class="player-control-button" data-action="play-pause" data-cursor-type="pointer">
                             <span class="icon-placeholder" data-asset-key="icon_play"></span>
                         </button>
-                        <button class="player-control-button" data-action="next">
+                        <button class="player-control-button" data-action="next" data-cursor-type="pointer">
                             <span class="icon-placeholder" data-asset-key="icon_next_track"></span>
                         </button>
-                         <button class="player-control-button" data-action="menu">
+                         <button class="player-control-button" data-action="menu" data-cursor-type="pointer">
                             <span class="icon-placeholder" data-asset-key="icon_menu"></span>
                         </button>
                     </div>
@@ -1799,8 +1854,6 @@
                 const onMouseUp = () => {
                     document.removeEventListener('mousemove', onMouseMove);
                     document.removeEventListener('mouseup', onMouseUp);
-                    dragHandle.style.cursor = 'grab';
-                    document.body.style.cursor = 'default';
                 };
                 dragHandle.addEventListener('mousedown', (e) => {
                     offsetX = e.clientX - player.offsetLeft;
@@ -1808,8 +1861,6 @@
                     bringToFront(player);
                     document.addEventListener('mousemove', onMouseMove);
                     document.addEventListener('mouseup', onMouseUp);
-                    dragHandle.style.cursor = 'grabbing';
-                    document.body.style.cursor = 'grabbing';
                 });
 
                 function loadSong(index) {
@@ -1889,7 +1940,7 @@
                         <p>${lang.settings.description}</p>
                         <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
                             <label for="language-toggle" class="text-lg">切换语言 (Toggle Language)</label>
-                            <label class="relative inline-flex items-center cursor-pointer">
+                            <label class="relative inline-flex items-center" data-cursor-type="pointer">
                                 <input type="checkbox" id="language-toggle" class="sr-only peer" ${currentLanguage === 'en' ? 'checked' : ''}>
                                 <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
                             </label>
@@ -1915,15 +1966,15 @@
                 const aboutLang = LANG_CONTENT[currentLanguage].about;
                 return `
                 <div class="p-4 flex flex-col gap-4">
-                    <div class="service-card" data-service="intro">
+                    <div class="service-card" data-service="intro" data-cursor-type="pointer">
                         <h3 class="text-xl font-bold">${aboutLang.introCardTitle}</h3>
                         <p>${aboutLang.introCardDesc}</p>
                     </div>
-                    <div class="service-card" data-service="character">
+                    <div class="service-card" data-service="character" data-cursor-type="pointer">
                         <h3 class="text-xl font-bold">${aboutLang.charCardTitle}</h3>
                         <p>${aboutLang.charCardDesc}</p>
                     </div>
-                     <div class="service-card" data-service="poster">
+                     <div class="service-card" data-service="poster" data-cursor-type="pointer">
                         <h3 class="text-xl font-bold">${aboutLang.posterCardTitle}</h3>
                         <p>${aboutLang.posterCardDesc}</p>
                     </div>
@@ -1948,14 +1999,14 @@
                 const lang = LANG_CONTENT[currentLanguage];
                 const imagesHTML = APP_DATA.datacore.map(image => `
                     <div class="flex flex-col items-center p-2 rounded-lg bg-white bg-opacity-5 hover:bg-opacity-10 transition-colors">
-                        <img src="${ASSETS[image.thumb_key]}" alt="${image.alt}" class="w-full h-32 object-cover rounded-md mb-2 cursor-pointer" data-full-image="${ASSETS[image.full_key]}">
+                        <img src="${ASSETS[image.thumb_key]}" alt="${image.alt}" class="w-full h-32 object-cover rounded-md mb-2" data-full-image="${ASSETS[image.full_key]}" data-cursor-type="pointer">
                         <p class="text-sm text-center opacity-90">${image.alt}</p>
                     </div>
                 `).join('');
                 return `
                     <div class="app-tab-nav">
-                        <div class="app-tab active" data-tab="gallery">${lang.gallery}</div>
-                        <div class="app-tab" data-tab="guestbook">${lang.guestbook}</div>
+                        <div class="app-tab active" data-tab="gallery" data-cursor-type="pointer">${lang.gallery}</div>
+                        <div class="app-tab" data-tab="guestbook" data-cursor-type="pointer">${lang.guestbook}</div>
                     </div>
 
                     <div class="app-tab-content active" data-tab-content="gallery">
@@ -1967,13 +2018,12 @@
                     </div>
 
                     <div class="app-tab-content" data-tab-content="guestbook">
-                        <!-- Guestbook will be rendered here -->
-                    </div>
+                        </div>
 
                     <div class="image-modal hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
                         <div class="relative max-w-4xl max-h-full">
                             <img class="modal-image" src="" alt="Full size image" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-xl">
-                            <button class="close-modal absolute top-4 right-4 text-white text-3xl font-bold p-2 rounded-full bg-red-600 hover:bg-red-700 transition-colors">&times;</button>
+                            <button class="close-modal absolute top-4 right-4 text-white text-3xl font-bold p-2 rounded-full bg-red-600 hover:bg-red-700 transition-colors" data-cursor-type="pointer">&times;</button>
                         </div>
                     </div>
                 `;
@@ -2045,8 +2095,8 @@
                        <div class="loading-spinner"></div>
                     </div>
                     <div class="guestbook-input-area">
-                        <input type="text" id="guestbook-input" class="guestbook-input" placeholder="Type a message...">
-                        <button id="guestbook-send" class="guestbook-send-btn">Send</button>
+                        <input type="text" id="guestbook-input" class="guestbook-input" placeholder="Type a message..." data-cursor-type="text">
+                        <button id="guestbook-send" class="guestbook-send-btn" data-cursor-type="pointer">Send</button>
                     </div>
                 `;
 
@@ -2186,17 +2236,17 @@
                 <div class="auth-form-container">
                     <div id="auth-error"></div>
                     <div id="login-form" style="${isLogin ? '' : 'display:none;'}">
-                        <input type="email" id="login-email" placeholder="Email">
-                        <input type="password" id="login-password" placeholder="Password">
-                        <button id="login-btn">Login</button>
-                        <p class="form-toggle-link" data-form="register">Need an account? Register</p>
+                        <input type="email" id="login-email" placeholder="Email" data-cursor-type="text">
+                        <input type="password" id="login-password" placeholder="Password" data-cursor-type="text">
+                        <button id="login-btn" data-cursor-type="pointer">Login</button>
+                        <p class="form-toggle-link" data-form="register" data-cursor-type="pointer">Need an account? Register</p>
                     </div>
                     <div id="register-form" style="${!isLogin ? '' : 'display:none;'}">
-                        <input type="text" id="register-username" placeholder="Username">
-                        <input type="email" id="register-email" placeholder="Email">
-                        <input type="password" id="register-password" placeholder="Password">
-                        <button id="register-btn">Register</button>
-                        <p class="form-toggle-link" data-form="login">Have an account? Login</p>
+                        <input type="text" id="register-username" placeholder="Username" data-cursor-type="text">
+                        <input type="email" id="register-email" placeholder="Email" data-cursor-type="text">
+                        <input type="password" id="register-password" placeholder="Password" data-cursor-type="text">
+                        <button id="register-btn" data-cursor-type="pointer">Register</button>
+                        <p class="form-toggle-link" data-form="login" data-cursor-type="pointer">Have an account? Login</p>
                     </div>
                 </div>
                 `;
@@ -2252,11 +2302,11 @@
                         <p><strong>Email:</strong> ${currentUser.email}</p>
                         <div>
                             <label for="display-name-input">Display Name:</label>
-                            <input type="text" id="display-name-input" class="guestbook-input" value="${currentUser.displayName || ''}">
+                            <input type="text" id="display-name-input" class="guestbook-input" value="${currentUser.displayName || ''}" data-cursor-type="text">
                         </div>
-                        <button id="update-profile-btn" class="guestbook-send-btn">Update Profile</button>
+                        <button id="update-profile-btn" class="guestbook-send-btn" data-cursor-type="pointer">Update Profile</button>
                         <hr class="border-gray-600 my-2">
-                        <button id="logout-btn" class="w-full p-2 bg-red-800 text-white">Logout</button>
+                        <button id="logout-btn" class="w-full p-2 bg-red-800 text-white" data-cursor-type="pointer">Logout</button>
                     </div>
                  `;
             }
