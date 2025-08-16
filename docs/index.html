@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>𝗠𝗔𝗫 _𝗢𝗦 _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝖤𝙳𝖨𝖮𝖭]</title>
+    <title>𝗠𝗔𝗫 _𝗢𝗦 _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝖮𝖭]</title>
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14' font-size='16'%3E🌟%3C/text%3E%3C/svg%3E" type="image/svg+xml">
     <!-- Tailwind CSS for rapid and responsive layout -->
@@ -543,7 +543,7 @@
             resize: both;
             background-image: linear-gradient(to top right, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
                               radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.05) 0%, transparent 30%);
-            transition: box-shadow 0.3s ease-in-out, border-color 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
         }
 
         .os-window.minimized {
@@ -557,8 +557,8 @@
             height: calc(100% - var(--taskbar-height)) !important;
             border-radius: 0;
             box-shadow: none;
-            transition: all 0.3s ease-in-out;
             border: none;
+            resize: none;
         }
 
         .os-window-title-bar {
@@ -652,7 +652,7 @@
             background-color: rgba(0, 0, 0, 0.85);
             color: var(--matrix-green-light);
             font-size: 1rem;
-            line-height: 1.7;
+            line-height: 1.8; /* Increased line-height */
             overflow: auto;
             box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1);
         }
@@ -688,24 +688,55 @@
             opacity: 0.8;
         }
 
-        /* Content Beautification */
-        .os-window-content .markdown-content h1,
-        .os-window-content .markdown-content h2,
-        .os-window-content .markdown-content h3 {
-            border-bottom: 1px solid var(--matrix-green-dark);
-            padding-bottom: 0.5em;
-            margin-bottom: 1em;
+        /* Content Beautification - Enhanced */
+        .markdown-content h1, .markdown-content h2, .markdown-content h3 {
+            border-bottom: 2px solid var(--matrix-green-dark);
+            padding-bottom: 0.6em;
+            margin-bottom: 1.2em;
+            margin-top: 1.5em;
         }
-        .os-window-content .markdown-content h1 { font-size: 2.4em; text-shadow: var(--text-glow-matrix); }
-        .os-window-content .markdown-content h2 { font-size: 2em; }
-        .os-window-content .markdown-content p { margin-bottom: 1.4em; }
-        .os-window-content .markdown-content a { color: var(--matrix-green-light); text-decoration: underline; text-shadow: var(--text-glow-matrix); transition: color 0.2s ease; }
-        .os-window-content .markdown-content a:hover { color: white; text-shadow: 0 0 8px white; }
-        .os-window-content .markdown-content hr { border-color: var(--matrix-green-dark); margin: 2em 0; }
+        .markdown-content h1 { font-size: 2.5em; text-shadow: var(--text-glow-matrix); }
+        .markdown-content h2 { font-size: 2.1em; }
+        .markdown-content h3 { font-size: 1.7em; }
+        .markdown-content p { margin-bottom: 1.5em; text-shadow: 0 0 2px rgba(0,255,65,0.1); }
+        .markdown-content a { color: var(--matrix-green-light); text-decoration: none; border-bottom: 1px dashed var(--matrix-green-light); text-shadow: var(--text-glow-matrix); transition: all 0.2s ease; }
+        .markdown-content a:hover { color: white; background-color: var(--matrix-green-dark); border-bottom-style: solid; text-shadow: 0 0 8px white; }
+        .markdown-content hr { border: 0; height: 2px; background: var(--matrix-green-dark); margin: 2.5em 0; }
+        .markdown-content ul, .markdown-content ol { padding-left: 2em; margin-bottom: 1.5em; }
+        .markdown-content li { margin-bottom: 0.8em; padding-left: 1em; }
+        .markdown-content ul > li::marker { content: '» '; color: var(--matrix-green-light); }
+        .markdown-content blockquote {
+            border-left: 5px solid var(--matrix-green-light);
+            background-color: rgba(0, 255, 65, 0.05);
+            padding: 1em 1.5em;
+            margin: 1.5em 0;
+            border-radius: 4px;
+        }
+        .markdown-content code {
+            background-color: var(--matrix-dark-grey);
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            font-size: 0.9em;
+            border: 1px solid var(--matrix-light-grey);
+        }
+        .markdown-content pre {
+            background-color: var(--matrix-black);
+            padding: 1.5em;
+            border-radius: 8px;
+            border: 1px solid var(--matrix-dark-grey);
+            overflow-x: auto;
+        }
+        .markdown-content pre code {
+            background: none;
+            border: none;
+            padding: 0;
+        }
+        
         .log-table { width: 100%; border-collapse: collapse; }
         .log-table th, .log-table td { padding: 12px 15px; border: 1px solid var(--matrix-dark-grey); text-align: left; }
-        .log-table th { background-color: var(--matrix-dark-grey); }
+        .log-table th { background-color: var(--matrix-dark-grey); font-weight: bold; }
         .log-table tr:nth-child(even) { background-color: rgba(255,255,255,0.05); }
+        .log-table tr:hover { background-color: rgba(0, 255, 65, 0.1); }
 
         
         @keyframes windowPopIn {
@@ -915,6 +946,39 @@
             animation: spin 0.8s linear infinite;
             margin: 25px auto;
         }
+        
+        .taskbar-minimized-icon {
+            background: rgba(0,0,0,0.7);
+            border: 1px solid var(--glass-border);
+            border-radius: 6px;
+            padding: 6px 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--matrix-green-light);
+            font-size: 0.9rem;
+            box-shadow: inset 0 0 5px rgba(0,255,65,0.1);
+            transition: all 0.2s ease;
+            max-width: 150px;
+        }
+        .taskbar-minimized-icon:hover {
+            background: rgba(0,255,65,0.2);
+            transform: translateY(-2px);
+        }
+        .taskbar-minimized-icon.active {
+            background: var(--matrix-green-dark);
+            box-shadow: 0 0 10px var(--matrix-green-light);
+        }
+        .taskbar-minimized-icon .icon-image {
+            width: 1.2em;
+            height: auto;
+        }
+        .taskbar-minimized-icon-label {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
 
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -971,6 +1035,11 @@
                         <span class="icon-placeholder" data-asset-key="icon_music_player"></span>
                         <span class="desktop-icon-label" data-lang-key="musicPlayerIcon">音乐播放器</span>
                     </div>
+                    <!-- 新增的数据核心应用程序图标 -->
+                    <div class="desktop-icon" data-section="data-core" data-title-zh="數據核心" data-title-en="DATA.CORE">
+                        <span class="icon-placeholder" data-asset-key="icon_datacore"></span>
+                        <span class="desktop-icon-label" data-lang-key="datacoreIcon">數據核心</span>
+                    </div>
                 </div>
                 <!-- Windows will be appended here by JavaScript -->
                 <div id="context-menu" class="context-menu"></div>
@@ -992,6 +1061,11 @@
                 <a href="#" class="start-menu-item" data-section="music-player" data-lang-key="musicPlayerMenuItem">
                     <span class="icon-placeholder" data-asset-key="icon_music_player"></span>
                     <span class="menu-item-label">音乐播放器</span>
+                </a>
+                 <!-- 新增的数据核心应用程序菜单项 -->
+                <a href="#" class="start-menu-item" data-section="data-core" data-lang-key="datacoreMenuItem">
+                    <span class="icon-placeholder" data-asset-key="icon_datacore"></span>
+                    <span class="menu-item-label">數據核心</span>
                 </a>
                 <div class="start-menu-buttons-container">
                     <button class="start-menu-footer-button" data-section="settings" title="设置">
@@ -1028,6 +1102,7 @@
             'icon_log': './assets/icon/storage_icon.png',
             'icon_mazko_logo': './assets/icon/radiation m logo 1.png',
             'icon_music_player': './assets/icon/music_player_icon.png',
+            'icon_datacore': './assets/icon/datacore_logo.png',
             'icon_wifi': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 18V22M12 12L12.01 12M2.99998 8.00002C5.99998 5.00002 9.00002 3.00002 12 3.00002C15 3.00002 18 5.00002 21 8.00002M5.99998 11C7.99998 9 10 7.99998 12 7.99998C14 7.99998 16 9 18 11\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_battery': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'1\' y=\'6\' width=\'18\' height=\'12\' rx=\'2\' stroke=\'%2300FF41\' stroke-width=\'2\'/%3E%3Cpath d=\'M23 10v4\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\'/%3E%3Crect x=\'3\' y=\'8\' width=\'14\' height=\'8\' rx=\'1\' fill=\'%2300FF41\'/%3E%3C/svg%3E',
             'icon_volume': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 5L6 9H2V15H6L11 19V5Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M19.07 4.93a9 9 0 1 1-12.73-12.73\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\'/%3E%3C/svg%3E',
@@ -1045,6 +1120,22 @@
             'icon_prev_track': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M19 20L9 12l10-8v16zM5 4v16H7V4H5z\' fill=\'%2300FF41\'/%3E%3C/svg%3E',
             'icon_menu': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z\' fill=\'%2300FF41\'/%3E%3C/svg%3E',
             'icon_battery_full': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'1\' y=\'6\' width=\'18\' height=\'12\' rx=\'2\' stroke=\'%2300FF41\' stroke-width=\'2\'/%3E%3Cpath d=\'M23 10v4\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\'/%3E%3Crect x=\'3\' y=\'8\' width=\'14\' height=\'8\' rx=\'1\' fill=\'%2300FF41\'/%3E%3C/svg%3E',
+            'inspiration_1_thumb': './assets/data-core/inspiration_1_thumb.jpg',
+            'inspiration_1_full': './assets/data-core/inspiration_1_full.jpg',
+            'inspiration_2_thumb': './assets/data-core/inspiration_2_thumb.jpg',
+            'inspiration_2_full': './assets/data-core/inspiration_2_full.jpg',
+            'inspiration_3_thumb': './assets/data-core/inspiration_3_thumb.jpg',
+            'inspiration_3_full': './assets/data-core/inspiration_3_full.jpg',
+            'inspiration_4_thumb': './assets/data-core/inspiration_4_thumb.jpg',
+            'inspiration_4_full': './assets/data-core/inspiration_4_full.jpg',
+            'inspiration_5_thumb': './assets/data-core/inspiration_5_thumb.jpg',
+            'inspiration_5_full': './assets/data-core/inspiration_5_full.jpg',
+            'inspiration_6_thumb': './assets/data-core/inspiration_6_thumb.jpg',
+            'inspiration_6_full': './assets/data-core/inspiration_6_full.jpg',
+            'inspiration_7_thumb': './assets/data-core/inspiration_7_thumb.jpg',
+            'inspiration_7_full': './assets/data-core/inspiration_7_full.jpg',
+            'inspiration_8_thumb': './assets/data-core/inspiration_8_thumb.jpg',
+            'inspiration_8_full': './assets/data-core/inspiration_8_full.jpg',
 
         };
 
@@ -1054,13 +1145,17 @@
                 logIcon: '系统日志',
                 mazkoExeIcon: 'MAZKO',
                 musicPlayerIcon: '音乐播放器',
+                datacoreIcon: '數據核心',
                 folderMenuItem: '我的文件夹',
                 logMenuItem: '系统日志',
                 musicPlayerMenuItem: '音乐播放器',
+                datacoreMenuItem: '數據核心',
                 profileName: 'MAZKO',
                 logTitle: '系统日志',
                 aboutTitle: '关于 MAZKO',
-                aboutContent: `# 关于 MAZKO\n\nMAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的数字艺术家。\n\n我的创作领域涵盖：\n\n* **三维模型与渲染**\n* **概念艺术与插画**\n* **视觉特效与动画**\n* **用户界面设计**\n\n---\n\n## 联系方式\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **小红书**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **哔哩哔哩**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)\n\n---\n\n# **角色建模服务报价表** \n\n **👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】** \n\n **[低边形人物建模丨500¥+ / 人]** \n\n 我将为你的角色进行低多边形建模与设计！ \n\n ▷ **基础服务内容：** \n\n -   角色建模（低多边形） \n      \n -   简单动作绑定 \n      \n -   渲染视频导出 \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】** \n\n **[低边形人物复古动画 丨1000¥+ / 个]** \n\n 我将为您提供完整的低多边形角色动画服务。   \n 包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。 \n\n ▷ **基础服务内容：** \n\n -   角色建模 + 骨骼动画设定 \n      \n -   场景搭建（根据需求定制） \n      \n -   演示渲染（默认动画长度为 20 秒内） \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明** \n\n -   **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。 \n      \n -   **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。 \n      \n -   **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。 \n      \n\n ---------- \n\n **📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】** **版权申明** \n\n -   所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。 \n      \n -   客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。 \n      \n -   需版权转让的，另行签署协议并支付原报价 3-5 倍费用。 \n      \n -   超范围使用引发的纠纷，由客户承担全部责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容\n\n# **海报设计服务报价表** \n\n **[平面海报 500¥ / 张]** \n\n 提供**源文件**和指定格式和尺寸的**图片** \n\n ---------- \n\n **[AI动态海报 500¥ / 张]** \n\n 提供指定格式和尺寸的**视频和图片** \n\n ---------- \n\n **[3D海报 700¥+/ 张]** \n\n 提供指定格式和尺寸的**图片** \n\n ---------- \n\n **[3D动态海报 1000¥+/ 张]** \n\n 可提供指定格式和尺寸的**视频** \n\n ---------- \n\n **📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明** \n\n -   **项目启动**：预付50%的订金后开始设计，工期约 **1–2 天/ 张** \n      \n -   **尾款支付**：设计定稿并经甲方确认后，支付50%的尾款 \n      \n -   **成果交付**：收到尾款后交付**最终成品文件** \n      \n\n ---------- \n\n **🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】修改规则与超额费用** \n\n -   提供 **3 次免费基础调整调** + **1 次免费重大调整** \n      \n -   超出免费基础调整次数后，每次**加收设计费的 25%** \n      \n -   超出免费重大调整次数后，每次**加收设计费的 50%** \n      \n\n ---------- \n\n **📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明** \n\n -   **基础调整**：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更 \n      \n -   **重大调整**：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计 \n      \n -   **责任界定**：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担 \n      \n -   **效率建议**：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率 \n      \n\n ---------- \n\n **📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐧𝐭】版权申明** \n\n -   所有成果知识产权归服务方（🅜）所有。 \n      \n -   甲方获**仅限该 club 自身宣传的商用使用权**（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。 \n      \n -   版权转让需另签协议并付费。 \n      \n -   超范围使用引发的纠纷，由甲方承担责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
+                datacoreTitle: '數據核心',
+                datacoreDescription: '探索我的灵感图库。',
+                aboutContent: `# 关于 MAZKO\n\nMAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的数字艺术家。\n\n我的创作领域涵盖：\n\n* **三维模型与渲染**\n* **概念艺术与插画**\n* **视觉特效与动画**\n* **用户界面设计**\n\n---\n\n## 联系方式\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **小红书**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **哔哩哔哩**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)\n\n---\n\n# **角色建模服务报价表** \n\n **👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】** \n\n **[低边形人物建模丨500¥+ / 人]** \n\n 我将为你的角色进行低多边形建模与设计！ \n\n ▷ **基础服务内容：** \n\n -   角色建模（低多边形） \n      \n -   简单动作绑定 \n      \n -   渲染视频导出 \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】** \n\n **[低边形人物复古动画 丨1000¥+ / 个]** \n\n 我将为您提供完整的低多边形角色动画服务。   \n 包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。 \n\n ▷ **基础服务内容：** \n\n -   角色建模 + 骨骼动画设定 \n      \n -   场景搭建（根据需求定制） \n      \n -   演示渲染（默认动画长度为 20 秒内） \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明** \n\n -   **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。 \n      \n -   **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。 \n      \n -   **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。 \n      \n\n ---------- \n\n **📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】** **版权申明** \n\n -   所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。 \n      \n -   客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。 \n      \n -   需版权转让的，另行签署协议并支付原报价 3-5 倍费用。 \n      \n -   超范围使用引发的纠纷，由客户承担全部责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容\n\n# **海报设计服务报价表** \n\n **[平面海报 500¥ / 张]** \n\n 提供**源文件**和指定格式和尺寸的**图片** \n\n ---------- \n\n **[AI动态海报 500¥ / 张]** \n\n 提供指定格式和尺寸的**视频和图片** \n\n ---------- \n\n **[3D海报 700¥+/ 张]** \n\n 提供指定格式和尺寸的**图片** \n\n ---------- \n\n **[3D动态海报 1000¥+/ 张]** \n\n 可提供指定格式和尺寸的**视频** \n\n ---------- \n\n **📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明** \n\n -   **项目启动**：预付50%的订金后开始设计，工期约 **1–2 天/ 张** \n      \n -   **尾款支付**：设计定稿并经甲方确认后，支付50%的尾款 \n      \n -   **成果交付**：收到尾款后交付**最终成品文件** \n      \n\n ---------- \n\n **🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】修改规则与超额费用** \n\n -   提供 **3 次免费基础调整调** + **1 次免费重大调整** \n      \n -   超出免费基础调整次数后，每次**加收设计费的 25%** \n      \n -   超出免费重大调整次数后，每次**加收设计费的 50%** \n      \n\n ---------- \n\n **📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明** \n\n -   **基础调整**：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更 \n      \n -   **重大调整**：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计 \n      \n -   **责任界定**：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担 \n      \n -   **效率建议**：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率 \n      \n\n ---------- \n\n **📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐍𝐓】版权申明** \n\n -   所有成果知识产权归服务方（🅜）所有。 \n      \n -   甲方获**仅限该 club 自身宣传的商用使用权**（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。 \n      \n -   版权转让需另签协议并付费。 \n      \n -   超范围使用引发的纠纷，由甲方承担责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
                 settings: {
                     title: '系统设置',
                     description: '调整您的系统偏好设置。',
@@ -1076,12 +1171,16 @@
                 logIcon: 'System Log',
                 mazkoExeIcon: 'MAZKO',
                 musicPlayerIcon: 'Music Player',
+                datacoreIcon: 'DATA.CORE',
                 folderMenuItem: 'My Folder',
                 logMenuItem: 'System Log',
                 musicPlayerMenuItem: 'Music Player',
+                datacoreMenuItem: 'DATA.CORE',
                 profileName: 'MAZKO',
                 logTitle: 'System Log',
                 aboutTitle: 'About MAZKO',
+                datacoreTitle: 'DATA.CORE',
+                datacoreDescription: 'Explore my inspiration gallery.',
                 aboutContent: `# About MAZKO\n\nMAZKO is a digital artist focused on **Cyberpunk, Y2K, PSX, and Glitch Art styles**.\n\nMy areas of expertise include:\n\n* **3D Models & Renders**\n* **Concept Art & Illustrations**\n* **Visual Effects & Animation**\n* **User Interface Design**\n\n---\n\n## Contact\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **Xiaohongshu**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **Bilibili**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)\n\n---\n\n# **Character Modeling Services** \n\n **👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】** \n\n **[低边形人物建模丨500¥+ / 人]** \n\n 我将为你的角色进行低多边形建模与设计！ \n\n ▷ **基础服务内容：** \n\n -   角色建模（低多边形） \n      \n -   简单动作绑定 \n      \n -   渲染视频导出 \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】** \n\n **[低边形人物复古动画 丨1000¥+ / 个]** \n\n 我将为您提供完整的低多边形角色动画服务。   \n 包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。 \n\n ▷ **基础服务内容：** \n\n -   角色建模 + 骨骼动画设定 \n      \n -   场景搭建（根据需求定制） \n      \n -   演示渲染（默认动画长度为 20 秒内） \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明** \n\n -   **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。 \n      \n -   **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。 \n      \n -   **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。 \n      \n\n ---------- \n\n **📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】** **版权申明** \n\n -   所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。 \n      \n -   客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。 \n      \n -   需版权转让的，另行签署协议并支付原报价 3-5 倍费用。 \n      \n -   超范围使用引发的纠纷，由客户承担全部责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容\n\n# **Poster Design Services** \n\n **[平面海报 500¥ / 张]** \n\n 提供**源文件**和指定格式和尺寸的**图片** \n\n ---------- \n\n **[AI动态海报 500¥ / 张]** \n\n 提供指定格式和尺寸的**视频和图片** \n\n ---------- \n\n **[3D海报 700¥+/ 张]** \n\n 提供指定格式和尺寸的**图片** \n\n ---------- \n\n **[3D动态海报 1000¥+/ 张]** \n\n 可提供指定格式和尺寸的**视频** \n\n ---------- \n\n **📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明** \n\n -   **项目启动**：预付50%的订金后开始设计，工期约 **1–2 天/ 张** \n      \n -   **尾款支付**：设计定稿并经甲方确认后，支付50%的尾款 \n      \n -   **成果交付**：收到尾款后交付**最终成品文件** \n      \n\n ---------- \n\n **🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】修改规则与超额费用** \n\n -   提供 **3 次免费基础调整调** + **1 次免费重大调整** \n      \n -   超出免费基础调整次数后，每次**加收设计费的 25%** \n      \n -   超出免费重大调整次数后，每次**加收设计费的 50%** \n      \n\n ---------- \n\n **📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明** \n\n -   **基础调整**：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更 \n      \n -   **重大调整**：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计 \n      \n -   **责任界定**：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担 \n      \n -   **效率建议**：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率 \n      \n\n ---------- \n\n **📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐍𝐓】版权申明** \n\n -   所有成果知识产权归服务方（🅜）所有。 \n      \n -   甲方获**仅限该 club 自身宣传的商用使用权**（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。 \n      \n -   版权转让需另签协议并付费。 \n      \n -   超范围使用引发的纠纷，由甲方承担责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
                 settings: {
                     title: 'System Settings',
@@ -1117,6 +1216,16 @@
                 { id: 'song1', title: 'Digital Rain', artist: 'Synthwave Kid', file: './docs/assets/music/track1.mp3' },
                 { id: 'song2', title: 'Neural Network', artist: 'Cybernetic', file: './docs/assets/music/track2.mp3' },
                 { id: 'song3', title: 'Cyber Pulse', artist: 'MAZKO', file: './docs/assets/music/track3.mp3' }
+            ],
+            datacore: [
+                { thumb_key: 'inspiration_1_thumb', full_key: 'inspiration_1_full', alt: '赛博朋克城市景观' },
+                { thumb_key: 'inspiration_2_thumb', full_key: 'inspiration_2_full', alt: '故障艺术肖像' },
+                { thumb_key: 'inspiration_3_thumb', full_key: 'inspiration_3_full', alt: 'Y2K美学设计' },
+                { thumb_key: 'inspiration_4_thumb', full_key: 'inspiration_4_full', alt: 'PSX风格场景' },
+                { thumb_key: 'inspiration_5_thumb', full_key: 'inspiration_5_full', alt: '霓虹灯管艺术' },
+                { thumb_key: 'inspiration_6_thumb', full_key: 'inspiration_6_full', alt: '科技感UI界面' },
+                { thumb_key: 'inspiration_7_thumb', full_key: 'inspiration_7_full', alt: '复古未来主义' },
+                { thumb_key: 'inspiration_8_thumb', full_key: 'inspiration_8_full', alt: '数字故障纹理' }
             ]
         };
 
@@ -1144,7 +1253,9 @@
                 document.querySelectorAll('.icon-placeholder[data-asset-key]').forEach(p => {
                     const key = p.dataset.assetKey;
                     if (ASSETS[key]) {
-                        p.innerHTML = `<img src="${ASSETS[key]}" alt="${key}" class="icon-image">`;
+                        if (!p.querySelector('img') || p.querySelector('img').getAttribute('src') !== ASSETS[key]) {
+                           p.innerHTML = `<img src="${ASSETS[key]}" alt="${key}" class="icon-image">`;
+                        }
                     }
                 });
             }
@@ -1152,16 +1263,27 @@
             function bringToFront(element) {
                 highestZIndex++;
                 element.style.zIndex = highestZIndex;
+                
                 document.querySelectorAll('.os-window-title-bar').forEach(bar => bar.classList.add('inactive'));
                 const titleBar = element.querySelector('.os-window-title-bar');
                 if (titleBar) titleBar.classList.remove('inactive');
-            }
 
+                document.querySelectorAll('.taskbar-minimized-icon').forEach(icon => icon.classList.remove('active'));
+                const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${element.dataset.section}"]`);
+                if(taskbarIcon) taskbarIcon.classList.add('active');
+            }
+            
+            // --- Window Management ---
             function openWindow(section, title, contentHTML, isMarkdown = false) {
                 if (openWindowsMap.has(section)) {
-                    bringToFront(openWindowsMap.get(section));
+                    const existingWindow = openWindowsMap.get(section);
+                    if (existingWindow.classList.contains('minimized')) {
+                        restoreWindow(existingWindow);
+                    }
+                    bringToFront(existingWindow);
                     return;
                 }
+
                 const windowEl = document.createElement('div');
                 windowEl.className = 'os-window';
                 windowEl.dataset.section = section;
@@ -1175,9 +1297,9 @@
                             <span class="os-window-title">${title}</span>
                         </div>
                         <div class="os-window-controls">
-                            <div class="control-button minimize"><span class="icon-placeholder" data-asset-key="icon_minus"></span></div>
-                            <div class="control-button maximize"><span class="icon-placeholder" data-asset-key="icon_square"></span></div>
-                            <div class="control-button close"><span class="icon-placeholder" data-asset-key="icon_times"></span></div>
+                            <div class="control-button minimize" title="最小化"><span class="icon-placeholder" data-asset-key="icon_minus"></span></div>
+                            <div class="control-button maximize" title="最大化"><span class="icon-placeholder" data-asset-key="icon_square"></span></div>
+                            <div class="control-button close" title="关闭"><span class="icon-placeholder" data-asset-key="icon_times"></span></div>
                         </div>
                     </div>
                     <div class="os-window-content ${isMarkdown ? 'markdown-content' : ''}">${finalContent}</div>
@@ -1193,23 +1315,32 @@
                 const desktopWidth = mainDesktopArea.offsetWidth;
                 const desktopHeight = mainDesktopArea.offsetHeight;
                 
-                windowEl.style.width = '600px';
-                windowEl.style.height = '400px';
-                
-                let initialLeft = (desktopWidth / 2) - 300 + offsetX;
-                let initialTop = (desktopHeight / 2) - 200 + offsetY;
+                const defaultWidth = Math.min(800, desktopWidth - 40);
+                const defaultHeight = Math.min(600, desktopHeight - 40 - parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--taskbar-height')));
 
-                if (initialLeft + 600 > desktopWidth) initialLeft = desktopWidth - 620;
-                if (initialTop + 400 > desktopHeight) initialTop = desktopHeight - 420;
+                windowEl.style.width = `${defaultWidth}px`;
+                windowEl.style.height = `${defaultHeight}px`;
+                
+                let initialLeft = (desktopWidth / 2) - (defaultWidth / 2) + offsetX;
+                let initialTop = (desktopHeight / 2) - (defaultHeight / 2) + offsetY;
+
+                if (initialLeft + defaultWidth > desktopWidth) initialLeft = desktopWidth - defaultWidth - 20;
+                if (initialTop + defaultHeight > desktopHeight) initialTop = desktopHeight - defaultHeight - 20;
 
                 windowEl.style.left = `${initialLeft < 0 ? 20 : initialLeft}px`;
                 windowEl.style.top = `${initialTop < 0 ? 20 : initialTop}px`;
 
                 mainDesktopArea.appendChild(windowEl);
                 openWindowsMap.set(section, windowEl);
+                
+                createTaskbarIcon(windowEl);
                 bringToFront(windowEl);
                 attachWindowEvents(windowEl);
                 renderDynamicAssets();
+                
+                if (section === 'data-core') {
+                    attachDataCoreListeners(windowEl);
+                }
             }
 
             function attachWindowEvents(win) {
@@ -1218,6 +1349,12 @@
                 let isDragging = false, offsetX, offsetY;
 
                 titleBar.addEventListener('mousedown', e => {
+                    // Only start dragging if the mousedown is on the title bar itself, not on buttons
+                    if (e.target.closest('.control-button')) {
+                        return;
+                    }
+                    if(win.classList.contains('maximized')) return;
+
                     isDragging = true;
                     offsetX = e.clientX - win.offsetLeft;
                     offsetY = e.clientY - win.offsetTop;
@@ -1231,13 +1368,79 @@
                     }
                 });
                 document.addEventListener('mouseup', () => { 
-                    isDragging = false;
-                    if(statusBarText) statusBarText.textContent = LANG_CONTENT[currentLanguage].statusBarStatusReady;
+                    if (isDragging) {
+                        isDragging = false;
+                        if(statusBarText) statusBarText.textContent = LANG_CONTENT[currentLanguage].statusBarStatusReady;
+                    }
                 });
 
-                win.querySelector('.close').addEventListener('click', () => {
-                    win.remove();
-                    openWindowsMap.delete(win.dataset.section);
+                win.querySelector('.close').addEventListener('click', () => closeWindow(win));
+                win.querySelector('.minimize').addEventListener('click', () => minimizeWindow(win));
+                win.querySelector('.maximize').addEventListener('click', () => toggleMaximizeWindow(win));
+                win.addEventListener('mousedown', () => bringToFront(win));
+            }
+
+            function closeWindow(win) {
+                const section = win.dataset.section;
+                win.remove();
+                openWindowsMap.delete(section);
+                const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${section}"]`);
+                if (taskbarIcon) taskbarIcon.remove();
+            }
+
+            function minimizeWindow(win) {
+                win.classList.add('minimized');
+                const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${win.dataset.section}"]`);
+                if(taskbarIcon) taskbarIcon.classList.remove('active');
+            }
+
+            function restoreWindow(win) {
+                win.classList.remove('minimized');
+                bringToFront(win);
+            }
+
+            function toggleMaximizeWindow(win) {
+                if (win.classList.contains('maximized')) {
+                    // Restore
+                    win.classList.remove('maximized');
+                    win.style.left = win.dataset.originalLeft;
+                    win.style.top = win.dataset.originalTop;
+                    win.style.width = win.dataset.originalWidth;
+                    win.style.height = win.dataset.originalHeight;
+                } else {
+                    // Maximize
+                    win.dataset.originalLeft = win.style.left;
+                    win.dataset.originalTop = win.style.top;
+                    win.dataset.originalWidth = win.style.width;
+                    win.dataset.originalHeight = win.style.height;
+                    win.classList.add('maximized');
+                }
+            }
+
+            function createTaskbarIcon(win) {
+                const section = win.dataset.section;
+                const title = win.querySelector('.os-window-title').textContent;
+                
+                const iconEl = document.createElement('div');
+                iconEl.className = 'taskbar-minimized-icon';
+                iconEl.dataset.windowId = section;
+                iconEl.innerHTML = `
+                    <span class="icon-placeholder" data-asset-key="icon_${section}"></span>
+                    <span class="taskbar-minimized-icon-label">${title}</span>
+                `;
+                taskbarIconsContainer.appendChild(iconEl);
+                renderDynamicAssets();
+
+                iconEl.addEventListener('click', () => {
+                    if (win.classList.contains('minimized')) {
+                        restoreWindow(win);
+                    } else {
+                        if (win.style.zIndex == highestZIndex) {
+                            minimizeWindow(win);
+                        } else {
+                            bringToFront(win);
+                        }
+                    }
                 });
             }
             
@@ -1251,6 +1454,7 @@
                 const playerElement = document.createElement('div');
                 playerElement.className = 'music-player-standalone';
                 playerElement.dataset.windowId = appId;
+                playerElement.dataset.section = appId; // for consistency
 
                 playerElement.innerHTML = `
                     <div class="player-drag-handle"></div>
@@ -1412,6 +1616,58 @@
                 `;
             }
 
+            function renderDataCoreContent() {
+                const lang = LANG_CONTENT[currentLanguage];
+                const imagesHTML = APP_DATA.datacore.map(image => `
+                    <div class="flex flex-col items-center p-2 rounded-lg bg-white bg-opacity-5 hover:bg-opacity-10 transition-colors">
+                        <img src="${ASSETS[image.thumb_key]}" alt="${image.alt}" class="w-full h-32 object-cover rounded-md mb-2 cursor-pointer" data-full-image="${ASSETS[image.full_key]}">
+                        <p class="text-sm text-center opacity-90">${image.alt}</p>
+                    </div>
+                `).join('');
+                return `
+                    <h2 class="text-xl font-bold mb-4">${lang.datacoreTitle}</h2>
+                    <p>${lang.datacoreDescription}</p>
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+                        ${imagesHTML}
+                    </div>
+                    <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+                        <div class="relative max-w-4xl max-h-full">
+                            <img id="modal-image" src="" alt="Full size image" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-xl">
+                            <button id="close-modal" class="absolute top-4 right-4 text-white text-3xl font-bold p-2 rounded-full bg-red-600 hover:bg-red-700 transition-colors">&times;</button>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function attachDataCoreListeners(windowEl) {
+                const imageModal = windowEl.querySelector('#image-modal');
+                const modalImage = windowEl.querySelector('#modal-image');
+                const closeModalButton = windowEl.querySelector('#close-modal');
+
+                windowEl.querySelectorAll('.os-window-content img[data-full-image]').forEach(img => {
+                    img.addEventListener('click', (e) => {
+                        modalImage.src = e.target.dataset.fullImage;
+                        imageModal.classList.remove('hidden');
+                    });
+                });
+
+                if (closeModalButton) {
+                    closeModalButton.addEventListener('click', () => {
+                        imageModal.classList.add('hidden');
+                        modalImage.src = '';
+                    });
+                }
+
+                if (imageModal) {
+                    imageModal.addEventListener('click', (e) => {
+                        if (e.target === imageModal) {
+                            imageModal.classList.add('hidden');
+                            modalImage.src = '';
+                        }
+                    });
+                }
+            }
+
             function attachSettingsListeners(windowEl) {
                 const toggle = windowEl.querySelector('#language-toggle');
                 if (toggle) {
@@ -1444,6 +1700,10 @@
                         break;
                     case 'about':
                         openWindow('about', lang.aboutTitle, lang.aboutContent, true);
+                        break;
+                    case 'data-core':
+                        const dataCoreContent = renderDataCoreContent();
+                        openWindow('data-core', lang.datacoreTitle, dataCoreContent, false);
                         break;
                     case 'settings':
                         const settingsContent = renderSettingsContent();
