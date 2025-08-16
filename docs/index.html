@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𝗠𝗔𝗫 _𝗢𝗦 _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝖤𝙳𝖨𝖮𝖭]</title>
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w.3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14' font-size='16'%3E🌟%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14' font-size='16'%3E🌟%3C/text%3E%3C/svg%3E" type="image/svg+xml">
     <!-- Tailwind CSS for rapid and responsive layout -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Roboto Mono for a terminal-like feel -->
@@ -580,6 +580,7 @@
                 inset 0 -2px 5px var(--metal-inner-shadow),
                 0 2px 5px var(--metal-shadow);
             overflow: hidden;
+            flex-shrink: 0; /* FIX: Prevent shrinking */
         }
         .os-window-title-bar::after {
             content: '';
@@ -653,17 +654,59 @@
             font-size: 1rem;
             line-height: 1.7;
             overflow: auto;
-            border-radius: 0 0 12px 12px;
             box-shadow: inset 0 0 10px rgba(0, 255, 65, 0.1);
         }
 
-        .os-window-content .markdown-content h1 { font-size: 2.4em; margin-bottom: 0.7em; color: var(--matrix-green-light); border-bottom: 3px solid var(--matrix-green-dark); padding-bottom: 0.5em; text-shadow: var(--text-glow-matrix); }
-        .os-window-content .markdown-content h2 { font-size: 2em; margin-bottom: 0.6em; color: var(--matrix-green-light); }
+        .os-window-status-bar {
+            padding: 8px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            background: linear-gradient(to bottom, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end));
+            border-top: 2px solid var(--metal-border-light);
+            border-radius: 0 0 12px 12px;
+            color: var(--metal-text-color);
+            text-shadow: none;
+            box-shadow: 
+                inset 0 1px 2px var(--metal-highlight), 
+                inset 0 -2px 5px var(--metal-inner-shadow),
+                0 2px 5px var(--metal-shadow);
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0; /* FIX: Prevent shrinking */
+        }
+        .os-window-status-bar::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(90deg, transparent, transparent 1px, var(--metal-bg) 1px, var(--metal-bg) 2px);
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        /* Content Beautification */
+        .os-window-content .markdown-content h1,
+        .os-window-content .markdown-content h2,
+        .os-window-content .markdown-content h3 {
+            border-bottom: 1px solid var(--matrix-green-dark);
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+        }
+        .os-window-content .markdown-content h1 { font-size: 2.4em; text-shadow: var(--text-glow-matrix); }
+        .os-window-content .markdown-content h2 { font-size: 2em; }
         .os-window-content .markdown-content p { margin-bottom: 1.4em; }
         .os-window-content .markdown-content a { color: var(--matrix-green-light); text-decoration: underline; text-shadow: var(--text-glow-matrix); transition: color 0.2s ease; }
         .os-window-content .markdown-content a:hover { color: white; text-shadow: 0 0 8px white; }
-        .os-window-content .markdown-content code { background-color: #1a1a1a; padding: 0.3em 0.6em; border-radius: 4px; border: 1px solid var(--matrix-dark-grey); }
-        .os-window-content .markdown-content pre { background-color: #111; padding: 1.5em; border-radius: 8px; overflow-x: auto; margin-bottom: 1.8em; border: 1px solid var(--matrix-dark-grey); box-shadow: inset 0 0 5px rgba(0,255,65,0.1); }
+        .os-window-content .markdown-content hr { border-color: var(--matrix-green-dark); margin: 2em 0; }
+        .log-table { width: 100%; border-collapse: collapse; }
+        .log-table th, .log-table td { padding: 12px 15px; border: 1px solid var(--matrix-dark-grey); text-align: left; }
+        .log-table th { background-color: var(--matrix-dark-grey); }
+        .log-table tr:nth-child(even) { background-color: rgba(255,255,255,0.05); }
+
         
         @keyframes windowPopIn {
             from { opacity: 0; transform: scale(0.9) translateY(20px); }
@@ -673,57 +716,48 @@
         /* --- 音乐播放器质感优化 --- */
         .music-player-standalone {
             position: absolute;
-            width: 350px;
-            height: 520px;
-            background: linear-gradient(145deg, #2c2c2c, #1a1a1a);
-            border-radius: 100px;
+            width: 380px; /* 变窄一些 */
+            height: auto;
+            background: linear-gradient(to top, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end));
+            border-radius: 20px;
             box-shadow: 
                 -10px -10px 20px rgba(60, 60, 60, 0.5),
                 10px 10px 20px rgba(0, 0, 0, 0.6),
                 inset 0 0 0 2px rgba(0,0,0,0.3),
                 inset 0 0 15px rgba(0,0,0,0.5);
-            padding: 25px;
+            padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            gap: 15px;
             z-index: 5;
             animation: windowPopIn 0.3s ease-out forwards;
-            border: 2px solid #111;
+            border: 2px solid var(--metal-border-light);
             user-select: none;
-            overflow: hidden; /* 隐藏伪元素的溢出 */
+            overflow: hidden;
         }
-        .music-player-standalone::before { /* 磨砂噪点质感 */
-            content: '';
-            position: absolute; top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAANklEQVR42u3OQQEAAAACIL/5/0u2s4JgHjA5HA6Hw+FwOBwOh8PhcDgcDofD4XC2ARsKQQBgYI5qAAAAAElFTkSuQmCC');
-            opacity: 0.03;
-            pointer-events: none;
-            border-radius: 100px;
-        }
-
+        
         .player-drag-handle {
             width: 100px;
             height: 8px;
             position: absolute;
-            top: 10px;
+            top: 5px;
             cursor: grab;
         }
         .player-drag-handle:active { cursor: grabbing; }
 
         .player-screen {
             width: 100%;
-            height: 180px;
+            height: 120px;
             background-color: #0a0c0a;
-            border-radius: 20px;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            color: var(--matrix-green-light);
+            text-shadow: 0 0 5px var(--matrix-green-light);
+            border-radius: 10px;
             box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.3), inset 0 3px 5px #000;
             border: 3px solid #282828;
             padding: 15px;
             display: flex;
             flex-direction: column;
-            color: var(--matrix-green-light);
             font-size: 1.1rem;
             overflow: hidden;
             position: relative;
@@ -735,6 +769,7 @@
             font-weight: bold;
             padding-bottom: 10px;
             border-bottom: 1px solid var(--matrix-green-dark);
+            flex-shrink: 0;
         }
         .screen-header .icon-image {
             width: 1.5em; height: auto;
@@ -743,6 +778,9 @@
             flex-grow: 1;
             overflow: hidden;
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .screen-song-title-scroller {
             position: absolute;
@@ -765,7 +803,6 @@
             cursor: pointer;
             position: relative;
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);
-            margin-bottom: 25px;
         }
         .player-progress-bar {
             height: 100%;
@@ -776,13 +813,13 @@
         }
 
         .player-controls {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 15px;
             width: 100%;
+            display: flex;
+            justify-content: space-around;
             align-items: center;
-            justify-items: center;
+            padding: 10px 0;
         }
+
         .player-control-button {
             width: 48px; height: 48px;
             border-radius: 50%;
@@ -808,13 +845,6 @@
             filter: drop-shadow(0 0 8px var(--matrix-green-light));
         }
         
-        .player-branding {
-            margin-top: auto;
-            color: #555;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-        }
-
         .folder-item {
             display: flex;
             align-items: center;
@@ -891,17 +921,16 @@
             100% { transform: rotate(360deg); }
         }
 
-        ::-webkit-scrollbar { width: 20px; }
+        ::-webkit-scrollbar { width: 25px; }
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(to bottom, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end));
             border-radius: 10px;
-            border: 4px solid var(--metal-border-dark);
+            border: 4px solid var(--matrix-dark-grey);
             box-shadow: inset 0 1px 3px var(--metal-highlight), inset 0 -2px 5px var(--metal-inner-shadow), 0 2px 8px var(--metal-shadow);
         }
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(to top, var(--metal-color-start), var(--metal-color-mid), var(--metal-color-end));
             box-shadow: inset 0 1px 4px var(--metal-highlight), inset 0 -3px 6px var(--metal-inner-shadow), 0 4px 12px rgba(0,255,65,0.6);
-            border-color: var(--matrix-green-light);
         }
         ::-webkit-scrollbar-track {
             background: rgba(0, 0, 0, 0.5);
@@ -1031,7 +1060,14 @@
                 profileName: 'MAZKO',
                 logTitle: '系统日志',
                 aboutTitle: '关于 MAZKO',
-                aboutContent: `# 关于 MAZKO\n\nMAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的数字艺术家。\n\n我的创作领域涵盖：\n\n* **三维模型与渲染**\n* **概念艺术与插画**\n* **视觉特效与动画**\n* **用户界面设计**`,
+                aboutContent: `# 关于 MAZKO\n\nMAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的数字艺术家。\n\n我的创作领域涵盖：\n\n* **三维模型与渲染**\n* **概念艺术与插画**\n* **视觉特效与动画**\n* **用户界面设计**\n\n---\n\n## 联系方式\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **小红书**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **哔哩哔哩**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)\n\n---\n\n# **角色建模服务报价表** \n\n **👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】** \n\n **[低边形人物建模丨500¥+ / 人]** \n\n 我将为你的角色进行低多边形建模与设计！ \n\n ▷ **基础服务内容：** \n\n -   角色建模（低多边形） \n      \n -   简单动作绑定 \n      \n -   渲染视频导出 \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】** \n\n **[低边形人物复古动画 丨1000¥+ / 个]** \n\n 我将为您提供完整的低多边形角色动画服务。   \n 包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。 \n\n ▷ **基础服务内容：** \n\n -   角色建模 + 骨骼动画设定 \n      \n -   场景搭建（根据需求定制） \n      \n -   演示渲染（默认动画长度为 20 秒内） \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明** \n\n -   **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。 \n      \n -   **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。 \n      \n -   **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。 \n      \n\n ---------- \n\n **📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】** **版权申明** \n\n -   所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。 \n      \n -   客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。 \n      \n -   需版权转让的，另行签署协议并支付原报价 3-5 倍费用。 \n      \n -   超范围使用引发的纠纷，由客户承担全部责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容\n\n# **海报设计服务报价表** \n\n **[平面海报 500¥ / 张]** \n\n 提供**源文件**和指定格式和尺寸的**图片** \n\n ---------- \n\n **[AI动态海报 500¥ / 张]** \n\n 提供指定格式和尺寸的**视频和图片** \n\n ---------- \n\n **[3D海报 700¥+/ 张]** \n\n 提供指定格式和尺寸的**图片** \n\n ---------- \n\n **[3D动态海报 1000¥+/ 张]** \n\n 可提供指定格式和尺寸的**视频** \n\n ---------- \n\n **📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明** \n\n -   **项目启动**：预付50%的订金后开始设计，工期约 **1–2 天/ 张** \n      \n -   **尾款支付**：设计定稿并经甲方确认后，支付50%的尾款 \n      \n -   **成果交付**：收到尾款后交付**最终成品文件** \n      \n\n ---------- \n\n **🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】修改规则与超额费用** \n\n -   提供 **3 次免费基础调整调** + **1 次免费重大调整** \n      \n -   超出免费基础调整次数后，每次**加收设计费的 25%** \n      \n -   超出免费重大调整次数后，每次**加收设计费的 50%** \n      \n\n ---------- \n\n **📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明** \n\n -   **基础调整**：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更 \n      \n -   **重大调整**：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计 \n      \n -   **责任界定**：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担 \n      \n -   **效率建议**：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率 \n      \n\n ---------- \n\n **📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐧𝐭】版权申明** \n\n -   所有成果知识产权归服务方（🅜）所有。 \n      \n -   甲方获**仅限该 club 自身宣传的商用使用权**（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。 \n      \n -   版权转让需另签协议并付费。 \n      \n -   超范围使用引发的纠纷，由甲方承担责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
+                settings: {
+                    title: '系统设置',
+                    description: '调整您的系统偏好设置。',
+                },
+                statusBarBranding: '⧉ мax 係統 ⸸ 𝙈𝙖𝙭 𝙊𝙎 [𝙑ᵉʳ¹․⁰․⁰]',
+                statusBarStatusReady: '就绪',
+                statusBarStatusDragging: '正在拖动窗口...',
                 loadingMessage: '加载中...',
                 errorLoadingContent: '加载内容失败'
             },
@@ -1046,7 +1082,14 @@
                 profileName: 'MAZKO',
                 logTitle: 'System Log',
                 aboutTitle: 'About MAZKO',
-                aboutContent: `# About MAZKO\n\nMAZKO is a digital artist focused on **Cyberpunk, Y2K, PSX, and Glitch Art styles**.\n\nMy areas of expertise include:\n\n* **3D Models & Renders**\n* **Concept Art & Illustrations**\n* **Visual Effects & Animation**\n* **User Interface Design**`,
+                aboutContent: `# About MAZKO\n\nMAZKO is a digital artist focused on **Cyberpunk, Y2K, PSX, and Glitch Art styles**.\n\nMy areas of expertise include:\n\n* **3D Models & Renders**\n* **Concept Art & Illustrations**\n* **Visual Effects & Animation**\n* **User Interface Design**\n\n---\n\n## Contact\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **Xiaohongshu**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **Bilibili**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)\n\n---\n\n# **Character Modeling Services** \n\n **👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】** \n\n **[低边形人物建模丨500¥+ / 人]** \n\n 我将为你的角色进行低多边形建模与设计！ \n\n ▷ **基础服务内容：** \n\n -   角色建模（低多边形） \n      \n -   简单动作绑定 \n      \n -   渲染视频导出 \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】** \n\n **[低边形人物复古动画 丨1000¥+ / 个]** \n\n 我将为您提供完整的低多边形角色动画服务。   \n 包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。 \n\n ▷ **基础服务内容：** \n\n -   角色建模 + 骨骼动画设定 \n      \n -   场景搭建（根据需求定制） \n      \n -   演示渲染（默认动画长度为 20 秒内） \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明** \n\n -   **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。 \n      \n -   **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。 \n      \n -   **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。 \n      \n\n ---------- \n\n **📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】** **版权申明** \n\n -   所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。 \n      \n -   客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。 \n      \n -   需版权转让的，另行签署协议并支付原报价 3-5 倍费用。 \n      \n -   超范围使用引发的纠纷，由客户承担全部责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容\n\n# **Poster Design Services** \n\n **[平面海报 500¥ / 张]** \n\n 提供**源文件**和指定格式和尺寸的**图片** \n\n ---------- \n\n **[AI动态海报 500¥ / 张]** \n\n 提供指定格式和尺寸的**视频和图片** \n\n ---------- \n\n **[3D海报 700¥+/ 张]** \n\n 提供指定格式和尺寸的**图片** \n\n ---------- \n\n **[3D动态海报 1000¥+/ 张]** \n\n 可提供指定格式和尺寸的**视频** \n\n ---------- \n\n **📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明** \n\n -   **项目启动**：预付50%的订金后开始设计，工期约 **1–2 天/ 张** \n      \n -   **尾款支付**：设计定稿并经甲方确认后，支付50%的尾款 \n      \n -   **成果交付**：收到尾款后交付**最终成品文件** \n      \n\n ---------- \n\n **🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】修改规则与超额费用** \n\n -   提供 **3 次免费基础调整调** + **1 次免费重大调整** \n      \n -   超出免费基础调整次数后，每次**加收设计费的 25%** \n      \n -   超出免费重大调整次数后，每次**加收设计费的 50%** \n      \n\n ---------- \n\n **📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明** \n\n -   **基础调整**：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更 \n      \n -   **重大调整**：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计 \n      \n -   **责任界定**：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担 \n      \n -   **效率建议**：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率 \n      \n\n ---------- \n\n **📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐍𝐓】版权申明** \n\n -   所有成果知识产权归服务方（🅜）所有。 \n      \n -   甲方获**仅限该 club 自身宣传的商用使用权**（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。 \n      \n -   版权转让需另签协议并付费。 \n      \n -   超范围使用引发的纠纷，由甲方承担责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
+                settings: {
+                    title: 'System Settings',
+                    description: 'Adjust your system preferences.',
+                },
+                statusBarBranding: '⧉ Max OS ⸸ 𝙈𝙖𝙭 𝙊𝙎 [𝙑ᵉʳ¹․⁰․⁰]',
+                statusBarStatusReady: 'Ready',
+                statusBarStatusDragging: 'Dragging Window...',
                 loadingMessage: 'Loading...',
                 errorLoadingContent: 'Failed to load content'
             }
@@ -1109,7 +1152,7 @@
             function bringToFront(element) {
                 highestZIndex++;
                 element.style.zIndex = highestZIndex;
-                document.querySelectorAll('.os-window .os-window-title-bar').forEach(bar => bar.classList.add('inactive'));
+                document.querySelectorAll('.os-window-title-bar').forEach(bar => bar.classList.add('inactive'));
                 const titleBar = element.querySelector('.os-window-title-bar');
                 if (titleBar) titleBar.classList.remove('inactive');
             }
@@ -1138,22 +1181,24 @@
                         </div>
                     </div>
                     <div class="os-window-content ${isMarkdown ? 'markdown-content' : ''}">${finalContent}</div>
+                    <div class="os-window-status-bar">
+                        <span class="status-text">${LANG_CONTENT[currentLanguage].statusBarStatusReady}</span>
+                        <span class="system-branding-text">${LANG_CONTENT[currentLanguage].statusBarBranding}</span>
+                    </div>
                 `;
                 
-                // --- FIX: Intelligent Window Positioning ---
                 const openWindowsCount = openWindowsMap.size;
                 const offsetX = 25 * openWindowsCount;
                 const offsetY = 25 * openWindowsCount;
                 const desktopWidth = mainDesktopArea.offsetWidth;
                 const desktopHeight = mainDesktopArea.offsetHeight;
                 
-                windowEl.style.width = '600px'; // Default size
+                windowEl.style.width = '600px';
                 windowEl.style.height = '400px';
                 
                 let initialLeft = (desktopWidth / 2) - 300 + offsetX;
                 let initialTop = (desktopHeight / 2) - 200 + offsetY;
 
-                // Ensure it doesn't spawn off-screen
                 if (initialLeft + 600 > desktopWidth) initialLeft = desktopWidth - 620;
                 if (initialTop + 400 > desktopHeight) initialTop = desktopHeight - 420;
 
@@ -1169,6 +1214,7 @@
 
             function attachWindowEvents(win) {
                 const titleBar = win.querySelector('.os-window-title-bar');
+                const statusBarText = win.querySelector('.status-text');
                 let isDragging = false, offsetX, offsetY;
 
                 titleBar.addEventListener('mousedown', e => {
@@ -1176,6 +1222,7 @@
                     offsetX = e.clientX - win.offsetLeft;
                     offsetY = e.clientY - win.offsetTop;
                     bringToFront(win);
+                    if(statusBarText) statusBarText.textContent = LANG_CONTENT[currentLanguage].statusBarStatusDragging;
                 });
                 document.addEventListener('mousemove', e => {
                     if (isDragging) {
@@ -1183,7 +1230,10 @@
                         win.style.top = `${e.clientY - offsetY}px`;
                     }
                 });
-                document.addEventListener('mouseup', () => { isDragging = false; });
+                document.addEventListener('mouseup', () => { 
+                    isDragging = false;
+                    if(statusBarText) statusBarText.textContent = LANG_CONTENT[currentLanguage].statusBarStatusReady;
+                });
 
                 win.querySelector('.close').addEventListener('click', () => {
                     win.remove();
@@ -1235,7 +1285,6 @@
                             <span class="icon-placeholder" data-asset-key="icon_menu"></span>
                         </button>
                     </div>
-                    <div class="player-branding">(ɔ) / ((o))</div>
                 `;
                 mainDesktopArea.appendChild(playerElement);
                 openStandaloneAppsMap.set(appId, playerElement);
@@ -1347,6 +1396,33 @@
 
                 loadSong(0);
             }
+            
+            function renderSettingsContent() {
+                return `
+                    <div class="p-4 flex flex-col gap-4">
+                        <p>${LANG_CONTENT[currentLanguage].settings.description}</p>
+                        <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
+                            <label for="language-toggle" class="text-lg">切换语言 (Toggle Language)</label>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" id="language-toggle" class="sr-only peer" ${currentLanguage === 'en' ? 'checked' : ''}>
+                                <div class="w-11 h-6 bg-gray-600 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                            </label>
+                        </div>
+                    </div>
+                `;
+            }
+
+            function attachSettingsListeners(windowEl) {
+                const toggle = windowEl.querySelector('#language-toggle');
+                if (toggle) {
+                    toggle.addEventListener('change', () => {
+                        currentLanguage = toggle.checked ? 'en' : 'zh';
+                        // A simple way to refresh UI is to re-render the settings window content
+                        windowEl.querySelector('.os-window-content').innerHTML = renderSettingsContent();
+                        attachSettingsListeners(windowEl); // Re-attach listener to the new element
+                    });
+                }
+            }
 
             function handleSectionClick(section) {
                 const lang = LANG_CONTENT[currentLanguage];
@@ -1358,12 +1434,27 @@
                         openWindow('folder', lang.folderMenuItem, '文件夹内容');
                         break;
                     case 'log':
-                        let logHTML = `<h2>${lang.logTitle}</h2><br>` + 
-                            APP_DATA.log.map(l => `<p><b>${l.date} [${l.type}]</b>: ${l.content}</p>`).join('');
+                        let logHTML = `<table class="log-table">
+                            <thead><tr><th>日期</th><th>类型</th><th>内容</th></tr></thead>
+                            <tbody>
+                                ${APP_DATA.log.map(l => `<tr><td>${l.date}</td><td>${l.type}</td><td>${l.content}</td></tr>`).join('')}
+                            </tbody>
+                        </table>`;
                         openWindow('log', lang.logTitle, logHTML);
                         break;
                     case 'about':
                         openWindow('about', lang.aboutTitle, lang.aboutContent, true);
+                        break;
+                    case 'settings':
+                        const settingsContent = renderSettingsContent();
+                        openWindow('settings', lang.settings.title, settingsContent);
+                        // Attach listeners after the window is created and in the DOM
+                        setTimeout(() => {
+                           const settingsWindow = openWindowsMap.get('settings');
+                           if (settingsWindow) {
+                               attachSettingsListeners(settingsWindow);
+                           }
+                        }, 0);
                         break;
                     default:
                         console.warn('Unknown section:', section);
