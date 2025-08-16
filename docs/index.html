@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𝗠𝗔𝗫 _𝗢𝗦 _ [𝖬𝙰𝚃𝚁𝖨𝚇 𝖤𝙳𝖨𝚃𝖨𝖮𝖭]</title>
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14' font-size='16'%3E🌟%3C/text%3E%3C/svg%3E" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ctext x='0' y='14' font-size='16'%3E📟%3C/text%3E%3C/svg%3E" type="image/svg+xml">
     <!-- Tailwind CSS for rapid and responsive layout -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts - Roboto Mono for a terminal-like feel -->
@@ -36,8 +36,7 @@
 
 
             /* 黑色玻璃显示屏效果 - 增加玻璃质感，降低模糊度以提高清晰度 */
-            --glass-bg: rgba(0, 0, 0, 0.6); /* 更不透明的黑色半透明背景 */
-            --glass-blur: 5px; /* 略微增加模糊度，使玻璃感更强 */
+            --glass-bg: rgba(10, 15, 10, 0.9); /* 更不透明的黑色半透明背景 */
             --glass-border: rgba(0, 255, 65, 0.6); /* 绿色半透明边框，更明显 */
             --glass-glow: 0 0 15px rgba(0, 255, 65, 0.6); /* 绿色光晕，强度适中 */
             --glass-inset-shadow: inset 0 0 8px rgba(0, 255, 65, 0.2); /* 绿色内阴影，强度适中 */
@@ -366,9 +365,7 @@
             width: 380px;
             height: auto;
             max-height: calc(100% - var(--taskbar-height) - 40px);
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
+            background: rgba(0,0,0,0.9);
             border-radius: 12px;
             box-shadow: 
                 0 8px 25px rgba(0, 255, 65, 0.5),
@@ -528,8 +525,6 @@
         .os-window {
             position: absolute;
             background: var(--glass-bg);
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
             border: 2px solid var(--glass-border);
             border-radius: 12px;
             box-shadow: var(--glass-glow), var(--glass-inset-shadow);
@@ -543,7 +538,11 @@
             resize: both;
             background-image: linear-gradient(to top right, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
                               radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.05) 0%, transparent 30%);
-            transition: all 0.3s ease-in-out;
+            transition: box-shadow 0.3s ease;
+        }
+        .os-window.is-dragging {
+            box-shadow: none;
+            transition: none;
         }
 
         .os-window.minimized {
@@ -594,9 +593,13 @@
             opacity: 0.8;
         }
 
-        .os-window-title-bar.inactive {
-            background: linear-gradient(to top, #666666, #444444);
-            color: rgba(0,0,0,0.5);
+        .os-window-title-bar.inactive, .os-window-status-bar.inactive {
+            background: linear-gradient(to top, #666, #444, #555);
+            color: rgba(255,255,255,0.5);
+            text-shadow: none;
+        }
+        .os-window-title-bar.inactive .os-window-title-content .icon-image {
+            filter: grayscale(100%) brightness(0.7);
         }
 
         .os-window-title-content {
@@ -769,10 +772,11 @@
         }
         
         .player-drag-handle {
-            width: 100px;
-            height: 8px;
+            width: 100%;
+            height: 20px;
             position: absolute;
-            top: 5px;
+            top: 0;
+            left:0;
             cursor: grab;
         }
         .player-drag-handle:active { cursor: grabbing; }
@@ -912,8 +916,6 @@
             display: none;
             flex-direction: column;
             min-width: 180px;
-            backdrop-filter: blur(var(--glass-blur));
-            -webkit-backdrop-filter: blur(var(--glass-blur));
         }
         .context-menu-item {
             padding: 10px 20px;
@@ -1003,12 +1005,117 @@
             box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
         }
         
+        /* Guestbook & Auth Styles */
+        .app-tab-nav {
+            display: flex;
+            border-bottom: 1px solid var(--matrix-green-dark);
+            margin-bottom: 15px;
+        }
+        .app-tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -1px;
+        }
+        .app-tab.active {
+            color: white;
+            border-bottom-color: var(--matrix-green-light);
+        }
+        .app-tab-content { display: none; }
+        .app-tab-content.active { display: block; }
+
+        .guestbook-messages {
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid var(--matrix-dark-grey);
+            padding: 10px;
+            margin-bottom: 10px;
+            background: rgba(0,0,0,0.3);
+        }
+        .guestbook-message {
+            margin-bottom: 8px;
+            padding-bottom: 4px;
+            border-bottom: 1px solid var(--matrix-dark-grey);
+        }
+        .guestbook-message .user-id {
+            font-weight: bold;
+            color: var(--matrix-green-light);
+            font-size: 0.9rem;
+        }
+        .guestbook-message .timestamp {
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-left: 10px;
+        }
+        .guestbook-input-area { display: flex; gap: 10px; }
+        .guestbook-input {
+            flex-grow: 1;
+            background: var(--matrix-black);
+            border: 1px solid var(--matrix-green-dark);
+            color: var(--matrix-green-light);
+            padding: 8px;
+        }
+        .guestbook-send-btn {
+            background: var(--matrix-green-dark);
+            color: var(--matrix-black);
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        .auth-form-container { padding: 10px; }
+        .auth-form-container input {
+            width: 100%;
+            background: var(--matrix-black);
+            border: 1px solid var(--matrix-green-dark);
+            color: var(--matrix-green-light);
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .auth-form-container button {
+            width: 100%;
+            padding: 10px;
+            background: var(--matrix-green-dark);
+            color: var(--matrix-black);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .auth-form-container .form-toggle-link {
+            text-align: center;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        #auth-error {
+            color: #ff4444;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* MAZKO App Card Styles */
+        .service-card {
+            background: rgba(0,255,65,0.05);
+            border: 1px solid var(--matrix-green-dark);
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .service-card:hover {
+            background: rgba(0,255,65,0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,255,65,0.2);
+        }
+
         @media (max-width: 768px) {
             .os-window { min-width: 90vw; min-height: 50vh; width: 95vw !important; height: 80vh !important; left: 2.5vw !important; top: 5vh !important; }
             .start-menu { width: 95vw; left: 2.5vw; }
             .desktop-icon { width: 80px; }
             .desktop-icon .icon-image { width: 50px; }
-            .music-player-standalone { width: 95vw !important; left: 2.5vw !important; height: auto !important; min-height: unset; transform: scale(0.9); }
+            .music-player-standalone { width: 95vw !important; left: 2.5vw !important; }
         }
     </style>
 </head>
@@ -1019,24 +1126,23 @@
         <div class="desktop-layout">
             <div class="main-desktop-area" id="main-desktop-area">
                 <div class="desktop-icons-container" id="desktop-icons-container">
-                    <div class="desktop-icon" data-section="folder" data-title-zh="我的文件夹" data-title-en="My Folder">
+                    <div class="desktop-icon" data-app-id="folder" data-title-zh="我的文件夹" data-title-en="My Folder">
                         <span class="icon-placeholder" data-asset-key="icon_folder"></span>
                         <span class="desktop-icon-label" data-lang-key="folderIcon">文件夹</span>
                     </div>
-                    <div class="desktop-icon" data-section="log" data-title-zh="系统日志" data-title-en="System Log">
+                    <div class="desktop-icon" data-app-id="log" data-title-zh="系统日志" data-title-en="System Log">
                         <span class="icon-placeholder" data-asset-key="icon_log"></span>
                         <span class="desktop-icon-label" data-lang-key="logIcon">系统日志</span>
                     </div>
-                    <div class="desktop-icon" data-section="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO">
+                    <div class="desktop-icon" data-app-id="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO">
                         <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                         <span class="desktop-icon-label" data-lang-key="mazkoExeIcon">MAZKO</span>
                     </div>
-                    <div class="desktop-icon" data-section="music-player" data-title-zh="音乐播放器" data-title-en="Music Player">
+                    <div class="desktop-icon" data-app-id="music-player" data-title-zh="音乐播放器" data-title-en="Music Player">
                         <span class="icon-placeholder" data-asset-key="icon_music_player"></span>
                         <span class="desktop-icon-label" data-lang-key="musicPlayerIcon">音乐播放器</span>
                     </div>
-                    <!-- 新增的数据核心应用程序图标 -->
-                    <div class="desktop-icon" data-section="data-core" data-title-zh="數據核心" data-title-en="DATA.CORE">
+                    <div class="desktop-icon" data-app-id="data-core" data-title-zh="數據核心" data-title-en="DATA.CORE">
                         <span class="icon-placeholder" data-asset-key="icon_datacore"></span>
                         <span class="desktop-icon-label" data-lang-key="datacoreIcon">數據核心</span>
                     </div>
@@ -1046,32 +1152,31 @@
             </div>
 
             <div id="start-menu" class="start-menu">
-                <div class="start-menu-header" data-section="about">
+                <div class="start-menu-header" id="start-menu-user-area">
                     <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                     <span data-lang-key="profileName">MAZKO</span>
                 </div>
-                <a href="#" class="start-menu-item" data-section="folder" data-lang-key="folderMenuItem">
+                <a href="#" class="start-menu-item" data-app-id="folder" data-lang-key="folderMenuItem">
                     <span class="icon-placeholder" data-asset-key="icon_folder"></span>
                     <span class="menu-item-label">我的文件夹</span>
                 </a>
-                <a href="#" class="start-menu-item" data-section="log" data-lang-key="logMenuItem">
+                <a href="#" class="start-menu-item" data-app-id="log" data-lang-key="logMenuItem">
                     <span class="icon-placeholder" data-asset-key="icon_log"></span>
                     <span class="menu-item-label">系统日志</span>
                 </a>
-                <a href="#" class="start-menu-item" data-section="music-player" data-lang-key="musicPlayerMenuItem">
+                <a href="#" class="start-menu-item" data-app-id="music-player" data-lang-key="musicPlayerMenuItem">
                     <span class="icon-placeholder" data-asset-key="icon_music_player"></span>
                     <span class="menu-item-label">音乐播放器</span>
                 </a>
-                 <!-- 新增的数据核心应用程序菜单项 -->
-                <a href="#" class="start-menu-item" data-section="data-core" data-lang-key="datacoreMenuItem">
+                <a href="#" class="start-menu-item" data-app-id="data-core" data-lang-key="datacoreMenuItem">
                     <span class="icon-placeholder" data-asset-key="icon_datacore"></span>
                     <span class="menu-item-label">數據核心</span>
                 </a>
                 <div class="start-menu-buttons-container">
-                    <button class="start-menu-footer-button" data-section="settings" title="设置">
+                    <button class="start-menu-footer-button" data-app-id="settings" title="设置">
                         <span class="icon-placeholder" data-asset-key="icon_settings"></span>
                     </button>
-                    <button class="start-menu-footer-button" data-section="shutdown" title="关闭系统">
+                    <button class="start-menu-footer-button" data-app-id="shutdown" title="关闭系统">
                         <span class="icon-placeholder" data-asset-key="icon_shutdown"></span>
                     </button>
                 </div>
@@ -1093,6 +1198,48 @@
             </div>
         </div>
     </div>
+    
+    <!-- Firebase SDK -->
+    <script type="module">
+        // These global variables are provided by the environment.
+        const firebaseConfig = typeof __firebase_config !== 'undefined' 
+            ? JSON.parse(__firebase_config) 
+            : { apiKey: "...", authDomain: "...", projectId: "...", storageBucket: "...", messagingSenderId: "...", appId: "..." };
+
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        import { initializeApp } from "https://www-d-gstatic-d-com-s-gmn.tga.wuaicha.cc/firebasejs/11.6.1/firebase-app.js";
+        import { 
+            getAuth, 
+            onAuthStateChanged, 
+            createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, 
+            signOut,
+            updateProfile
+        } from "https://www-d-gstatic-d-com-s-gmn.tga.wuaicha.cc/firebasejs/11.6.1/firebase-auth.js";
+        import { 
+            getFirestore, 
+            collection, 
+            addDoc, 
+            query, 
+            onSnapshot, 
+            serverTimestamp,
+            doc,
+            getDoc,
+            setDoc
+        } from "https://www-d-gstatic-d-com-s-gmn.tga.wuaicha.cc/firebasejs/11.6.1/firebase-firestore.js";
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        window.firebaseServices = { 
+            auth, db, onAuthStateChanged, createUserWithEmailAndPassword, 
+            signInWithEmailAndPassword, signOut, updateProfile,
+            collection, addDoc, query, onSnapshot, serverTimestamp,
+            doc, getDoc, setDoc, appId
+        };
+    </script>
 
     <script>
         const ASSETS = {
@@ -1103,6 +1250,7 @@
             'icon_mazko_logo': './assets/icon/radiation m logo 1.png',
             'icon_music_player': './assets/icon/music_player_icon.png',
             'icon_datacore': './assets/icon/datacore_logo.png',
+            'icon_guestbook': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 4h16v12H8l-4 4V4z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 11h.01M8 11h.01M16 11h.01\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\'/%3E%3C/svg%3E',
             'icon_wifi': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 18V22M12 12L12.01 12M2.99998 8.00002C5.99998 5.00002 9.00002 3.00002 12 3.00002C15 3.00002 18 5.00002 21 8.00002M5.99998 11C7.99998 9 10 7.99998 12 7.99998C14 7.99998 16 9 18 11\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_battery': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'1\' y=\'6\' width=\'18\' height=\'12\' rx=\'2\' stroke=\'%2300FF41\' stroke-width=\'2\'/%3E%3Cpath d=\'M23 10v4\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\'/%3E%3Crect x=\'3\' y=\'8\' width=\'14\' height=\'8\' rx=\'1\' fill=\'%2300FF41\'/%3E%3C/svg%3E',
             'icon_volume': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 5L6 9H2V15H6L11 19V5Z\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M19.07 4.93a9 9 0 1 1-12.73-12.73\' stroke=\'%2300FF41\' stroke-width=\'2\' stroke-linecap=\'round\'/%3E%3C/svg%3E',
@@ -1153,9 +1301,23 @@
                 profileName: 'MAZKO',
                 logTitle: '系统日志',
                 aboutTitle: '关于 MAZKO',
+                musicPlayerTitle: '音乐播放器',
                 datacoreTitle: '數據核心',
+                authTitle: '登录 / 注册',
+                userSettingsTitle: '用户设置',
                 datacoreDescription: '探索我的灵感图库。',
-                aboutContent: `# 关于 MAZKO\n\nMAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的数字艺术家。\n\n我的创作领域涵盖：\n\n* **三维模型与渲染**\n* **概念艺术与插画**\n* **视觉特效与动画**\n* **用户界面设计**\n\n---\n\n## 联系方式\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **小红书**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **哔哩哔哩**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)\n\n---\n\n# **角色建模服务报价表** \n\n **👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】** \n\n **[低边形人物建模丨500¥+ / 人]** \n\n 我将为你的角色进行低多边形建模与设计！ \n\n ▷ **基础服务内容：** \n\n -   角色建模（低多边形） \n      \n -   简单动作绑定 \n      \n -   渲染视频导出 \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】** \n\n **[低边形人物复古动画 丨1000¥+ / 个]** \n\n 我将为您提供完整的低多边形角色动画服务。   \n 包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。 \n\n ▷ **基础服务内容：** \n\n -   角色建模 + 骨骼动画设定 \n      \n -   场景搭建（根据需求定制） \n      \n -   演示渲染（默认动画长度为 20 秒内） \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明** \n\n -   **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。 \n      \n -   **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。 \n      \n -   **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。 \n      \n\n ---------- \n\n **📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】** **版权申明** \n\n -   所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。 \n      \n -   客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。 \n      \n -   需版权转让的，另行签署协议并支付原报价 3-5 倍费用。 \n      \n -   超范围使用引发的纠纷，由客户承担全部责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容\n\n# **海报设计服务报价表** \n\n **[平面海报 500¥ / 张]** \n\n 提供**源文件**和指定格式和尺寸的**图片** \n\n ---------- \n\n **[AI动态海报 500¥ / 张]** \n\n 提供指定格式和尺寸的**视频和图片** \n\n ---------- \n\n **[3D海报 700¥+/ 张]** \n\n 提供指定格式和尺寸的**图片** \n\n ---------- \n\n **[3D动态海报 1000¥+/ 张]** \n\n 可提供指定格式和尺寸的**视频** \n\n ---------- \n\n **📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明** \n\n -   **项目启动**：预付50%的订金后开始设计，工期约 **1–2 天/ 张** \n      \n -   **尾款支付**：设计定稿并经甲方确认后，支付50%的尾款 \n      \n -   **成果交付**：收到尾款后交付**最终成品文件** \n      \n\n ---------- \n\n **🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】修改规则与超额费用** \n\n -   提供 **3 次免费基础调整调** + **1 次免费重大调整** \n      \n -   超出免费基础调整次数后，每次**加收设计费的 25%** \n      \n -   超出免费重大调整次数后，每次**加收设计费的 50%** \n      \n\n ---------- \n\n **📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明** \n\n -   **基础调整**：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更 \n      \n -   **重大调整**：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计 \n      \n -   **责任界定**：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担 \n      \n -   **效率建议**：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率 \n      \n\n ---------- \n\n **📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐍𝐓】版权申明** \n\n -   所有成果知识产权归服务方（🅜）所有。 \n      \n -   甲方获**仅限该 club 自身宣传的商用使用权**（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。 \n      \n -   版权转让需另签协议并付费。 \n      \n -   超范围使用引发的纠纷，由甲方承担责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
+                about: {
+                    mainTitle: '关于 MAZKO',
+                    introCardTitle: '关于我',
+                    introCardDesc: '艺术家简介与联系方式。',
+                    charCardTitle: '角色建模服务',
+                    charCardDesc: '低多边形角色建模与复古动画服务报价。',
+                    posterCardTitle: '海报设计服务',
+                    posterCardDesc: '平面、AI动态及3D海报设计服务报价。',
+                    introContent: `# 关于 MAZKO\n\nMAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的数字艺术家。\n\n我的创作领域涵盖：\n\n* **三维模型与渲染**\n* **概念艺术与插画**\n* **视觉特效与动画**\n* **用户界面设计**\n\n---\n\n## 联系方式\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **小红书**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **哔哩哔哩**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)`,
+                    characterContent: `# **角色建模服务报价表**\n\n**👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】**\n\n**[低边形人物建模丨500¥+ / 人]**\n\n我将为你的角色进行低多边形建模与设计！\n\n▷ **基础服务内容：**\n\n- 角色建模（低多边形）\n- 简单动作绑定\n- 渲染视频导出\n\n■ **交付格式：** FBX / Blender / mp4\n\n----------\n\n**🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】**\n\n**[低边形人物复古动画 丨1000¥+ / 个]**\n\n我将为您提供完整的低多边形角色动画服务。\n包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。\n\n▷ **基础服务内容：**\n\n- 角色建模 + 骨骼动画设定\n- 场景搭建（根据需求定制）\n- 演示渲染（默认动画长度为 20 秒内）\n\n■ **交付格式：** FBX / Blender / mp4\n\n----------\n\n**⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明**\n\n- **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。\n- **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。\n- **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。\n\n----------\n\n**📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】** **版权申明**\n\n- 所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。\n- 客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。\n- 需版权转让的，另行签署协议并支付原报价 3-5 倍费用。\n- 超范围使用引发的纠纷，由客户承担全部责任。\n\n----------\n\n🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
+                    posterContent: `# **海报设计服务报价表**\n\n**[平面海报 500¥ / 张]**\n\n提供**源文件**和指定格式和尺寸的**图片**\n\n----------\n\n**[AI动态海报 500¥ / 张]**\n\n提供指定格式和尺寸的**视频和图片**\n\n----------\n\n**[3D海报 700¥+/ 张]**\n\n提供指定格式和尺寸的**图片**\n\n----------\n\n**[3D动态海报 1000¥+/ 张]**\n\n可提供指定格式和尺寸的**视频**\n\n----------\n\n**📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明**\n\n- **项目启动**：预付50%的订金后开始设计，工期约 **1–2 天/ 张**\n- **尾款支付**：设计定稿并经甲方确认后，支付50%的尾款\n- **成果交付**：收到尾款后交付**最终成品文件**\n\n----------\n\n**🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】修改规则与超额费用**\n\n- 提供 **3 次免费基础调整调** + **1 次免费重大调整**\n- 超出免费基础调整次数后，每次**加收设计费的 25%**\n- 超出免费重大调整次数后，每次**加收设计费的 50%**\n\n----------\n\n**📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明**\n\n- **基础调整**：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更\n- **重大调整**：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计\n- **责任界定**：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担\n- **效率建议**：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率\n\n----------\n\n**📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐍𝐓】版权申明**\n\n- 所有成果知识产权归服务方（🅜）所有。\n- 甲方获**仅限该 club 自身宣传的商用使用权**（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。\n- 版权转让需另签协议并付费。\n- 超范围使用引发的纠纷，由甲方承担责任。\n\n----------\n\n🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`
+                },
                 settings: {
                     title: '系统设置',
                     description: '调整您的系统偏好设置。',
@@ -1164,7 +1326,12 @@
                 statusBarStatusReady: '就绪',
                 statusBarStatusDragging: '正在拖动窗口...',
                 loadingMessage: '加载中...',
-                errorLoadingContent: '加载内容失败'
+                errorLoadingContent: '加载内容失败',
+                login: '登录',
+                register: '注册',
+                logout: '登出',
+                gallery: '灵感画廊',
+                guestbook: '公共留言板'
             },
             en: {
                 folderIcon: 'Folder',
@@ -1179,9 +1346,23 @@
                 profileName: 'MAZKO',
                 logTitle: 'System Log',
                 aboutTitle: 'About MAZKO',
+                musicPlayerTitle: 'Music Player',
                 datacoreTitle: 'DATA.CORE',
+                authTitle: 'Login / Register',
+                userSettingsTitle: 'User Settings',
                 datacoreDescription: 'Explore my inspiration gallery.',
-                aboutContent: `# About MAZKO\n\nMAZKO is a digital artist focused on **Cyberpunk, Y2K, PSX, and Glitch Art styles**.\n\nMy areas of expertise include:\n\n* **3D Models & Renders**\n* **Concept Art & Illustrations**\n* **Visual Effects & Animation**\n* **User Interface Design**\n\n---\n\n## Contact\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **Xiaohongshu**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **Bilibili**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)\n\n---\n\n# **Character Modeling Services** \n\n **👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】** \n\n **[低边形人物建模丨500¥+ / 人]** \n\n 我将为你的角色进行低多边形建模与设计！ \n\n ▷ **基础服务内容：** \n\n -   角色建模（低多边形） \n      \n -   简单动作绑定 \n      \n -   渲染视频导出 \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】** \n\n **[低边形人物复古动画 丨1000¥+ / 个]** \n\n 我将为您提供完整的低多边形角色动画服务。   \n 包含从建模、绑定、到动作设定与渲染导出，适合用于演示短片、社交媒体角色展示、复古场景氛围渲染等。 \n\n ▷ **基础服务内容：** \n\n -   角色建模 + 骨骼动画设定 \n      \n -   场景搭建（根据需求定制） \n      \n -   演示渲染（默认动画长度为 20 秒内） \n      \n\n ■ **交付格式：** FBX / Blender / mp4 \n\n ---------- \n\n **⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】** **特别说明** \n\n -   **授权范围**：仅限个人非商业场景（如微信 / 微博 / 抖音等社交分享、非盈利个人展示）；商用场景（品牌宣传、产品植入、付费内容等）需提前沟通，报价随使用范围 / 时长调整。 \n      \n -   **费用补充**：动画超 20 秒或内容复杂化（如特效 / 多角色互动），将按工作量追加费用，具体以双方确认清单为准。 \n      \n -   **建议**：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。 \n      \n\n ---------- \n\n **📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】** **版权申明** \n\n -   所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。 \n      \n -   客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。 \n      \n -   需版权转让的，另行签署协议并支付原报价 3-5 倍费用。 \n      \n -   超范围使用引发的纠纷，由客户承担全部责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容\n\n# **Poster Design Services** \n\n **[平面海报 500¥ / 张]** \n\n 提供**源文件**和指定格式和尺寸的**图片** \n\n ---------- \n\n **[AI动态海报 500¥ / 张]** \n\n 提供指定格式和尺寸的**视频和图片** \n\n ---------- \n\n **[3D海报 700¥+/ 张]** \n\n 提供指定格式和尺寸的**图片** \n\n ---------- \n\n **[3D动态海报 1000¥+/ 张]** \n\n 可提供指定格式和尺寸的**视频** \n\n ---------- \n\n **📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明** \n\n -   **项目启动**：预付50%的订金后开始设计，工期约 **1–2 天/ 张** \n      \n -   **尾款支付**：设计定稿并经甲方确认后，支付50%的尾款 \n      \n -   **成果交付**：收到尾款后交付**最终成品文件** \n      \n\n ---------- \n\n **🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】修改规则与超额费用** \n\n -   提供 **3 次免费基础调整调** + **1 次免费重大调整** \n      \n -   超出免费基础调整次数后，每次**加收设计费的 25%** \n      \n -   超出免费重大调整次数后，每次**加收设计费的 50%** \n      \n\n ---------- \n\n **📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明** \n\n -   **基础调整**：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更 \n      \n -   **重大调整**：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计 \n      \n -   **责任界定**：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担 \n      \n -   **效率建议**：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率 \n      \n\n ---------- \n\n **📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐍𝐓】版权申明** \n\n -   所有成果知识产权归服务方（🅜）所有。 \n      \n -   甲方获**仅限该 club 自身宣传的商用使用权**（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。 \n      \n -   版权转让需另签协议并付费。 \n      \n -   超范围使用引发的纠纷，由甲方承担责任。 \n      \n\n ---------- \n\n 🅜 协议版本：𝘝1.2 | 下单即视为同意全部内容`,
+                about: {
+                    mainTitle: 'About MAZKO',
+                    introCardTitle: 'About Me',
+                    introCardDesc: 'Artist profile and contact information.',
+                    charCardTitle: 'Character Modeling Services',
+                    charCardDesc: 'Pricing for low-poly character modeling and retro animation.',
+                    posterCardTitle: 'Poster Design Services',
+                    posterCardDesc: 'Pricing for graphic, AI dynamic, and 3D poster designs.',
+                    introContent: `# About MAZKO\n\nMAZKO is a digital artist focused on **Cyberpunk, Y2K, PSX, and Glitch Art styles**.\n\nMy areas of expertise include:\n\n* **3D Models & Renders**\n* **Concept Art & Illustrations**\n* **Visual Effects & Animation**\n* **User Interface Design**\n\n---\n\n## Contact\n\n* **Instagram**: [mazko.exe](https://www.instagram.com/mazko.exe/)\n* **Xiaohongshu**: [MAZKO](https://www.xiaohongshu.com/user/profile/65d8cb410000000005031ecc?m_source=mingfengbaofeng)\n* **Bilibili**: [MAZKO_](https://space.bilibili.com/11138274?spm_id_from=333.1369.0.0)`,
+                    characterContent: `# Character Modeling Service Price List\n\n**👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】**\n\n**[Low-Poly Character Modeling | ¥500+ / character]**\n\nI will model and design your character in a low-poly style!\n\n▷ **Base Service Includes:**\n\n- Character Modeling (Low-Poly)\n- Simple Rigging\n- Rendered Video Export\n\n■ **Delivery Format:** FBX / Blender / mp4\n\n----------\n\n**🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢𝐦𝐚ț𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】**\n\n**[Low-Poly Retro Character Animation | ¥1000+ / animation]**\n\nI will provide a complete low-poly character animation service.\nThis includes modeling, rigging, animation, and final rendering, suitable for demo shorts, social media character showcases, and retro scene atmosphere rendering.\n\n▷ **Base Service Includes:**\n\n- Character Modeling + Skeletal Animation Setup\n- Scene Building (customized to requirements)\n- Demo Rendering (default animation length within 20 seconds)\n\n■ **Delivery Format:** FBX / Blender / mp4\n\n----------\n\n**⚠️** **【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】**\n\n- **License Scope**: For personal, non-commercial use only (e.g., sharing on social media like WeChat/Weibo/Douyin, non-profit personal displays). For commercial use (brand promotion, product placement, paid content, etc.), please communicate in advance; pricing will be adjusted based on the scope and duration of use.\n- **Additional Fees**: For animations exceeding 20 seconds or with increased complexity (e.g., special effects, multi-character interactions), additional fees will be charged based on the workload, as confirmed in a mutually agreed-upon checklist.\n- **Recommendation**: Providing clear reference images or inspirational directions will help in more efficiently realizing your visual requirements.\n\n----------\n\n**📜** **【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】**\n\n- All deliverables (models, animations, source files, etc.) are copyrighted by the service provider (🅜).\n- The client is granted non-commercial use rights only and is prohibited from commercial use, derivative works, resale, or licensing to third parties.\n- For copyright transfer, a separate agreement must be signed, and a fee of 3-5 times the original quote will be charged.\n- The client is fully responsible for any disputes arising from use beyond the licensed scope.\n\n----------\n\n🅜 Agreement Version: 𝘝1.2 | Placing an order constitutes agreement to all terms`,
+                    posterContent: `# Poster Design Service Price List\n\n**[Graphic Poster | ¥500 / poster]**\n\nProvides **source file** and **image** in specified formats and dimensions.\n\n----------\n\n**[AI Dynamic Poster | ¥500 / poster]**\n\nProvides **video and image** in specified formats and dimensions.\n\n----------\n\n**[3D Poster | ¥700+ / poster]**\n\nProvides **image** in specified formats and dimensions.\n\n----------\n\n**[3D Dynamic Poster | ¥1000+ / poster]**\n\nProvides **video** in specified formats and dimensions.\n\n----------\n\n**📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】**\n\n- **Project Start**: Design begins after a 50% deposit is paid. Turnaround time is approximately **1–2 days per poster**.\n- **Final Payment**: The remaining 50% is due after the design is finalized and approved by the client.\n- **Delivery**: Final files are delivered upon receipt of the final payment.\n\n----------\n\n**🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】**\n\n- Includes **3 free minor revisions** + **1 free major revision**.\n- Additional minor revisions are charged at **25% of the design fee** each.\n- Additional major revisions are charged at **50% of the design fee** each.\n\n----------\n\n**📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】**\n\n- **Minor Revisions**: Limited to detail adjustments (e.g., text correction, minor color tweaks, small layout changes) that do not alter the core concept or framework.\n- **Major Revisions**: Limited to core direction adjustments (e.g., overall style changes, core element replacement) that do not constitute a complete redesign.\n- **Responsibility**: Delays and additional revisions caused by unclear client requirements, incomplete materials, or repeated changes are the client's responsibility.\n- **Efficiency Tip**: Providing clear reference images or inspirational directions can significantly improve accuracy and service efficiency.\n\n----------\n\n**📜 【𝐂𝐎𝐏𝐘𝐑𝐈𝐆𝐇𝐓 𝐒𝐓𝐀𝐓𝐄𝐌𝐄𝐍𝐓】**\n\n- All intellectual property rights for the deliverables belong to the service provider (🅜).\n- The client is granted commercial use rights **limited to their own club's promotion** (including offline posters, official social media promotion, etc.) and is prohibited from reselling or licensing to third parties.\n- Copyright transfer requires a separate agreement and payment.\n- The client is responsible for any disputes arising from use beyond the agreed-upon scope.\n\n----------\n\n🅜 Agreement Version: 𝘝1.2 | Placing an order constitutes agreement to all terms`
+                },
                 settings: {
                     title: 'System Settings',
                     description: 'Adjust your system preferences.',
@@ -1190,7 +1371,12 @@
                 statusBarStatusReady: 'Ready',
                 statusBarStatusDragging: 'Dragging Window...',
                 loadingMessage: 'Loading...',
-                errorLoadingContent: 'Failed to load content'
+                errorLoadingContent: 'Failed to load content',
+                login: 'Login',
+                register: 'Register',
+                logout: 'Logout',
+                gallery: 'Gallery',
+                guestbook: 'Guestbook'
             }
         };
 
@@ -1236,6 +1422,7 @@
             const startMenu = document.getElementById('start-menu');
             const taskbarIconsContainer = document.getElementById('taskbar-icons');
             const contextMenu = document.getElementById('context-menu');
+            const startMenuUserArea = document.getElementById('start-menu-user-area');
 
             let highestZIndex = 10;
             const openWindowsMap = new Map();
@@ -1243,6 +1430,42 @@
             let currentLanguage = 'zh';
             let currentAudio = new Audio();
             let currentSongIndex = -1;
+            let currentUser = null;
+            let unsubscribeGuestbook = null;
+            let userProfilesCache = {};
+
+            // --- Firebase Initialization ---
+            function initializeFirebase() {
+                if (window.firebaseServices) {
+                    const { auth, onAuthStateChanged } = window.firebaseServices;
+                    onAuthStateChanged(auth, user => {
+                        currentUser = user;
+                        updateUserUI();
+                    });
+                } else {
+                    console.error("Firebase services not available.");
+                }
+            }
+            
+            function updateUserUI() {
+                const lang = LANG_CONTENT[currentLanguage];
+                if (currentUser) {
+                    const displayName = currentUser.displayName || currentUser.email;
+                    startMenuUserArea.innerHTML = `
+                        <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
+                        <span>${displayName}</span>
+                    `;
+                    startMenuUserArea.dataset.appId = 'user-settings';
+                } else {
+                    startMenuUserArea.innerHTML = `
+                        <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
+                        <span data-lang-key="profileName">${lang.profileName}</span>
+                    `;
+                    startMenuUserArea.dataset.appId = 'auth';
+                }
+                renderDynamicAssets();
+            }
+
 
             function updateTime() {
                 const now = new Date();
@@ -1259,25 +1482,63 @@
                     }
                 });
             }
+            
+            function updateUIForLanguageChange() {
+                const lang = LANG_CONTENT[currentLanguage];
+                // Desktop Icons and Start Menu
+                document.querySelectorAll('[data-lang-key]').forEach(el => {
+                    const key = el.dataset.langKey;
+                    if (lang[key]) {
+                        el.textContent = lang[key];
+                    }
+                });
+                
+                // Open Windows
+                openWindowsMap.forEach((win, appId) => {
+                    const titleEl = win.querySelector('.os-window-title');
+                    if (titleEl && lang[`${appId}Title`]) {
+                        titleEl.textContent = lang[`${appId}Title`];
+                    }
+                    const taskbarIconLabel = taskbarIconsContainer.querySelector(`[data-window-id="${appId}"] .taskbar-minimized-icon-label`);
+                    if (taskbarIconLabel && lang[`${appId}Title`]) {
+                        taskbarIconLabel.textContent = lang[`${appId}Title`];
+                    }
+                });
+                
+                // Standalone Apps (like music player)
+                openStandaloneAppsMap.forEach((app, appId) => {
+                    const taskbarIconLabel = taskbarIconsContainer.querySelector(`[data-window-id="${appId}"] .taskbar-minimized-icon-label`);
+                    if (taskbarIconLabel && lang[`${appId}Title`]) {
+                        taskbarIconLabel.textContent = lang[`${appId}Title`];
+                    }
+                });
+                updateUserUI();
+            }
 
             function bringToFront(element) {
                 highestZIndex++;
                 element.style.zIndex = highestZIndex;
                 
-                document.querySelectorAll('.os-window-title-bar').forEach(bar => bar.classList.add('inactive'));
-                const titleBar = element.querySelector('.os-window-title-bar');
-                if (titleBar) titleBar.classList.remove('inactive');
+                document.querySelectorAll('.os-window').forEach(win => {
+                    win.querySelector('.os-window-title-bar')?.classList.add('inactive');
+                    win.querySelector('.os-window-status-bar')?.classList.add('inactive');
+                });
+                
+                if(element.classList.contains('os-window')){
+                    element.querySelector('.os-window-title-bar')?.classList.remove('inactive');
+                    element.querySelector('.os-window-status-bar')?.classList.remove('inactive');
+                }
 
                 document.querySelectorAll('.taskbar-minimized-icon').forEach(icon => icon.classList.remove('active'));
-                const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${element.dataset.section}"]`);
+                const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${element.dataset.appId}"]`);
                 if(taskbarIcon) taskbarIcon.classList.add('active');
             }
             
             // --- Window Management ---
-            function openWindow(section, title, contentHTML, isMarkdown = false) {
-                if (openWindowsMap.has(section)) {
-                    const existingWindow = openWindowsMap.get(section);
-                    if (existingWindow.classList.contains('minimized')) {
+            function openWindow(appId, title, contentHTML, isMarkdown = false) {
+                if (openWindowsMap.has(appId)) {
+                    const existingWindow = openWindowsMap.get(appId);
+                    if (existingWindow.style.display === 'none') { // Minimized
                         restoreWindow(existingWindow);
                     }
                     bringToFront(existingWindow);
@@ -1286,14 +1547,14 @@
 
                 const windowEl = document.createElement('div');
                 windowEl.className = 'os-window';
-                windowEl.dataset.section = section;
+                windowEl.dataset.appId = appId;
                 
                 const finalContent = isMarkdown ? marked.parse(contentHTML) : contentHTML;
 
                 windowEl.innerHTML = `
                     <div class="os-window-title-bar">
                         <div class="os-window-title-content">
-                            <span class="icon-placeholder" data-asset-key="icon_${section}"></span>
+                            <span class="icon-placeholder" data-asset-key="icon_${appId}"></span>
                             <span class="os-window-title">${title}</span>
                         </div>
                         <div class="os-window-controls">
@@ -1309,7 +1570,7 @@
                     </div>
                 `;
                 
-                const openWindowsCount = openWindowsMap.size;
+                const openWindowsCount = openWindowsMap.size + openStandaloneAppsMap.size;
                 const offsetX = 25 * openWindowsCount;
                 const offsetY = 25 * openWindowsCount;
                 const desktopWidth = mainDesktopArea.offsetWidth;
@@ -1331,47 +1592,55 @@
                 windowEl.style.top = `${initialTop < 0 ? 20 : initialTop}px`;
 
                 mainDesktopArea.appendChild(windowEl);
-                openWindowsMap.set(section, windowEl);
+                openWindowsMap.set(appId, windowEl);
                 
-                createTaskbarIcon(windowEl);
+                createTaskbarIcon(appId, title, false);
                 bringToFront(windowEl);
                 attachWindowEvents(windowEl);
                 renderDynamicAssets();
                 
-                if (section === 'data-core') {
-                    attachDataCoreListeners(windowEl);
-                }
+                // App-specific initializations
+                if (appId === 'data-core') attachDataCoreListeners(windowEl);
+                if (appId === 'settings') attachSettingsListeners(windowEl);
+                if (appId === 'about') attachAboutAppListeners(windowEl);
+                if (appId === 'auth') attachAuthListeners(windowEl);
+                if (appId === 'user-settings') attachUserSettingsListeners(windowEl);
             }
 
             function attachWindowEvents(win) {
                 const titleBar = win.querySelector('.os-window-title-bar');
                 const statusBarText = win.querySelector('.status-text');
-                let isDragging = false, offsetX, offsetY;
+                let offsetX, offsetY;
+
+                const onMouseMove = (e) => {
+                    win.style.left = `${e.clientX - offsetX}px`;
+                    win.style.top = `${e.clientY - offsetY}px`;
+                };
+
+                const onMouseUp = () => {
+                    win.classList.remove('is-dragging');
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                    titleBar.style.cursor = 'grab';
+                    document.body.style.cursor = 'default';
+                    if(statusBarText) statusBarText.textContent = LANG_CONTENT[currentLanguage].statusBarStatusReady;
+                };
 
                 titleBar.addEventListener('mousedown', e => {
-                    // Only start dragging if the mousedown is on the title bar itself, not on buttons
-                    if (e.target.closest('.control-button')) {
+                    if (e.target.closest('.control-button') || win.classList.contains('maximized')) {
                         return;
                     }
-                    if(win.classList.contains('maximized')) return;
-
-                    isDragging = true;
+                    win.classList.add('is-dragging');
                     offsetX = e.clientX - win.offsetLeft;
                     offsetY = e.clientY - win.offsetTop;
                     bringToFront(win);
+                    
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                    
+                    titleBar.style.cursor = 'grabbing';
+                    document.body.style.cursor = 'grabbing';
                     if(statusBarText) statusBarText.textContent = LANG_CONTENT[currentLanguage].statusBarStatusDragging;
-                });
-                document.addEventListener('mousemove', e => {
-                    if (isDragging) {
-                        win.style.left = `${e.clientX - offsetX}px`;
-                        win.style.top = `${e.clientY - offsetY}px`;
-                    }
-                });
-                document.addEventListener('mouseup', () => { 
-                    if (isDragging) {
-                        isDragging = false;
-                        if(statusBarText) statusBarText.textContent = LANG_CONTENT[currentLanguage].statusBarStatusReady;
-                    }
                 });
 
                 win.querySelector('.close').addEventListener('click', () => closeWindow(win));
@@ -1381,34 +1650,36 @@
             }
 
             function closeWindow(win) {
-                const section = win.dataset.section;
+                const appId = win.dataset.appId;
+                if (appId === 'data-core' && unsubscribeGuestbook) {
+                    unsubscribeGuestbook();
+                    unsubscribeGuestbook = null;
+                }
                 win.remove();
-                openWindowsMap.delete(section);
-                const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${section}"]`);
+                openWindowsMap.delete(appId);
+                const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${appId}"]`);
                 if (taskbarIcon) taskbarIcon.remove();
             }
 
             function minimizeWindow(win) {
-                win.classList.add('minimized');
-                const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${win.dataset.section}"]`);
+                win.style.display = 'none';
+                const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${win.dataset.appId}"]`);
                 if(taskbarIcon) taskbarIcon.classList.remove('active');
             }
 
             function restoreWindow(win) {
-                win.classList.remove('minimized');
+                win.style.display = 'flex';
                 bringToFront(win);
             }
 
             function toggleMaximizeWindow(win) {
                 if (win.classList.contains('maximized')) {
-                    // Restore
                     win.classList.remove('maximized');
                     win.style.left = win.dataset.originalLeft;
                     win.style.top = win.dataset.originalTop;
                     win.style.width = win.dataset.originalWidth;
                     win.style.height = win.dataset.originalHeight;
                 } else {
-                    // Maximize
                     win.dataset.originalLeft = win.style.left;
                     win.dataset.originalTop = win.style.top;
                     win.dataset.originalWidth = win.style.width;
@@ -1417,44 +1688,47 @@
                 }
             }
 
-            function createTaskbarIcon(win) {
-                const section = win.dataset.section;
-                const title = win.querySelector('.os-window-title').textContent;
-                
+            function createTaskbarIcon(appId, title, isStandalone) {
                 const iconEl = document.createElement('div');
                 iconEl.className = 'taskbar-minimized-icon';
-                iconEl.dataset.windowId = section;
+                iconEl.dataset.windowId = appId;
                 iconEl.innerHTML = `
-                    <span class="icon-placeholder" data-asset-key="icon_${section}"></span>
+                    <span class="icon-placeholder" data-asset-key="icon_${appId}"></span>
                     <span class="taskbar-minimized-icon-label">${title}</span>
                 `;
                 taskbarIconsContainer.appendChild(iconEl);
                 renderDynamicAssets();
 
                 iconEl.addEventListener('click', () => {
-                    if (win.classList.contains('minimized')) {
-                        restoreWindow(win);
+                    const appElement = isStandalone ? openStandaloneAppsMap.get(appId) : openWindowsMap.get(appId);
+                    if (!appElement) return;
+
+                    if (appElement.style.display === 'none') {
+                         appElement.style.display = isStandalone ? 'flex' : 'flex';
+                         bringToFront(appElement);
                     } else {
-                        if (win.style.zIndex == highestZIndex) {
-                            minimizeWindow(win);
+                        if (appElement.style.zIndex == highestZIndex) {
+                            appElement.style.display = 'none';
+                            iconEl.classList.remove('active');
                         } else {
-                            bringToFront(win);
+                            bringToFront(appElement);
                         }
                     }
                 });
             }
             
-            async function openMusicPlayer() {
+            function openMusicPlayer() {
                 const appId = 'music-player';
                 if (openStandaloneAppsMap.has(appId)) {
-                    bringToFront(openStandaloneAppsMap.get(appId));
+                    const player = openStandaloneAppsMap.get(appId);
+                    player.style.display = 'flex';
+                    bringToFront(player);
                     return;
                 }
 
                 const playerElement = document.createElement('div');
                 playerElement.className = 'music-player-standalone';
-                playerElement.dataset.windowId = appId;
-                playerElement.dataset.section = appId; // for consistency
+                playerElement.dataset.appId = appId;
 
                 playerElement.innerHTML = `
                     <div class="player-drag-handle"></div>
@@ -1473,25 +1747,29 @@
                         <div class="player-progress-bar"></div>
                     </div>
                     <div class="player-controls">
-                        <button class="player-control-button" id="player-power">
+                        <button class="player-control-button" data-action="power">
                             <span class="icon-placeholder" data-asset-key="icon_power"></span>
                         </button>
-                        <button class="player-control-button" id="player-prev">
+                        <button class="player-control-button" data-action="prev">
                             <span class="icon-placeholder" data-asset-key="icon_prev_track"></span>
                         </button>
-                        <button class="player-control-button" id="player-play-pause">
+                        <button class="player-control-button" data-action="play-pause">
                             <span class="icon-placeholder" data-asset-key="icon_play"></span>
                         </button>
-                        <button class="player-control-button" id="player-next">
+                        <button class="player-control-button" data-action="next">
                             <span class="icon-placeholder" data-asset-key="icon_next_track"></span>
                         </button>
-                        <button class="player-control-button" id="player-menu">
+                         <button class="player-control-button" data-action="menu">
                             <span class="icon-placeholder" data-asset-key="icon_menu"></span>
                         </button>
                     </div>
                 `;
                 mainDesktopArea.appendChild(playerElement);
                 openStandaloneAppsMap.set(appId, playerElement);
+                
+                const lang = LANG_CONTENT[currentLanguage];
+                createTaskbarIcon(appId, lang.musicPlayerTitle, true);
+                
                 bringToFront(playerElement);
                 renderDynamicAssets();
                 attachPlayerListeners(playerElement);
@@ -1504,33 +1782,34 @@
 
             function attachPlayerListeners(player) {
                 const dragHandle = player.querySelector('.player-drag-handle');
-                const playPauseBtn = player.querySelector('#player-play-pause');
-                const nextBtn = player.querySelector('#player-next');
-                const prevBtn = player.querySelector('#player-prev');
-                const powerBtn = player.querySelector('#player-power');
+                const playPauseBtn = player.querySelector('[data-action="play-pause"]');
+                const nextBtn = player.querySelector('[data-action="next"]');
+                const prevBtn = player.querySelector('[data-action="prev"]');
+                const powerBtn = player.querySelector('[data-action="power"]');
                 const progressContainer = player.querySelector('.player-progress-container');
                 const progressBar = player.querySelector('.player-progress-bar');
                 const titleDisplay = player.querySelector('#song-title-display');
                 const titleScroller = player.querySelector('.screen-song-title-scroller');
 
-                let isDragging = false, offsetX, offsetY;
-
+                let offsetX, offsetY;
+                const onMouseMove = (e) => {
+                    player.style.left = `${e.clientX - offsetX}px`;
+                    player.style.top = `${e.clientY - offsetY}px`;
+                };
+                const onMouseUp = () => {
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                    dragHandle.style.cursor = 'grab';
+                    document.body.style.cursor = 'default';
+                };
                 dragHandle.addEventListener('mousedown', (e) => {
-                    isDragging = true;
                     offsetX = e.clientX - player.offsetLeft;
                     offsetY = e.clientY - player.offsetTop;
-                    dragHandle.style.cursor = 'grabbing';
                     bringToFront(player);
-                });
-                document.addEventListener('mousemove', (e) => {
-                    if (isDragging) {
-                        player.style.left = `${e.clientX - offsetX}px`;
-                        player.style.top = `${e.clientY - offsetY}px`;
-                    }
-                });
-                document.addEventListener('mouseup', () => {
-                    isDragging = false;
-                    dragHandle.style.cursor = 'grab';
+                    document.addEventListener('mousemove', onMouseMove);
+                    document.addEventListener('mouseup', onMouseUp);
+                    dragHandle.style.cursor = 'grabbing';
+                    document.body.style.cursor = 'grabbing';
                 });
 
                 function loadSong(index) {
@@ -1546,21 +1825,19 @@
                 }
 
                 function playSong() {
-                    player.classList.add('playing');
                     playPauseBtn.querySelector('.icon-placeholder').dataset.assetKey = 'icon_pause';
                     renderDynamicAssets();
                     currentAudio.play();
                 }
 
                 function pauseSong() {
-                    player.classList.remove('playing');
                     playPauseBtn.querySelector('.icon-placeholder').dataset.assetKey = 'icon_play';
                     renderDynamicAssets();
                     currentAudio.pause();
                 }
 
                 playPauseBtn.addEventListener('click', () => {
-                    if (player.classList.contains('playing')) {
+                    if (!currentAudio.paused) {
                         pauseSong();
                     } else {
                         if (currentSongIndex === -1) loadSong(0);
@@ -1580,9 +1857,13 @@
 
                 powerBtn.addEventListener('click', () => {
                     pauseSong();
+                    const appId = player.dataset.appId;
                     player.remove();
-                    openStandaloneAppsMap.delete('music-player');
+                    openStandaloneAppsMap.delete(appId);
+                    const taskbarIcon = taskbarIconsContainer.querySelector(`[data-window-id="${appId}"]`);
+                    if (taskbarIcon) taskbarIcon.remove();
                 });
+
 
                 currentAudio.addEventListener('timeupdate', () => {
                     if (currentAudio.duration) {
@@ -1598,13 +1879,14 @@
                     }
                 });
 
-                loadSong(0);
+                if (currentSongIndex === -1) loadSong(0);
             }
             
             function renderSettingsContent() {
+                const lang = LANG_CONTENT[currentLanguage];
                 return `
                     <div class="p-4 flex flex-col gap-4">
-                        <p>${LANG_CONTENT[currentLanguage].settings.description}</p>
+                        <p>${lang.settings.description}</p>
                         <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
                             <label for="language-toggle" class="text-lg">切换语言 (Toggle Language)</label>
                             <label class="relative inline-flex items-center cursor-pointer">
@@ -1614,6 +1896,52 @@
                         </div>
                     </div>
                 `;
+            }
+            
+            function attachSettingsListeners(windowEl) {
+                const toggle = windowEl.querySelector('#language-toggle');
+                if (toggle) {
+                    toggle.addEventListener('change', () => {
+                        currentLanguage = toggle.checked ? 'en' : 'zh';
+                        updateUIForLanguageChange();
+                        // Re-render self
+                        windowEl.querySelector('.os-window-content').innerHTML = renderSettingsContent();
+                        attachSettingsListeners(windowEl);
+                    });
+                }
+            }
+            
+            function renderAboutContent() {
+                const aboutLang = LANG_CONTENT[currentLanguage].about;
+                return `
+                <div class="p-4 flex flex-col gap-4">
+                    <div class="service-card" data-service="intro">
+                        <h3 class="text-xl font-bold">${aboutLang.introCardTitle}</h3>
+                        <p>${aboutLang.introCardDesc}</p>
+                    </div>
+                    <div class="service-card" data-service="character">
+                        <h3 class="text-xl font-bold">${aboutLang.charCardTitle}</h3>
+                        <p>${aboutLang.charCardDesc}</p>
+                    </div>
+                     <div class="service-card" data-service="poster">
+                        <h3 class="text-xl font-bold">${aboutLang.posterCardTitle}</h3>
+                        <p>${aboutLang.posterCardDesc}</p>
+                    </div>
+                </div>
+                `;
+            }
+
+            function attachAboutAppListeners(win) {
+                win.querySelectorAll('.service-card').forEach(card => {
+                    card.addEventListener('click', () => {
+                        const service = card.dataset.service;
+                        const aboutLang = LANG_CONTENT[currentLanguage].about;
+                        const appId = `about-${service}`;
+                        const title = aboutLang[`${service}CardTitle`];
+                        const content = aboutLang[`${service}Content`];
+                        openWindow(appId, title, content, true);
+                    });
+                });
             }
 
             function renderDataCoreContent() {
@@ -1625,70 +1953,159 @@
                     </div>
                 `).join('');
                 return `
-                    <h2 class="text-xl font-bold mb-4">${lang.datacoreTitle}</h2>
-                    <p>${lang.datacoreDescription}</p>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
-                        ${imagesHTML}
+                    <div class="app-tab-nav">
+                        <div class="app-tab active" data-tab="gallery">${lang.gallery}</div>
+                        <div class="app-tab" data-tab="guestbook">${lang.guestbook}</div>
                     </div>
-                    <div id="image-modal" class="hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
+
+                    <div class="app-tab-content active" data-tab-content="gallery">
+                        <h2 class="text-xl font-bold mb-4">${lang.datacoreTitle}</h2>
+                        <p>${lang.datacoreDescription}</p>
+                        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
+                            ${imagesHTML}
+                        </div>
+                    </div>
+
+                    <div class="app-tab-content" data-tab-content="guestbook">
+                        <!-- Guestbook will be rendered here -->
+                    </div>
+
+                    <div class="image-modal hidden fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 p-4">
                         <div class="relative max-w-4xl max-h-full">
-                            <img id="modal-image" src="" alt="Full size image" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-xl">
-                            <button id="close-modal" class="absolute top-4 right-4 text-white text-3xl font-bold p-2 rounded-full bg-red-600 hover:bg-red-700 transition-colors">&times;</button>
+                            <img class="modal-image" src="" alt="Full size image" class="max-w-full max-h-[80vh] object-contain rounded-lg shadow-xl">
+                            <button class="close-modal absolute top-4 right-4 text-white text-3xl font-bold p-2 rounded-full bg-red-600 hover:bg-red-700 transition-colors">&times;</button>
                         </div>
                     </div>
                 `;
             }
 
             function attachDataCoreListeners(windowEl) {
-                const imageModal = windowEl.querySelector('#image-modal');
-                const modalImage = windowEl.querySelector('#modal-image');
-                const closeModalButton = windowEl.querySelector('#close-modal');
+                // Image Gallery Logic
+                const imageModal = windowEl.querySelector('.image-modal');
+                const modalImage = windowEl.querySelector('.modal-image');
+                const closeModalButton = windowEl.querySelector('.close-modal');
 
-                windowEl.querySelectorAll('.os-window-content img[data-full-image]').forEach(img => {
+                windowEl.querySelectorAll('img[data-full-image]').forEach(img => {
                     img.addEventListener('click', (e) => {
                         modalImage.src = e.target.dataset.fullImage;
                         imageModal.classList.remove('hidden');
                     });
                 });
-
                 if (closeModalButton) {
-                    closeModalButton.addEventListener('click', () => {
-                        imageModal.classList.add('hidden');
-                        modalImage.src = '';
-                    });
+                    closeModalButton.addEventListener('click', () => imageModal.classList.add('hidden'));
                 }
-
                 if (imageModal) {
                     imageModal.addEventListener('click', (e) => {
-                        if (e.target === imageModal) {
-                            imageModal.classList.add('hidden');
-                            modalImage.src = '';
+                        if (e.target === imageModal) imageModal.classList.add('hidden');
+                    });
+                }
+
+                // Tab Switching Logic
+                const tabs = windowEl.querySelectorAll('.app-tab');
+                const tabContents = windowEl.querySelectorAll('.app-tab-content');
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
+                        const tabName = tab.dataset.tab;
+                        tabContents.forEach(content => {
+                            content.classList.toggle('active', content.dataset.tabContent === tabName);
+                        });
+
+                        if (tabName === 'guestbook' && !windowEl.querySelector('#guestbook-messages')) {
+                            renderAndAttachGuestbook(windowEl.querySelector('[data-tab-content="guestbook"]'));
                         }
                     });
+                });
+            }
+            
+            async function fetchUserProfile(userId) {
+                if (userProfilesCache[userId]) {
+                    return userProfilesCache[userId];
+                }
+                const { db, doc, getDoc, appId } = window.firebaseServices;
+                const userDocRef = doc(db, 'artifacts', appId, 'users', userId);
+                const docSnap = await getDoc(userDocRef);
+                if (docSnap.exists()) {
+                    const profile = docSnap.data();
+                    userProfilesCache[userId] = profile;
+                    return profile;
+                } else {
+                    return { displayName: 'Anonymous' }; // Fallback
                 }
             }
 
-            function attachSettingsListeners(windowEl) {
-                const toggle = windowEl.querySelector('#language-toggle');
-                if (toggle) {
-                    toggle.addEventListener('change', () => {
-                        currentLanguage = toggle.checked ? 'en' : 'zh';
-                        // A simple way to refresh UI is to re-render the settings window content
-                        windowEl.querySelector('.os-window-content').innerHTML = renderSettingsContent();
-                        attachSettingsListeners(windowEl); // Re-attach listener to the new element
-                    });
+            function renderAndAttachGuestbook(container) {
+                 if (!currentUser) {
+                    container.innerHTML = `<p class="p-4 text-center">请登录后查看或发表留言。</p>`;
+                    return;
                 }
+                container.innerHTML = `
+                    <div id="guestbook-messages" class="guestbook-messages">
+                       <div class="loading-spinner"></div>
+                    </div>
+                    <div class="guestbook-input-area">
+                        <input type="text" id="guestbook-input" class="guestbook-input" placeholder="Type a message...">
+                        <button id="guestbook-send" class="guestbook-send-btn">Send</button>
+                    </div>
+                `;
+
+                const { db, collection, addDoc, query, onSnapshot, serverTimestamp, appId } = window.firebaseServices;
+                const messagesContainer = container.querySelector('#guestbook-messages');
+                const input = container.querySelector('#guestbook-input');
+                const sendBtn = container.querySelector('#guestbook-send');
+                
+                const messagesCol = collection(db, 'artifacts', appId, 'public', 'data', 'guestbook');
+                const q = query(messagesCol);
+
+                unsubscribeGuestbook = onSnapshot(q, async (querySnapshot) => {
+                    messagesContainer.innerHTML = '';
+                    let messages = [];
+                    querySnapshot.forEach((doc) => messages.push({ id: doc.id, ...doc.data() }));
+                    messages.sort((a, b) => (a.timestamp?.seconds || 0) - (b.timestamp?.seconds || 0));
+
+                    for (const msg of messages) {
+                        const profile = await fetchUserProfile(msg.userId);
+                        const msgEl = document.createElement('div');
+                        msgEl.className = 'guestbook-message';
+                        const date = msg.timestamp ? new Date(msg.timestamp.seconds * 1000).toLocaleString() : '...';
+                        msgEl.innerHTML = `
+                            <div>
+                                <span class="user-id">${profile.displayName}</span>
+                                <span class="timestamp">@ ${date}</span>
+                            </div>
+                            <div>${msg.text}</div>
+                        `;
+                        messagesContainer.appendChild(msgEl);
+                    }
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                });
+                
+                const sendMessage = async () => {
+                    if (input.value.trim() === '' || !currentUser) return;
+                    try {
+                        await addDoc(messagesCol, {
+                            text: input.value,
+                            userId: currentUser.uid,
+                            timestamp: serverTimestamp()
+                        });
+                        input.value = '';
+                    } catch (e) {
+                        console.error("Error adding document: ", e);
+                    }
+                };
+
+                sendBtn.addEventListener('click', sendMessage);
+                input.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') sendMessage();
+                });
             }
 
-            function handleSectionClick(section) {
+            function handleAppClick(appId) {
                 const lang = LANG_CONTENT[currentLanguage];
-                switch (section) {
-                    case 'music-player':
-                        openMusicPlayer();
-                        break;
-                    case 'folder':
-                        openWindow('folder', lang.folderMenuItem, '文件夹内容');
-                        break;
+                switch (appId) {
+                    case 'music-player': openMusicPlayer(); break;
+                    case 'folder': openWindow('folder', lang.folderMenuItem, '文件夹内容'); break;
                     case 'log':
                         let logHTML = `<table class="log-table">
                             <thead><tr><th>日期</th><th>类型</th><th>内容</th></tr></thead>
@@ -1698,39 +2115,30 @@
                         </table>`;
                         openWindow('log', lang.logTitle, logHTML);
                         break;
-                    case 'about':
-                        openWindow('about', lang.aboutTitle, lang.aboutContent, true);
-                        break;
-                    case 'data-core':
-                        const dataCoreContent = renderDataCoreContent();
-                        openWindow('data-core', lang.datacoreTitle, dataCoreContent, false);
-                        break;
-                    case 'settings':
-                        const settingsContent = renderSettingsContent();
-                        openWindow('settings', lang.settings.title, settingsContent);
-                        // Attach listeners after the window is created and in the DOM
-                        setTimeout(() => {
-                           const settingsWindow = openWindowsMap.get('settings');
-                           if (settingsWindow) {
-                               attachSettingsListeners(settingsWindow);
-                           }
-                        }, 0);
-                        break;
-                    default:
-                        console.warn('Unknown section:', section);
+                    case 'about': openWindow('about', lang.about.mainTitle, renderAboutContent()); break;
+                    case 'data-core': openWindow('data-core', lang.datacoreTitle, renderDataCoreContent()); break;
+                    case 'settings': openWindow('settings', lang.settings.title, renderSettingsContent()); break;
+                    case 'auth': openWindow('auth', lang.authTitle, getAuthFormHTML()); break;
+                    case 'user-settings': openWindow('user-settings', lang.userSettingsTitle, getUserSettingsHTML()); break;
+                    default: console.warn('Unknown app:', appId);
                 }
             }
             
             desktopIconsContainer.querySelectorAll('.desktop-icon').forEach(icon => {
-                icon.addEventListener('click', () => handleSectionClick(icon.dataset.section));
+                icon.addEventListener('click', () => handleAppClick(icon.dataset.appId));
             });
 
-            startMenu.querySelectorAll('.start-menu-item, .start-menu-header, .start-menu-footer-button').forEach(item => {
+            startMenu.querySelectorAll('.start-menu-item, .start-menu-footer-button').forEach(item => {
                 item.addEventListener('click', (e) => {
                     e.preventDefault();
-                    handleSectionClick(item.dataset.section);
+                    handleAppClick(item.dataset.appId);
                     startMenu.classList.remove('is-open');
                 });
+            });
+            startMenuUserArea.addEventListener('click', (e) => {
+                 e.preventDefault();
+                 handleAppClick(startMenuUserArea.dataset.appId);
+                 startMenu.classList.remove('is-open');
             });
 
             startButton.addEventListener('click', (e) => {
@@ -1771,8 +2179,116 @@
                     currentY += (iconHeight + gapY);
                 });
             }
+            
+            // --- Auth Functions ---
+            function getAuthFormHTML(isLogin = true) {
+                return `
+                <div class="auth-form-container">
+                    <div id="auth-error"></div>
+                    <div id="login-form" style="${isLogin ? '' : 'display:none;'}">
+                        <input type="email" id="login-email" placeholder="Email">
+                        <input type="password" id="login-password" placeholder="Password">
+                        <button id="login-btn">Login</button>
+                        <p class="form-toggle-link" data-form="register">Need an account? Register</p>
+                    </div>
+                    <div id="register-form" style="${!isLogin ? '' : 'display:none;'}">
+                        <input type="text" id="register-username" placeholder="Username">
+                        <input type="email" id="register-email" placeholder="Email">
+                        <input type="password" id="register-password" placeholder="Password">
+                        <button id="register-btn">Register</button>
+                        <p class="form-toggle-link" data-form="login">Have an account? Login</p>
+                    </div>
+                </div>
+                `;
+            }
+            
+            function attachAuthListeners(win) {
+                const { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, updateProfile, db, doc, setDoc, appId } = window.firebaseServices;
+                const errorDiv = win.querySelector('#auth-error');
+                
+                win.querySelectorAll('.form-toggle-link').forEach(link => {
+                    link.addEventListener('click', () => {
+                        const showLogin = link.dataset.form === 'login';
+                        win.querySelector('#login-form').style.display = showLogin ? '' : 'none';
+                        win.querySelector('#register-form').style.display = !showLogin ? '' : 'none';
+                        errorDiv.textContent = '';
+                    });
+                });
 
-            // Initial setup
+                win.querySelector('#login-btn').addEventListener('click', () => {
+                    const email = win.querySelector('#login-email').value;
+                    const password = win.querySelector('#login-password').value;
+                    signInWithEmailAndPassword(auth, email, password)
+                        .then(() => closeWindow(win))
+                        .catch(err => errorDiv.textContent = err.message);
+                });
+
+                win.querySelector('#register-btn').addEventListener('click', () => {
+                    const email = win.querySelector('#register-email').value;
+                    const password = win.querySelector('#register-password').value;
+                    const username = win.querySelector('#register-username').value;
+                    if (!username) {
+                        errorDiv.textContent = "Please enter a username.";
+                        return;
+                    }
+                    createUserWithEmailAndPassword(auth, email, password)
+                        .then(userCredential => {
+                            const user = userCredential.user;
+                            return updateProfile(user, { displayName: username })
+                                .then(() => {
+                                    const userDocRef = doc(db, 'artifacts', appId, 'users', user.uid);
+                                    return setDoc(userDocRef, { displayName: username, email: user.email });
+                                });
+                        })
+                        .then(() => closeWindow(win))
+                        .catch(err => errorDiv.textContent = err.message);
+                });
+            }
+            
+            function getUserSettingsHTML() {
+                 if (!currentUser) return '<p>Not logged in.</p>';
+                 return `
+                    <div class="p-4 flex flex-col gap-4">
+                        <p><strong>Email:</strong> ${currentUser.email}</p>
+                        <div>
+                            <label for="display-name-input">Display Name:</label>
+                            <input type="text" id="display-name-input" class="guestbook-input" value="${currentUser.displayName || ''}">
+                        </div>
+                        <button id="update-profile-btn" class="guestbook-send-btn">Update Profile</button>
+                        <hr class="border-gray-600 my-2">
+                        <button id="logout-btn" class="w-full p-2 bg-red-800 text-white">Logout</button>
+                    </div>
+                 `;
+            }
+
+            function attachUserSettingsListeners(win) {
+                if (!currentUser) return;
+                const { auth, signOut, updateProfile, db, doc, setDoc, appId } = window.firebaseServices;
+
+                win.querySelector('#logout-btn').addEventListener('click', () => {
+                    signOut(auth).then(() => closeWindow(win));
+                });
+                
+                win.querySelector('#update-profile-btn').addEventListener('click', async () => {
+                    const newName = win.querySelector('#display-name-input').value;
+                    if (newName && newName !== currentUser.displayName) {
+                        try {
+                            await updateProfile(currentUser, { displayName: newName });
+                            const userDocRef = doc(db, 'artifacts', appId, 'users', currentUser.uid);
+                            await setDoc(userDocRef, { displayName: newName }, { merge: true });
+                            alert('Profile updated!');
+                            updateUserUI();
+                            userProfilesCache[currentUser.uid] = { ...userProfilesCache[currentUser.uid], displayName: newName };
+                        } catch (error) {
+                            alert('Error updating profile: ' + error.message);
+                        }
+                    }
+                });
+            }
+
+
+            // --- Initial setup ---
+            initializeFirebase();
             updateTime();
             renderDynamicAssets();
             positionDesktopIcons();
