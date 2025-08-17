@@ -1650,7 +1650,7 @@
             }
             
             // --- Window Management ---
-            function openWindow(appId, title, contentHTML, isMarkdown = false) {
+            function openWindow(appId, title, contentHTML, isMarkdown = false, iconKey = null) {
                 if (openWindowsMap.has(appId)) {
                     const existingWindow = openWindowsMap.get(appId);
                     if (existingWindow.style.display === 'none') { // Minimized
@@ -1665,11 +1665,12 @@
                 windowEl.dataset.appId = appId;
                 
                 const finalContent = isMarkdown ? marked.parse(contentHTML) : contentHTML;
+                const finalIconKey = iconKey || `icon_${appId}`;
 
                 windowEl.innerHTML = `
                     <div class="os-window-title-bar" data-cursor-type="move">
                         <div class="os-window-title-content">
-                            <span class="icon-placeholder" data-asset-key="icon_${appId}"></span>
+                            <span class="icon-placeholder" data-asset-key="${finalIconKey}"></span>
                             <span class="os-window-title">${title}</span>
                         </div>
                         <div class="os-window-controls">
@@ -2047,7 +2048,7 @@
                         const appId = `about-${service}`;
                         const title = aboutLang[`${service}CardTitle`];
                         const content = aboutLang[`${service}Content`];
-                        openWindow(appId, title, content, true);
+                        openWindow(appId, title, content, true, 'icon_mazko_logo');
                     });
                 });
             }
@@ -2223,7 +2224,7 @@
                         </table>`;
                         openWindow('log', lang.logTitle, logHTML);
                         break;
-                    case 'about': openWindow('about', lang.about.mainTitle, renderAboutContent()); break;
+                    case 'about': openWindow('about', lang.about.mainTitle, renderAboutContent(), false, 'icon_mazko_logo'); break;
                     case 'data-core': openWindow('data-core', lang.datacoreTitle, renderDataCoreContent()); break;
                     case 'settings': openWindow('settings', lang.settings.title, renderSettingsContent()); break;
                     case 'auth': openWindow('auth', lang.authTitle, getAuthFormHTML()); break;
